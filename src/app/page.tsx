@@ -129,6 +129,7 @@ export default function Home() {
             <div 
               key={index} 
               className={`hero-slide ${getSlideClass(index)}`}
+              style={{ backgroundImage: `url(${slide.image})` }}
             >
               <div className="hero-content-container">
                 <div className="hero-content">
@@ -145,23 +146,6 @@ export default function Home() {
                       <button className="hero-cta-button inline-block px-8 py-4 rounded-full font-semibold">
                         {slide.buttonText} →
                       </button>
-                    </div>
-                  </div>
-
-                  {/* Image Content */}
-                  <div className="hero-image-content">
-                    <div className="hero-image-square">
-                      <Image
-                        src={slide.image}
-                        alt="Perfume"
-                        width={400}
-                        height={400}
-                        className="w-full h-full object-cover"
-                        priority={index === 0}
-                      />
-                      {/* Decorative elements */}
-                      <div className="hero-decorative-1 absolute -top-4 -left-4 w-20 h-20 rounded-full opacity-60"></div>
-                      <div className="hero-decorative-2 absolute -bottom-4 -right-4 w-16 h-16 rounded-full opacity-40"></div>
                     </div>
                   </div>
                 </div>
