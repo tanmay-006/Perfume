@@ -1,0 +1,841 @@
+/* Perfume Website Custom Styles */
+
+/* Color Variables - Luxurious Gold & Navy Theme */
+:root {
+  /* Primary Palette - Rich Gold to Navy */
+  --gold-lightest: #f8f0e3;
+  --gold-light: #e6d2b5;
+  --gold-medium: #d4b485;
+  --gold-dark: #c19a54;
+  --gold-darkest: #a67c2e;
+  
+  /* Secondary Palette - Deep Navy */
+  --navy-lightest: #e6eaef;
+  --navy-light: #a3b0c2;
+  --navy-medium: #526580;
+  --navy-dark: #2c3e50;
+  --navy-darkest: #1a2533;
+  
+  /* Legacy Earth Tones - For Backwards Compatibility */
+  --earth-light: var(--gold-lightest);
+  --earth-medium: var(--gold-medium);
+  --earth-dark: var(--gold-dark);
+  --earth-darker: var(--navy-medium);
+  --earth-darkest: var(--navy-dark);
+}
+
+/* Navigation Styles - Transparent Overlay */
+.nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  color: var(--gold-light);
+}
+
+.nav-bar.scrolled {
+  background: rgba(26, 37, 51, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 180, 133, 0.15);
+}
+
+.nav-logo {
+  color: var(--gold-medium);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.nav-link {
+  color: var(--gold-light);
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--gold-medium);
+}
+
+.nav-button {
+  background-color: var(--gold-dark);
+  color: var(--navy-darkest);
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: var(--gold-medium);
+  transform: scale(1.05);
+}
+
+/* Hero Section - Full Width Banner with Slider */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-darkest) 100%);
+}
+
+.hero-slider-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--navy-darkest);
+}
+
+/* Featured promo card styles (moved from inline styles in page.tsx) */
+.promo-card {
+  position: relative;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.promo-card--cream {
+  background: linear-gradient(135deg, var(--gold-lightest) 0%, var(--gold-medium) 100%);
+}
+.promo-card--goldgreen {
+  background: linear-gradient(135deg, var(--gold-medium) 0%, var(--gold-dark) 100%);
+}
+.promo-card--navy {
+  background: linear-gradient(135deg, var(--navy-medium) 0%, var(--navy-dark) 100%);
+}
+.promo-card-circle {
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0.5;
+}
+.promo-card-circle.right-large { width: 8rem; height: 8rem; bottom: 0; right: 0; }
+.promo-card-circle.right-small { width: 6rem; height: 6rem; top: 0; right: 0; }
+.promo-card-circle.left-medium { width: 7rem; height: 7rem; bottom: 0; left: 0; }
+.promo-card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
+.promo-card-title.cream { color: var(--navy-dark); }
+.promo-card-title.light { color: var(--gold-lightest); }
+.promo-card-text.light { color: var(--gold-lightest); }
+.promo-card-btn { background-color: white; padding: 0.5rem 1.5rem; border-radius: 9999px; font-weight: 600; }
+.promo-card-btn.dark-text { color: var(--navy-medium); }
+
+/* Product set heading */
+.product-set-title { color: var(--navy-dark); }
+
+/* Brand story paragraph */
+.brand-description { color: var(--navy-medium); }
+
+/* Product badge styles used in product grids */
+.product-badge { padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; color: var(--gold-lightest); background-color: var(--navy-dark); }
+.product-badge.alt { background-color: var(--navy-medium); color: var(--gold-lightest); }
+
+/* Review card styles replacing inline colors */
+.review-card { padding: 1rem; border-radius: 0.75rem; background-color: rgba(255,255,255,0.03); }
+.review-avatar-circle { background-color: var(--navy-medium); color: var(--gold-dark); font-weight: 600; display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 9999px; }
+.review-name { color: var(--gold-light); }
+.review-text { color: var(--gold-light); }
+
+/* Section backgrounds moved from inline */
+.section--navy-darker { background: linear-gradient(135deg, var(--navy-medium) 0%, var(--navy-dark) 100%); }
+.section--navy-darker-2 { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-darkest) 100%); }
+
+/* Best Sellers section utility */
+.best-sellers-bg { background: linear-gradient(135deg, var(--gold-light) 0%, rgba(212,180,133,0.08) 100%); }
+.best-sellers-title { color: var(--gold-darkest); }
+.best-sellers-desc { color: var(--gold-dark); }
+
+/* Product card text overrides */
+.product-name-dark { color: var(--navy-dark); }
+.product-price-gold { color: var(--gold-dark); }
+
+/* Brand story badges moved from inline styles */
+.badge { padding: 0.25rem 1rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; display: inline-block; }
+.badge--gold { background-color: var(--gold-medium); color: var(--navy-darkest); border: 1px solid var(--gold-dark); }
+.badge--gold-light { background-color: var(--gold-light); color: var(--navy-dark); border: 1px solid var(--gold-medium); }
+
+/* Brand story overlay */
+.brand-image-overlay { position: absolute; inset: 0; border-radius: 9999px; }
+.brand-image-overlay--soft { background: linear-gradient(135deg, rgba(44,62,80,0.3) 0%, rgba(26,37,51,0.3) 100%); }
+
+/* Section backgrounds previously inline */
+.section--gold-gradient { background: linear-gradient(135deg, var(--gold-medium) 0%, var(--gold-dark) 100%); }
+.section--navy-dark-gradient { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-darkest) 100%); }
+
+/* Brand story stat colors */
+.brand-stat-number { color: var(--navy-dark); font-weight: 700; }
+.brand-stat-label { color: var(--navy-medium); }
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  background: linear-gradient(135deg, rgba(44, 62, 80, 0.95) 0%, rgba(26, 37, 51, 1) 100%);
+  z-index: 1;
+  visibility: hidden;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  z-index: 10;
+  visibility: visible;
+}
+
+.hero-slide.prev {
+  opacity: 0;
+  z-index: 1;
+  visibility: hidden;
+}
+
+.hero-slide.next {
+  opacity: 0;
+  z-index: 1;
+  visibility: hidden;
+}
+
+.hero-content-container {
+  position: relative;
+  z-index: 20;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 80px; /* Account for transparent header */
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-text-content {
+  z-index: 30;
+}
+
+.hero-image-content {
+  position: relative;
+  z-index: 25;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image-square {
+  width: 400px;
+  height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.hero-rating-badge {
+  background-color: var(--gold-medium);
+  color: var(--navy-darkest);
+}
+
+.hero-title-primary {
+  color: var(--gold-light);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-title-accent {
+  color: var(--gold-medium);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-description {
+  color: var(--gold-lightest);
+}
+
+.hero-cta-button {
+  background-color: var(--gold-dark);
+  color: var(--navy-darkest);
+  transition: all 0.3s ease;
+  border: 1px solid var(--gold-medium);
+}
+
+.hero-cta-button:hover {
+  background-color: var(--gold-medium);
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(166, 124, 46, 0.3);
+}
+
+.hero-stats-number {
+  color: var(--gold-light);
+}
+
+.hero-stats-label {
+  color: var(--gold-medium);
+}
+
+.hero-decorative-1 {
+  background-color: var(--gold-lightest);
+}
+
+.hero-decorative-2 {
+  background-color: var(--gold-medium);
+}
+
+/* Slider Pagination */
+.slider-pagination {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 40;
+}
+
+.pagination-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(230, 210, 181, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(212, 180, 133, 0.3);
+}
+
+.pagination-dot.active {
+  background: var(--gold-medium);
+  transform: scale(1.2);
+  border-color: var(--gold-dark);
+}
+
+/* Slider Navigation Arrows */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  background: rgba(212, 180, 133, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(212, 180, 133, 0.3);
+}
+
+.slider-nav:hover {
+  background: rgba(212, 180, 133, 0.25);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 15px rgba(212, 180, 133, 0.2);
+}
+
+.slider-nav-prev {
+  left: 2rem;
+}
+
+.slider-nav-next {
+  right: 2rem;
+}
+
+.slider-nav-icon {
+  color: var(--gold-light);
+}
+
+/* Responsive Design for Hero */
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .hero-title-primary {
+    font-size: 2.5rem;
+  }
+  
+  .hero-image-square {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .slider-nav {
+    display: none;
+  }
+}
+
+/* Product Grid Styles - Elegant Cards on Deep Background */
+.section-title {
+  color: var(--gold-light);
+}
+
+.section-description {
+  color: var(--gold-medium);
+}
+
+.product-card {
+  background-color: white;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(212, 180, 133, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(26, 37, 51, 0.15);
+  border-color: rgba(212, 180, 133, 0.3);
+}
+
+.product-image {
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.wishlist-button {
+  background-color: white;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(212, 180, 133, 0.3);
+}
+
+.wishlist-button:hover {
+  transform: scale(1.1);
+  background-color: var(--gold-lightest);
+}
+
+.wishlist-icon {
+  color: var(--gold-dark);
+}
+
+.product-name {
+  color: var(--navy-dark);
+  font-weight: 500;
+}
+
+.product-subtitle {
+  color: var(--navy-medium);
+}
+
+.product-price {
+  color: var(--gold-dark);
+  font-weight: 600;
+}
+
+.product-original-price {
+  color: var(--navy-light);
+}
+
+.product-rating-text {
+  color: var(--navy-medium);
+}
+
+/* Promotional Banners - Luxurious Scheme */
+.promo-banner-1 {
+  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-darkest) 100%);
+}
+
+.promo-banner-2 {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-darkest) 100%);
+}
+
+.promo-banner-3 {
+  background: linear-gradient(135deg, var(--gold-medium) 0%, var(--gold-dark) 100%);
+}
+
+.promo-title-light {
+  color: var(--gold-lightest);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.promo-title-dark {
+  color: var(--navy-darkest);
+}
+
+.promo-description-light {
+  color: var(--gold-light);
+}
+
+.promo-description-dark {
+  color: var(--navy-dark);
+}
+
+.promo-button-light {
+  background-color: var(--gold-lightest);
+  color: var(--navy-darkest);
+  border: 1px solid var(--gold-light);
+}
+
+.promo-button-dark {
+  background-color: white;
+  color: var(--navy-dark);
+  border: 1px solid var(--navy-light);
+}
+
+.promo-decorative-1 {
+  background-color: var(--gold-lightest);
+}
+
+.promo-decorative-2 {
+  background-color: var(--gold-medium);
+}
+
+.promo-decorative-3 {
+  background-color: var(--gold-light);
+}
+
+/* Brand Story Section - Luxurious Dark Theme */
+.brand-story-section {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-darkest) 100%);
+  border-top: 1px solid rgba(212, 180, 133, 0.1);
+  border-bottom: 1px solid rgba(212, 180, 133, 0.1);
+}
+
+.brand-story-overlay {
+  background: linear-gradient(135deg, rgba(212, 180, 133, 0.05) 0%, rgba(166, 124, 46, 0.05) 100%);
+}
+
+.brand-story-title {
+  color: var(--gold-light);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.brand-story-badge-1 {
+  background-color: var(--gold-medium);
+  color: var(--navy-darkest);
+  border: 1px solid var(--gold-dark);
+}
+
+.brand-story-badge-2 {
+  background-color: var(--gold-light);
+  color: var(--navy-dark);
+  border: 1px solid var(--gold-medium);
+}
+
+.brand-story-description {
+  color: var(--gold-lightest);
+}
+
+.brand-story-stats-number {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.brand-story-stats-label {
+  color: var(--gold-medium);
+}
+
+.brand-story-arrow {
+  color: var(--gold-medium);
+}
+
+/* Customer Experience Section - Elegant Dark Background with Light Cards */
+.customer-experience-section {
+  background-color: var(--navy-darkest);
+  background-image: radial-gradient(circle at top right, rgba(212, 180, 133, 0.03), transparent 70%),
+                    radial-gradient(circle at bottom left, rgba(212, 180, 133, 0.03), transparent 70%);
+}
+
+.customer-section-title {
+  color: var(--gold-light);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.customer-section-description {
+  color: var(--gold-lightest);
+}
+
+.brand-logo {
+  color: var(--gold-medium);
+}
+
+.review-avatar {
+  background-color: var(--gold-lightest);
+  border: 2px solid var(--gold-medium);
+}
+
+.review-avatar-text {
+  color: var(--navy-dark);
+}
+
+.review-name {
+  color: var(--navy-medium);
+  font-weight: 500;
+}
+
+.review-text {
+  color: var(--navy-medium);
+}
+
+/* Newsletter Section */
+.newsletter-section {
+  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-darkest) 100%);
+  border-top: 1px solid rgba(248, 240, 227, 0.1);
+}
+
+.newsletter-title {
+  color: var(--gold-lightest);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.newsletter-description {
+  color: var(--gold-light);
+}
+
+.newsletter-input {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--navy-dark);
+  border: 1px solid var(--gold-light);
+}
+
+.newsletter-button {
+  background-color: var(--navy-dark);
+  color: var(--gold-light);
+  border: 1px solid var(--navy-light);
+}
+
+/* Footer Styles */
+.footer-section {
+  background-color: var(--navy-darkest);
+  color: var(--gold-lightest);
+  border-top: 1px solid rgba(212, 180, 133, 0.1);
+}
+
+.footer-logo {
+  color: var(--gold-medium);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.footer-description {
+  color: var(--gold-lightest);
+}
+
+.footer-social-icon {
+  background-color: rgba(212, 180, 133, 0.1);
+  border: 1px solid rgba(212, 180, 133, 0.2);
+  transition: all 0.3s ease;
+}
+
+.footer-social-icon:hover {
+  background-color: var(--gold-dark);
+  transform: translateY(-2px);
+}
+
+.footer-link {
+  color: var(--gold-light);
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--gold-medium);
+  transform: translateX(2px);
+}
+
+.footer-border {
+  border-color: rgba(212, 180, 133, 0.1);
+}
+
+.footer-copyright {
+  color: var(--gold-lightest);
+}
+
+/* View All Button */
+.view-all-button {
+  border: 1px solid var(--gold-dark);
+  color: var(--gold-dark);
+  transition: all 0.3s ease;
+}
+
+.view-all-button:hover {
+  background-color: var(--gold-dark);
+  color: white;
+  box-shadow: 0 4px 12px rgba(166, 124, 46, 0.15);
+}
+
+/* Add to Cart Button */
+.add-to-cart-button {
+  background-color: var(--navy-dark);
+  color: var(--gold-lightest);
+  transition: all 0.3s ease;
+  border: 1px solid var(--navy-medium);
+}
+
+.add-to-cart-button:hover {
+  background-color: var(--navy-medium);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(44, 62, 80, 0.2);
+}
+
+/* Utility Classes */
+/* Gold Gradients */
+.gold-gradient-1 {
+  background: linear-gradient(135deg, var(--gold-lightest) 0%, var(--gold-medium) 100%);
+}
+
+.gold-gradient-2 {
+  background: linear-gradient(135deg, var(--gold-medium) 0%, var(--gold-dark) 100%);
+}
+
+.gold-gradient-3 {
+  background: linear-gradient(135deg, var(--gold-lightest) 0%, var(--gold-medium) 50%, var(--gold-darkest) 100%);
+}
+
+/* Navy Gradients */
+.navy-gradient-1 {
+  background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-medium) 100%);
+}
+
+.navy-gradient-2 {
+  background: linear-gradient(135deg, var(--navy-medium) 0%, var(--navy-dark) 100%);
+}
+
+.navy-gradient-3 {
+  background: linear-gradient(135deg, var(--navy-lightest) 0%, var(--navy-medium) 50%, var(--navy-darkest) 100%);
+}
+
+/* Background Colors */
+.bg-gold-lightest {
+  background-color: var(--gold-lightest);
+}
+
+.bg-gold-light {
+  background-color: var(--gold-light);
+}
+
+.bg-gold-medium {
+  background-color: var(--gold-medium);
+}
+
+.bg-gold-dark {
+  background-color: var(--gold-dark);
+}
+
+.bg-gold-darkest {
+  background-color: var(--gold-darkest);
+}
+
+.bg-navy-lightest {
+  background-color: var(--navy-lightest);
+}
+
+.bg-navy-light {
+  background-color: var(--navy-light);
+}
+
+.bg-navy-medium {
+  background-color: var(--navy-medium);
+}
+
+.bg-navy-dark {
+  background-color: var(--navy-dark);
+}
+
+.bg-navy-darkest {
+  background-color: var(--navy-darkest);
+}
+
+/* Text Colors */
+.text-gold-lightest {
+  color: var(--gold-lightest);
+}
+
+.text-gold-light {
+  color: var(--gold-light);
+}
+
+.text-gold-medium {
+  color: var(--gold-medium);
+}
+
+.text-gold-dark {
+  color: var(--gold-dark);
+}
+
+.text-gold-darkest {
+  color: var(--gold-darkest);
+}
+
+.text-navy-lightest {
+  color: var(--navy-lightest);
+}
+
+.text-navy-light {
+  color: var(--navy-light);
+}
+
+.text-navy-medium {
+  color: var(--navy-medium);
+}
+
+.text-navy-dark {
+  color: var(--navy-dark);
+}
+
+.text-navy-darkest {
+  color: var(--navy-darkest);
+}
+
+/* Legacy Support */
+.bg-earth-light {
+  background-color: var(--gold-lightest);
+}
+
+.bg-earth-medium {
+  background-color: var(--gold-medium);
+}
+
+.bg-earth-dark {
+  background-color: var(--gold-dark);
+}
+
+.bg-earth-darker {
+  background-color: var(--navy-medium);
+}
+
+.bg-earth-darkest {
+  background-color: var(--navy-dark);
+}
+
+.text-earth-light {
+  color: var(--gold-lightest);
+}
+
+.text-earth-medium {
+  color: var(--gold-medium);
+}
+
+.text-earth-dark {
+  color: var(--gold-dark);
+}
+
+.text-earth-darker {
+  color: var(--navy-medium);
+}
+
+.text-earth-darkest {
+  color: var(--navy-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title-primary,
+  .hero-title-accent {
+    font-size: 2rem;
+  }
+  
+  .brand-story-title {
+    font-size: 2.5rem;
+  }
+  
+  .customer-section-title {
+    font-size: 2rem;
+  }
+}
