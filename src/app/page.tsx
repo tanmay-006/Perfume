@@ -67,16 +67,13 @@ export default function Home() {
   };
 
   const getSlideClass = (index) => {
-    const nextSlideIndex = (currentSlide + 1) % slides.length;
-    
     if (index === currentSlide) {
       return 'active';
-    } else if (index === prevSlide) {
-      return 'prev';
-    } else if (index === nextSlideIndex) {
-      return 'next';
     }
-    return ''; // Hidden slides
+    if (index === prevSlide) {
+      return 'prev';
+    }
+    return '';
   };
 
   return (

@@ -177,8 +177,9 @@
   background-position: center;
   background-repeat: no-repeat;
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1;
   transform: translateX(100%);
+  z-index: 1;
+  visibility: hidden;
 }
 
 .hero-slide::after {
@@ -195,16 +196,13 @@
 .hero-slide.active {
   transform: translateX(0);
   z-index: 10;
+  visibility: visible;
 }
 
 .hero-slide.prev {
   transform: translateX(-100%);
   z-index: 5;
-}
-
-.hero-slide.next {
-  transform: translateX(100%);
-  z-index: 5;
+  visibility: visible;
 }
 
 .hero-content-container {
