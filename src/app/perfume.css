@@ -1,29 +1,5 @@
 /* Perfume Website Custom Styles */
 
-/* Color Variables - Luxurious Gold & Navy Theme */
-:root {
-  /* Primary Palette - Rich Gold to Navy */
-  --gold-lightest: #f8f0e3;
-  --gold-light: #e6d2b5;
-  --gold-medium: #d4b485;
-  --gold-dark: #c19a54;
-  --gold-darkest: #a67c2e;
-  
-  /* Secondary Palette - Deep Navy */
-  --navy-lightest: #e6eaef;
-  --navy-light: #a3b0c2;
-  --navy-medium: #526580;
-  --navy-dark: #2c3e50;
-  --navy-darkest: #1a2533;
-  
-  /* Legacy Earth Tones - For Backwards Compatibility */
-  --earth-light: var(--gold-lightest);
-  --earth-medium: var(--gold-medium);
-  --earth-dark: var(--gold-dark);
-  --earth-darker: var(--navy-medium);
-  --earth-darkest: var(--navy-dark);
-}
-
 /* Navigation Styles - Transparent Overlay */
 .nav-bar {
   position: absolute;

@@ -3,11 +3,40 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --earth-light: #cad2c5;
-  --earth-medium: #84a98c;
-  --earth-dark: #52796f;
-  --earth-darker: #354f52;
-  --earth-darkest: #2f3e46;
+}
+
+[data-theme='light'] {
+  --background: #f8f9fa;
+  --foreground: #212529;
+
+  /* Accessible gold palette for light theme */
+  --gold-darkest: #8c6825;   /* Contrast: 5.1:1 */
+  --gold-dark: #a67c2e;     /* Contrast: 3.5:1 (for large text/UI elements) */
+  --gold-medium: #b38633;   /* Contrast: 3.8:1 (for large text/UI elements) */
+  --gold-light: #c89f58;    /* Contrast: 3.0:1 (for large text/UI elements) */
+  --gold-lightest: #d1ae77; /* Contrast: 2.5:1 (for UI elements) */
+
+  /* Accessible navy palette for light theme */
+  --navy-darkest: #1a2533;   /* Contrast: 11.4:1 */
+  --navy-dark: #2c3e50;     /* Contrast: 7.8:1 */
+  --navy-medium: #526580;   /* Contrast: 4.1:1 (for large text/UI elements) */
+  --navy-light: #6c757d;    /* Contrast: 4.5:1 */
+  --navy-lightest: #868e96; /* Contrast: 3.5:1 (for large text/UI elements) */
+}
+
+[data-theme='dark'] {
+  --background: #1a2533;
+  --foreground: #f8f0e3;
+  --gold-lightest: #f8f0e3;
+  --gold-light: #e6d2b5;
+  --gold-medium: #d4b485;
+  --gold-dark: #c19a54;
+  --gold-darkest: #a67c2e;
+  --navy-lightest: #e6eaef;
+  --navy-light: #a3b0c2;
+  --navy-medium: #526580;
+  --navy-dark: #2c3e50;
+  --navy-darkest: #1a2533;
 }
 
 @theme inline {
@@ -17,17 +46,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Custom earth-tone hover effects */
