@@ -13,6 +13,7 @@ import Newsletter from '@/components/ui/Newsletter';
 import Footer from '@/components/layout/Footer';
 import { products } from '@/data/products';
 
+// Loading screen component
 const MFFragranceLoader = () => {
   const brandLetters = ['M', 'F', ' ', 'F', 'R', 'A', 'G', 'R', 'A', 'N', 'C', 'E'];
 
@@ -201,14 +202,8 @@ export default function Home() {
   }, []);
 
   // Get featured products
-  const featuredProducts = products.slice(0, 5).map(p => ({
-    ...p,
-    images: p.images || (p.image ? [p.image] : [])
-  }));
-  const secondaryProducts = products.slice(2, 8).map(p => ({
-    ...p,
-    images: p.images || (p.image ? [p.image] : [])
-  }));
+  const featuredProducts = products.slice(0, 5);
+  const secondaryProducts = products.slice(2, 8);
   const bestSellersProducts = products.slice(0, 3).map(p => ({
     ...p,
     images: p.images || (p.image ? [p.image] : [])
