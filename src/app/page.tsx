@@ -1,10 +1,12 @@
 'use client';
 
 import './perfume.css';
+import './new-perfume.css';
 import { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import Hero from '@/components/ui/Hero';
 import FeaturedProducts from '@/components/product/FeaturedProducts';
+import NewFeaturedProducts from '@/components/product/NewFeaturedProducts';
 import PromoSection from '@/components/ui/PromoSection';
 import BrandStory from '@/components/ui/BrandStory';
 import Testimonials from '@/components/ui/Testimonials';
@@ -260,9 +262,8 @@ export default function Home() {
         
         <Hero />
         
-        <FeaturedProducts 
-          title="Product Set" 
-          description="Discover our carefully curated collection of premium fragrances"
+        <NewFeaturedProducts 
+          title="Our Collection"
           products={featuredProducts}
         />
 
