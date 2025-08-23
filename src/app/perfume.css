@@ -49,7 +49,7 @@
 /* Hero Section - Full Width Banner with Slider */
 .hero-section {
   position: relative;
-  min-height: 100vh;
+  min-height:70vh;
   overflow: hidden;
   background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-darkest) 100%);
 }
