@@ -12,6 +12,7 @@ import BestSellers from '@/components/product/BestSellers';
 import Newsletter from '@/components/ui/Newsletter';
 import Footer from '@/components/layout/Footer';
 import { products } from '@/data/products';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 const MFFragranceLoader = () => {
   const brandLetters = ['M', 'F', ' ', 'F', 'R', 'A', 'G', 'R', 'A', 'N', 'C', 'E'];
@@ -46,15 +47,14 @@ const MFFragranceLoader = () => {
             display: inline-block;
             opacity: 0;
             transform: translateY(50px);
-            color: var(--gold-medium);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
             animation: letterReveal 0.8s ease-out forwards;
-            background: linear-gradient(45deg, var(--gold-dark), var(--gold-medium), var(--gold-light), var(--gold-medium));
+            background: linear-gradient(45deg, #a39081, #8b7355, #967969, #806b2a);
             background-size: 300% 300%;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 800;
             animation: letterReveal 0.8s ease-out forwards, colorShift 3s ease-in-out infinite;
           }
 
@@ -167,8 +167,8 @@ const MFFragranceLoader = () => {
         <div style={{
           width: '60px',
           height: '60px',
-          border: '4px solid rgba(212, 180, 133, 0.2)',
-          borderTop: '4px solid var(--gold-medium)',
+          border: '3px solid rgba(255, 255, 255, 0.1)',
+          borderTop: '3px solid #4ecdc4',
           borderRadius: '50%',
           margin: '2rem auto',
           animation: 'spin 1s linear infinite, fadeIn 1s ease-out 2.5s forwards',
@@ -180,35 +180,16 @@ const MFFragranceLoader = () => {
 };
 
 export default function Home() {
-  const [theme, setTheme] = useState('dark');
   const [loading, setLoading] = useState(true);
-  const [contentVisible, setContentVisible] = useState(false);
+  const { theme } = useTheme();
 
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
-
-  // Set theme on mount and when it changes
+  // Handle loader
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // Handle loader and content visibility
-  useEffect(() => {
-    // Show loader immediately
-    setLoading(true);
-    setContentVisible(false);
-    
-    const loaderTimer = setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoading(false);
-      // Add a small delay before showing content
-      const contentTimer = setTimeout(() => {
-        setContentVisible(true);
-      }, 100);
-      return () => clearTimeout(contentTimer);
-    }, 3000);
+    }, 3000); // Hide loader after 3 seconds
 
-    return () => clearTimeout(loaderTimer);
+    return () => clearTimeout(timer);
   }, []);
 
   // Get featured products
@@ -254,9 +235,8 @@ export default function Home() {
   return (
     <>
       {loading && <MFFragranceLoader />}
-      <div className={`min-h-screen transition-opacity duration-500 ${contentVisible ? 'opacity-100' : 'opacity-0'}`}
-           style={{ display: loading ? 'none' : 'block' }}>
-        <Header theme={theme} onThemeToggle={toggleTheme} />
+      <div className="min-h-screen">
+        <Header />
         
         <Hero />
         
@@ -275,9 +255,35 @@ export default function Home() {
           viewAllLink="/products"
         />
 
-        <BrandStory />
+        <BrandStory 
+          title="MF Fragrance & Perfume"
+          description="Experience the finest collection of premium fragrances crafted with 100% natural ingredients. Our perfumes tell stories of elegance, sophistication, and timeless beauty."
+          image="/images/laura-chouette-4sKdeIMiFEI-unsplash.jpg"
+        />
 
-        <Testimonials title="Crafting Scents With<br />Passion And Precision" />
+        <Testimonials 
+          title="Crafting Scents With<br />Passion And Precision"
+          reviews={[
+            {
+              name: "Sarah Johnson",
+              rating: 5,
+              review: "Absolutely love the Velvet Orchid! The scent lasts all day and receives so many compliments.",
+              avatar: "SJ"
+            },
+            {
+              name: "Michael Chen",
+              rating: 5,
+              review: "Premium quality fragrances at reasonable prices. My go-to store for all perfume needs.",
+              avatar: "MC"
+            },
+            {
+              name: "Emily Davis",
+              rating: 5,
+              review: "The customer service is exceptional and the packaging is beautiful. Highly recommended!",
+              avatar: "ED"
+            }
+          ]}
+        />
 
         <BestSellers products={bestSellersProducts} />
 

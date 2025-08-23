@@ -2,33 +2,25 @@
 
 import Link from "next/link";
 import { useState, useEffect } from 'react';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface HeaderProps {
   isScrolled?: boolean;
+  // Legacy props for backward compatibility
   theme?: 'light' | 'dark';
   onThemeToggle?: () => void;
 }
 
-export default function Header({ theme = 'dark', onThemeToggle }: HeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Header({ isScrolled: initialScrolled, theme: themeProp, onThemeToggle }: HeaderProps) {
+  const [isScrolled, setIsScrolled] = useState(initialScrolled || false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-
-  // Close profile dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const profileMenu = document.getElementById('profile-menu');
-      const profileButton = document.getElementById('profile-button');
-      if (profileMenu && profileButton && 
-          !profileMenu.contains(event.target as Node) && 
-          !profileButton.contains(event.target as Node)) {
-        setIsProfileOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  
+  // Use the global theme context
+  const themeContext = useTheme();
+  
+  // Use either the prop (for backward compatibility) or the context
+  const theme = themeProp || themeContext.theme;
+  const toggleTheme = onThemeToggle || themeContext.toggleTheme;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,17 +65,21 @@ export default function Header({ theme = 'dark', onThemeToggle }: HeaderProps) {
           {/* Right Side Icons */}
           <div className="flex items-center space-x-4">
             {/* Theme Toggle */}
-            {onThemeToggle && (
-              <button 
-                onClick={onThemeToggle} 
-                className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors"
-                aria-label="Toggle theme"
-              >
+            <button 
+              onClick={toggleTheme} 
+              className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
                 <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
-              </button>
-            )}
+              ) : (
+                <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
 
             {/* Search */}
             <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors" aria-label="Search">
@@ -93,15 +89,11 @@ export default function Header({ theme = 'dark', onThemeToggle }: HeaderProps) {
             </button>
 
             {/* User Account */}
-            <Link 
-              href="/profile" 
-              className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors" 
-              aria-label="Account"
-            >
+            <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors" aria-label="Account">
               <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
-            </Link>
+            </button>
 
             {/* Shopping Cart */}
             <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors relative" aria-label="Shopping cart">

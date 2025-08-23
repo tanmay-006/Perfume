@@ -10,9 +10,12 @@ import Footer from '@/components/layout/Footer';
 import { Product, FilterState } from '@/types/product';
 import { products, categories, sortOptions } from '@/data/products';
 import '../perfume.css';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 export default function ProductsPage() {
-    const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+    // Use global theme context
+    const { theme } = useTheme();
+    
     const [filters, setFilters] = useState<FilterState>({
         category: 'all',
         priceRange: [0, 500],
@@ -21,15 +24,6 @@ export default function ProductsPage() {
         onSale: false,
         freeShipping: false
     });
-
-    const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light');
-    };
-
-    // Set theme on mount and when it changes
-    useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
-    }, [theme]);
 
     const [sortBy, setSortBy] = useState('featured');
     const [currentPage, setCurrentPage] = useState(1);
@@ -122,7 +116,7 @@ export default function ProductsPage() {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Header */}
-            <Header theme={theme} onThemeToggle={toggleTheme} />
+            <Header />
 
             {/* Hero Banner */}
             <Hero slides={[

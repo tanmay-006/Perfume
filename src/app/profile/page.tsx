@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface UserProfile {
   personalInfo: {
@@ -38,7 +39,7 @@ interface UserProfile {
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('overview');
-  const [theme, setTheme] = useState('dark');
+  const { theme } = useTheme();
   
   // Dummy data - replace with actual user data from your backend
   const [userProfile, setUserProfile] = useState<UserProfile>({
@@ -79,13 +80,11 @@ export default function ProfilePage() {
     }
   });
 
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
+  // We no longer need this as we're using the global theme context
 
   return (
     <div data-theme={theme} className="min-h-screen bg-background">
-      <Header theme={theme} onThemeToggle={toggleTheme} />
+      <Header />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <div className="mb-8">

@@ -50,17 +50,17 @@ export default function Footer({ sections = defaultSections }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="px-4 py-16" style={{backgroundColor: "#2f3e46", color: "#cad2c5"}}>
+    <footer className="px-4 py-16 bg-navy-darkest text-gold-lightest">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Brand Section */}
           <div className="space-y-4">
             <Link href="/">
-              <h3 className="text-2xl font-bold cursor-pointer hover:opacity-80 transition-opacity" style={{color: "#84a98c"}}>
+              <h3 className="text-2xl font-bold cursor-pointer hover:opacity-80 transition-opacity text-gold-medium">
                 MF fragrance
               </h3>
             </Link>
-            <p className="leading-relaxed" style={{color: "#cad2c5"}}>
+            <p className="leading-relaxed text-gold-lightest">
               Premium fragrances crafted with passion and precision for the discerning individual.
             </p>
             
@@ -68,8 +68,7 @@ export default function Footer({ sections = defaultSections }: FooterProps) {
             <div className="flex space-x-4">
               <a 
                 href="#" 
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110" 
-                style={{backgroundColor: "#354f52"}}
+                className="w-10 h-10 bg-navy-dark rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110 hover:bg-navy-medium text-gold-light" 
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -78,8 +77,7 @@ export default function Footer({ sections = defaultSections }: FooterProps) {
               </a>
               <a 
                 href="#" 
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110" 
-                style={{backgroundColor: "#354f52"}}
+                className="w-10 h-10 bg-navy-dark rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110 hover:bg-navy-medium text-gold-light" 
                 aria-label="Twitter"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -88,8 +86,7 @@ export default function Footer({ sections = defaultSections }: FooterProps) {
               </a>
               <a 
                 href="#" 
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110" 
-                style={{backgroundColor: "#354f52"}}
+                className="w-10 h-10 bg-navy-dark rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110 hover:bg-navy-medium text-gold-light" 
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -102,14 +99,13 @@ export default function Footer({ sections = defaultSections }: FooterProps) {
           {/* Footer Sections */}
           {sections.map((section, index) => (
             <div key={index}>
-              <h4 className="font-semibold mb-4 text-white">{section.title}</h4>
+              <h4 className="font-semibold mb-4 text-gold-light">{section.title}</h4>
               <ul className="space-y-2">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <Link 
                       href={link.href} 
-                      className="transition-all duration-300 hover:text-gold-medium hover:translate-x-1 block" 
-                      style={{color: "#cad2c5"}}
+                      className="text-gold-lightest transition-all duration-300 hover:text-gold-medium hover:translate-x-1 block" 
                     >
                       {link.label}
                     </Link>
@@ -121,30 +117,27 @@ export default function Footer({ sections = defaultSections }: FooterProps) {
         </div>
 
         {/* Bottom Section */}
-        <div className="pt-8" style={{borderTop: "1px solid #354f52"}}>
+        <div className="pt-8 border-t border-navy-dark">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm" style={{color: "#cad2c5"}}>
+            <p className="text-sm text-gold-lightest">
               &copy; {currentYear} MF fragrance. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm mt-4 md:mt-0">
               <Link 
                 href="/privacy" 
-                className="transition-colors hover:text-gold-medium" 
-                style={{color: "#cad2c5"}}
+                className="text-gold-lightest transition-colors hover:text-gold-medium" 
               >
                 Privacy Policy
               </Link>
               <Link 
                 href="/terms" 
-                className="transition-colors hover:text-gold-medium" 
-                style={{color: "#cad2c5"}}
+                className="text-gold-lightest transition-colors hover:text-gold-medium" 
               >
                 Terms of Service
               </Link>
               <Link 
                 href="/cookies" 
-                className="transition-colors hover:text-gold-medium" 
-                style={{color: "#cad2c5"}}
+                className="text-gold-lightest transition-colors hover:text-gold-medium" 
               >
                 Cookie Policy
               </Link>
