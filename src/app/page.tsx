@@ -46,14 +46,15 @@ const MFFragranceLoader = () => {
             display: inline-block;
             opacity: 0;
             transform: translateY(50px);
-            color: white;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            color: var(--gold-medium);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             animation: letterReveal 0.8s ease-out forwards;
-            background: linear-gradient(45deg, #a39081, #8b7355, #967969, #806b2a);
+            background: linear-gradient(45deg, var(--gold-dark), var(--gold-medium), var(--gold-light), var(--gold-medium));
             background-size: 300% 300%;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 800;
             animation: letterReveal 0.8s ease-out forwards, colorShift 3s ease-in-out infinite;
           }
 
@@ -166,8 +167,8 @@ const MFFragranceLoader = () => {
         <div style={{
           width: '60px',
           height: '60px',
-          border: '3px solid rgba(255, 255, 255, 0.1)',
-          borderTop: '3px solid #4ecdc4',
+          border: '4px solid rgba(212, 180, 133, 0.2)',
+          borderTop: '4px solid var(--gold-medium)',
           borderRadius: '50%',
           margin: '2rem auto',
           animation: 'spin 1s linear infinite, fadeIn 1s ease-out 2.5s forwards',
@@ -181,6 +182,7 @@ const MFFragranceLoader = () => {
 export default function Home() {
   const [theme, setTheme] = useState('dark');
   const [loading, setLoading] = useState(true);
+  const [contentVisible, setContentVisible] = useState(false);
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
@@ -191,13 +193,22 @@ export default function Home() {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  // Handle loader
+  // Handle loader and content visibility
   useEffect(() => {
-    const timer = setTimeout(() => {
+    // Show loader immediately
+    setLoading(true);
+    setContentVisible(false);
+    
+    const loaderTimer = setTimeout(() => {
       setLoading(false);
-    }, 3000); // Hide loader after 3 seconds
+      // Add a small delay before showing content
+      const contentTimer = setTimeout(() => {
+        setContentVisible(true);
+      }, 100);
+      return () => clearTimeout(contentTimer);
+    }, 3000);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(loaderTimer);
   }, []);
 
   // Get featured products
@@ -243,7 +254,8 @@ export default function Home() {
   return (
     <>
       {loading && <MFFragranceLoader />}
-      <div className="min-h-screen">
+      <div className={`min-h-screen transition-opacity duration-500 ${contentVisible ? 'opacity-100' : 'opacity-0'}`}
+           style={{ display: loading ? 'none' : 'block' }}>
         <Header theme={theme} onThemeToggle={toggleTheme} />
         
         <Hero />
