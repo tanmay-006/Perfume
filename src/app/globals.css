@@ -27,16 +27,20 @@
 [data-theme='dark'] {
   --background: #1a2533;
   --foreground: #f8f0e3;
-  --gold-lightest: #f8f0e3;
-  --gold-light: #e6d2b5;
-  --gold-medium: #d4b485;
-  --gold-dark: #c19a54;
-  --gold-darkest: #a67c2e;
-  --navy-lightest: #e6eaef;
-  --navy-light: #a3b0c2;
-  --navy-medium: #526580;
-  --navy-dark: #2c3e50;
-  --navy-darkest: #1a2533;
+  
+  /* Gold palette for dark theme - lighter colors for text on dark backgrounds */
+  --gold-lightest: #d1ae77;  /* Very light for primary text */
+  --gold-light: #e6d2b5;     /* Light for secondary text */
+  --gold-medium: #d4b485;    /* Medium for accents */
+  --gold-dark: #c19a54;      /* Darker for buttons/highlights */
+  --gold-darkest: #a67c2e;   /* Darkest for button text on light backgrounds */
+  
+  /* Navy palette for dark theme - inverted for proper contrast */
+  --navy-lightest: #e6eaef;  /* Very light for text on dark backgrounds */
+  --navy-light: #a3b0c2;     /* Light for secondary text */
+  --navy-medium: #526580;    /* Medium for UI elements */
+  --navy-dark: #2c3e50;      /* Dark for secondary backgrounds */
+  --navy-darkest: #1a2533;   /* Darkest for main background */
 }
 
 @theme inline {
@@ -51,6 +55,102 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme-aware text color overrides for proper contrast */
+[data-theme='dark'] .text-gray-900 {
+  color: var(--gold-lightest) !important;
+}
+
+[data-theme='dark'] .text-gray-800 {
+  color: var(--gold-lightest) !important;
+}
+
+[data-theme='dark'] .text-gray-700 {
+  color: var(--gold-light) !important;
+}
+
+[data-theme='dark'] .text-gray-600 {
+  color: var(--gold-light) !important;
+}
+
+[data-theme='dark'] .text-gray-500 {
+  color: var(--gold-medium) !important;
+}
+
+[data-theme='dark'] .text-gray-400 {
+  color: var(--gold-medium) !important;
+}
+
+/* Light theme overrides for consistency */
+[data-theme='light'] .text-gray-900 {
+  color: var(--navy-darkest) !important;
+}
+
+[data-theme='light'] .text-gray-800 {
+  color: var(--navy-dark) !important;
+}
+
+[data-theme='light'] .text-gray-700 {
+  color: var(--navy-medium) !important;
+}
+
+[data-theme='light'] .text-gray-600 {
+  color: var(--navy-medium) !important;
+}
+
+[data-theme='light'] .text-gray-500 {
+  color: var(--navy-light) !important;
+}
+
+[data-theme='light'] .text-gray-400 {
+  color: var(--navy-light) !important;
+}
+
+/* Theme-aware background color overrides */
+[data-theme='dark'] .bg-gray-50 {
+  background-color: var(--background) !important;
+}
+
+[data-theme='dark'] .bg-gray-100 {
+  background-color: var(--navy-dark) !important;
+}
+
+[data-theme='dark'] .bg-gray-200 {
+  background-color: var(--navy-medium) !important;
+}
+
+[data-theme='dark'] .bg-white {
+  background-color: var(--navy-dark) !important;
+}
+
+[data-theme='light'] .bg-gray-50 {
+  background-color: var(--background) !important;
+}
+
+[data-theme='light'] .bg-gray-100 {
+  background-color: #f8f9fa !important;
+}
+
+[data-theme='light'] .bg-gray-200 {
+  background-color: #e9ecef !important;
+}
+
+/* Theme-aware border color overrides */
+[data-theme='dark'] .border-gray-200 {
+  border-color: var(--navy-medium) !important;
+}
+
+[data-theme='dark'] .border-gray-300 {
+  border-color: var(--navy-medium) !important;
+}
+
+[data-theme='light'] .border-gray-200 {
+  border-color: var(--navy-lightest) !important;
+}
+
+[data-theme='light'] .border-gray-300 {
+  border-color: var(--navy-light) !important;
 }
 
 /* Custom earth-tone hover effects */

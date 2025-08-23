@@ -31,9 +31,9 @@ export default function FeaturedProducts({
     <section className="px-4 py-16">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">{title}</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold text-gold-lightest mb-4">{title}</h2>
           {description && (
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gold-light max-w-2xl mx-auto">
               {description}
             </p>
           )}
@@ -42,7 +42,7 @@ export default function FeaturedProducts({
         {/* Product Grid */}
         <div className={`grid ${gridColsClass} gap-6`}>
           {products.map((product, index) => (
-            <div key={index} className="product-card bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow group cursor-pointer">
+            <div key={index} className="product-card bg-background p-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow group cursor-pointer border border-navy-light">
               <Link href={`/products/${product.id}`}>
                 <div className="relative mb-4">
                   <div className="aspect-[3/4] rounded-xl overflow-hidden">
@@ -55,7 +55,7 @@ export default function FeaturedProducts({
                     />
                   </div>
                   {product.badge && (
-                    <div className="absolute top-2 left-2 bg-earth-dark text-white px-2 py-1 rounded-full text-xs font-semibold">
+                    <div className="absolute top-2 left-2 bg-gold-dark text-navy-darkest px-2 py-1 rounded-full text-xs font-semibold">
                       {product.badge}
                     </div>
                   )}
@@ -63,11 +63,11 @@ export default function FeaturedProducts({
               </Link>
               
               <div className="space-y-2">
-                <h3 className="product-name font-semibold text-sm">{product.name}</h3>
+                <h3 className="product-name font-semibold text-sm text-foreground">{product.name}</h3>
                 <div className="flex items-center space-x-2">
-                  <span className="product-price font-bold">${product.price.toFixed(2)}</span>
+                  <span className="product-price font-bold text-gold-dark">${product.price.toFixed(2)}</span>
                   {product.originalPrice && (
-                    <span className="product-original-price text-sm line-through">
+                    <span className="product-original-price text-sm line-through text-gold-light">
                       ${product.originalPrice.toFixed(2)}
                     </span>
                   )}
@@ -82,9 +82,9 @@ export default function FeaturedProducts({
                         </svg>
                       ))}
                     </div>
-                    <span className="product-rating-text text-xs">({product.rating})</span>
+                    <span className="product-rating-text text-xs text-gold-light">({product.rating})</span>
                   </div>
-                  <span className="product-rating-text text-xs">{product.reviews} reviews</span>
+                  <span className="product-rating-text text-xs text-gold-light">{product.reviews} reviews</span>
                 </div>
                 <button className="add-to-cart-button w-full py-2 rounded-lg font-semibold text-sm">
                   Add to Cart
@@ -96,7 +96,7 @@ export default function FeaturedProducts({
 
         {viewAllLink && (
           <div className="text-center mt-12">
-            <Link href={viewAllLink} className="inline-block px-6 py-3 rounded-full border border-earth-dark text-earth-dark hover:bg-earth-dark hover:text-white transition-colors font-medium">
+            <Link href={viewAllLink} className="inline-block px-6 py-3 rounded-full border border-gold-dark text-gold-dark hover:bg-gold-dark hover:text-navy-darkest transition-colors font-medium">
               View All Products
             </Link>
           </div>

@@ -98,10 +98,10 @@
 .promo-card-btn.dark-text { color: var(--navy-medium); }
 
 /* Product set heading */
-.product-set-title { color: var(--navy-dark); }
+.product-set-title { color: var(--gold-lightest); }
 
 /* Brand story paragraph */
-.brand-description { color: var(--navy-medium); }
+.brand-description { color: var(--gold-light); }
 
 /* Product badge styles used in product grids */
 .product-badge { padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; color: var(--gold-lightest); background-color: var(--navy-dark); }
@@ -114,8 +114,8 @@
 .review-text { color: var(--gold-light); }
 
 /* Section backgrounds moved from inline */
-.section--navy-darker { background: linear-gradient(135deg, var(--navy-medium) 0%, var(--navy-dark) 100%); }
-.section--navy-darker-2 { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-darkest) 100%); }
+.section--navy-darker { background: linear-gradient(135deg, var(--navy-medium) 0%, var(--navy-dark) 100%); color: var(--gold-lightest); }
+.section--navy-darker-2 { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-darkest) 100%); color: var(--gold-lightest); }
 
 /* Best Sellers section utility */
 .best-sellers-bg { background: linear-gradient(135deg, var(--gold-light) 0%, rgba(212,180,133,0.08) 100%); }
@@ -123,7 +123,7 @@
 .best-sellers-desc { color: var(--gold-dark); }
 
 /* Product card text overrides */
-.product-name-dark { color: var(--navy-dark); }
+.product-name-dark { color: var(--foreground); }
 .product-price-gold { color: var(--gold-dark); }
 
 /* Brand story badges moved from inline styles */
@@ -140,8 +140,8 @@
 .section--navy-dark-gradient { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-darkest) 100%); }
 
 /* Brand story stat colors */
-.brand-stat-number { color: var(--navy-dark); font-weight: 700; }
-.brand-stat-label { color: var(--navy-medium); }
+.brand-stat-number { color: var(--gold-lightest); font-weight: 700; }
+.brand-stat-label { color: var(--gold-light); }
 
 .hero-slide {
   position: absolute;
@@ -366,9 +366,9 @@
 }
 
 .product-card {
-  background-color: white;
+  background-color: var(--background);
   transition: all 0.3s ease;
-  border: 1px solid rgba(212, 180, 133, 0.1);
+  border: 1px solid var(--navy-light);
 }
 
 .product-card:hover {
@@ -826,10 +826,10 @@
 
 /* Product Page Specific Styles */
 .product-filter-sidebar {
-  background: white;
+  background: var(--background);
   border-radius: 0.75rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(229, 231, 235, 1);
+  border: 1px solid var(--navy-light);
 }
 
 .filter-category-button {
@@ -854,10 +854,10 @@
 }
 
 .product-grid-card {
-  background: white;
+  background: var(--background);
   border-radius: 0.75rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(229, 231, 235, 1);
+  border: 1px solid var(--navy-light);
   overflow: hidden;
   transition: all 0.3s ease;
 }
@@ -870,7 +870,7 @@
 
 .product-quick-action {
   padding: 0.5rem;
-  background: white;
+  background: var(--background);
   border-radius: 9999px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -988,15 +988,15 @@
 
 /* Utility classes for product pages */
 .bg-product-light {
-  background-color: rgba(249, 250, 251, 1);
+  background-color: var(--background);
 }
 
 .text-product-primary {
-  color: var(--navy-dark);
+  color: var(--foreground);
 }
 
 .text-product-secondary {
-  color: var(--navy-medium);
+  color: var(--gold-light);
 }
 
 .text-product-accent {
@@ -1004,9 +1004,9 @@
 }
 
 .border-product-light {
-  border-color: rgba(229, 231, 235, 1);
+  border-color: var(--navy-light);
 }
 
 .border-product-medium {
-  border-color: rgba(209, 213, 219, 1);
+  border-color: var(--navy-medium);
 }

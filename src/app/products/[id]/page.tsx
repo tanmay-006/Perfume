@@ -133,7 +133,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50" style={{ paddingTop: '40px' }}>
+        <div className="min-h-screen bg-background" style={{ paddingTop: '40px' }}>
             {/* Breadcrumb */}
             {/*       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-4">
