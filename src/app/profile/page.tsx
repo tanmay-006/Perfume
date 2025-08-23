@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface UserProfile {
   personalInfo: {
@@ -37,127 +39,109 @@ interface UserProfile {
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('overview');
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const email = searchParams.get('email');
-    if (email) {
-      // In a real app, you would fetch the user profile from your backend based on the email
-      const mockUser: UserProfile = {
-        personalInfo: {
-          name: 'Alexandra Smith',
-          email: email,
-          phone: '+1 (555) 123-4567'
-        },
-        shippingAddresses: [
+  const { theme } = useTheme();
+  
+  // Dummy data - replace with actual user data from your backend
+  const [userProfile, setUserProfile] = useState<UserProfile>({
+    personalInfo: {
+      name: 'Alexandra Smith',
+      email: 'alexandra.smith@example.com',
+      phone: '+1 (555) 123-4567'
+    },
+    shippingAddresses: [
+      {
+        street: '123 Luxury Lane',
+        city: 'Beverly Hills',
+        state: 'CA',
+        zipCode: '90210',
+        country: 'United States',
+        isDefault: true
+      }
+    ],
+    orders: [
+      {
+        orderId: 'ORD-2025-001',
+        date: '2025-08-20',
+        status: 'Delivered',
+        total: 245.00,
+        items: [
           {
-            street: '123 Luxury Lane',
-            city: 'Beverly Hills',
-            state: 'CA',
-            zipCode: '90210',
-            country: 'United States',
-            isDefault: true
+            name: 'Midnight Orchid Eau de Parfum',
+            quantity: 1,
+            price: 245.00
           }
-        ],
-        orders: [], // Initially no orders
-        preferences: {
-          fragranceTypes: ['Floral', 'Oriental', 'Woody'],
-          notifications: true,
-          newsletter: true
-        }
-      };
-      setUserProfile(mockUser);
-
-      // Simulate adding an order after a delay
-      setTimeout(() => {
-        setUserProfile(prevProfile => {
-          if (!prevProfile) return null;
-          return {
-            ...prevProfile,
-            orders: [
-              {
-                orderId: 'ORD-2025-001',
-                date: '2025-08-20',
-                status: 'Delivered',
-                total: 245.00,
-                items: [
-                  {
-                    name: 'Midnight Orchid Eau de Parfum',
-                    quantity: 1,
-                    price: 245.00
-                  }
-                ]
-              }
-            ]
-          }
-        });
-      }, 5000); // 5 second delay
+        ]
+      }
+    ],
+    preferences: {
+      fragranceTypes: ['Floral', 'Oriental', 'Woody'],
+      notifications: true,
+      newsletter: true
     }
-  }, [searchParams]);
+  });
 
-  if (!userProfile) {
-    return <div>Loading...</div>; // Or a more sophisticated loading state
-  }
+  // We no longer need this as we're using the global theme context
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gold-medium mb-2">My Profile</h1>
-        <p className="text-gold-light/80">Manage your account preferences and view your orders</p>
-      </div>
+    <div data-theme={theme} className="min-h-screen bg-background">
+      <Header />
+      
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-gold-medium mb-2">My Profile</h1>
+          <p className="text-gold-light/80">Manage your account preferences and view your orders</p>
+        </div>
 
-      {/* Profile Navigation */}
-      <div className="flex flex-col md:flex-row gap-8">
-        <aside className="md:w-64">
-          <nav className="space-y-1">
-            {[
-              { id: 'overview', label: 'Overview' },
-              { id: 'orders', label: 'Orders' },
-              { id: 'addresses', label: 'Addresses' },
-              { id: 'preferences', label: 'Preferences' },
-              { id: 'security', label: 'Security' }
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                  activeTab === item.id
-                    ? 'bg-gold-medium/10 text-gold-medium'
-                    : 'text-gold-light/70 hover:bg-gold-medium/5 hover:text-gold-light'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-        </aside>
+        {/* Profile Navigation */}
+        <div className="flex flex-col md:flex-row gap-8">
+          <aside className="md:w-64">
+            <nav className="space-y-1">
+              {[
+                { id: 'overview', label: 'Overview' },
+                { id: 'orders', label: 'Orders' },
+                { id: 'addresses', label: 'Addresses' },
+                { id: 'preferences', label: 'Preferences' },
+                { id: 'security', label: 'Security' }
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                    activeTab === item.id
+                      ? 'bg-gold-medium/10 text-gold-medium'
+                      : 'text-gold-light/70 hover:bg-gold-medium/5 hover:text-gold-light'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+          </aside>
 
-        {/* Main Content Area */}
-        <div className="flex-1 min-h-[600px]">
-          {activeTab === 'overview' && (
-            <div className="space-y-6">
-              <section className="bg-navy-darkest/30 rounded-xl p-6">
-                <h2 className="text-2xl font-semibold text-gold-medium mb-4">Personal Information</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-gold-light/70 mb-1">Name</label>
-                    <p className="text-gold-light">{userProfile.personalInfo.name}</p>
+          {/* Main Content Area */}
+          <div className="flex-1 min-h-[600px]">
+            {activeTab === 'overview' && (
+              <div className="space-y-6">
+                <section className="bg-navy-darkest/30 rounded-xl p-6">
+                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Personal Information</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gold-light/70 mb-1">Name</label>
+                      <p className="text-gold-light">{userProfile.personalInfo.name}</p>
+                    </div>
+                    <div>
+                      <label className="block text-gold-light/70 mb-1">Email</label>
+                      <p className="text-gold-light">{userProfile.personalInfo.email}</p>
+                    </div>
+                    <div>
+                      <label className="block text-gold-light/70 mb-1">Phone</label>
+                      <p className="text-gold-light">{userProfile.personalInfo.phone}</p>
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-gold-light/70 mb-1">Email</label>
-                    <p className="text-gold-light">{userProfile.personalInfo.email}</p>
-                  </div>
-                  <div>
-                    <label className="block text-gold-light/70 mb-1">Phone</label>
-                    <p className="text-gold-light">{userProfile.personalInfo.phone}</p>
-                  </div>
-                </div>
-              </section>
+                </section>
 
-              <section className="bg-navy-darkest/30 rounded-xl p-6">
-                <h2 className="text-2xl font-semibold text-gold-medium mb-4">Recent Orders</h2>
-                {userProfile.orders.length > 0 ? (
+                <section className="bg-navy-darkest/30 rounded-xl p-6">
+                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Recent Orders</h2>
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
@@ -186,31 +170,27 @@ export default function ProfilePage() {
                       </tbody>
                     </table>
                   </div>
-                ) : (
-                  <p className="text-gold-light/70">You have no recent orders.</p>
-                )}
-              </section>
+                </section>
 
-              <section className="bg-navy-darkest/30 rounded-xl p-6">
-                <h2 className="text-2xl font-semibold text-gold-medium mb-4">Fragrance Preferences</h2>
-                <div className="flex flex-wrap gap-2">
-                  {userProfile.preferences.fragranceTypes.map((type) => (
-                    <span
-                      key={type}
-                      className="px-4 py-2 rounded-full bg-gold-medium/10 text-gold-medium text-sm"
-                    >
-                      {type}
-                    </span>
-                  ))}
-                </div>
-              </section>
-            </div>
-          )}
+                <section className="bg-navy-darkest/30 rounded-xl p-6">
+                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Fragrance Preferences</h2>
+                  <div className="flex flex-wrap gap-2">
+                    {userProfile.preferences.fragranceTypes.map((type) => (
+                      <span
+                        key={type}
+                        className="px-4 py-2 rounded-full bg-gold-medium/10 text-gold-medium text-sm"
+                      >
+                        {type}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            )}
 
-          {activeTab === 'orders' && (
-            <div className="bg-navy-darkest/30 rounded-xl p-6">
-              <h2 className="text-2xl font-semibold text-gold-medium mb-6">Order History</h2>
-              {userProfile.orders.length > 0 ? (
+            {activeTab === 'orders' && (
+              <div className="bg-navy-darkest/30 rounded-xl p-6">
+                <h2 className="text-2xl font-semibold text-gold-medium mb-6">Order History</h2>
                 <div className="space-y-6">
                   {userProfile.orders.map((order) => (
                     <div key={order.orderId} className="border-b border-gold-light/10 pb-6">
@@ -241,139 +221,131 @@ export default function ProfilePage() {
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div className="text-center py-16">
-                  <h3 className="text-xl font-semibold text-gold-medium">No Orders Yet</h3>
-                  <p className="text-gold-light/70 mt-2">Your past orders will appear here.</p>
-                  <button className="mt-6 px-6 py-2 bg-gold-medium text-navy-darkest rounded-lg hover:bg-gold-light transition-colors">
-                    Start Shopping
+              </div>
+            )}
+
+            {activeTab === 'addresses' && (
+              <div className="bg-navy-darkest/30 rounded-xl p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-semibold text-gold-medium">Shipping Addresses</h2>
+                  <button className="px-4 py-2 rounded-lg bg-gold-medium text-navy-darkest hover:bg-gold-light transition-colors">
+                    Add New Address
                   </button>
                 </div>
-              )}
-            </div>
-          )}
-
-          {activeTab === 'addresses' && (
-            <div className="bg-navy-darkest/30 rounded-xl p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-semibold text-gold-medium">Shipping Addresses</h2>
-                <button className="px-4 py-2 rounded-lg bg-gold-medium text-navy-darkest hover:bg-gold-light transition-colors">
-                  Add New Address
-                </button>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {userProfile.shippingAddresses.map((address, index) => (
-                  <div key={index} className="border border-gold-light/10 rounded-lg p-4">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        {address.isDefault && (
-                          <span className="inline-block px-2 py-1 rounded text-xs bg-gold-medium/20 text-gold-medium mb-2">
-                            Default
-                          </span>
-                        )}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {userProfile.shippingAddresses.map((address, index) => (
+                    <div key={index} className="border border-gold-light/10 rounded-lg p-4">
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          {address.isDefault && (
+                            <span className="inline-block px-2 py-1 rounded text-xs bg-gold-medium/20 text-gold-medium mb-2">
+                              Default
+                            </span>
+                          )}
+                        </div>
+                        <button className="text-gold-light/70 hover:text-gold-light">Edit</button>
                       </div>
-                      <button className="text-gold-light/70 hover:text-gold-light">Edit</button>
+                      <div className="space-y-1 text-gold-light">
+                        <p>{address.street}</p>
+                        <p>{address.city}, {address.state} {address.zipCode}</p>
+                        <p>{address.country}</p>
+                      </div>
                     </div>
-                    <div className="space-y-1 text-gold-light">
-                      <p>{address.street}</p>
-                      <p>{address.city}, {address.state} {address.zipCode}</p>
-                      <p>{address.country}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {activeTab === 'preferences' && (
-            <div className="space-y-6">
-              <section className="bg-navy-darkest/30 rounded-xl p-6">
-                <h2 className="text-2xl font-semibold text-gold-medium mb-4">Fragrance Preferences</h2>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-gold-light mb-2">Preferred Fragrance Types</label>
-                    <div className="flex flex-wrap gap-2">
-                      {userProfile.preferences.fragranceTypes.map((type) => (
+            {activeTab === 'preferences' && (
+              <div className="space-y-6">
+                <section className="bg-navy-darkest/30 rounded-xl p-6">
+                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Fragrance Preferences</h2>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-gold-light mb-2">Preferred Fragrance Types</label>
+                      <div className="flex flex-wrap gap-2">
+                        {userProfile.preferences.fragranceTypes.map((type) => (
+                          <span
+                            key={type}
+                            className="px-4 py-2 rounded-full bg-gold-medium/10 text-gold-medium text-sm"
+                          >
+                            {type}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section className="bg-navy-darkest/30 rounded-xl p-6">
+                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Communication Preferences</h2>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gold-light">Email Notifications</p>
+                        <p className="text-gold-light/70 text-sm">Receive updates about your orders and account</p>
+                      </div>
+                      <button
+                        className={`w-12 h-6 rounded-full transition-colors ${
+                          userProfile.preferences.notifications ? 'bg-gold-medium' : 'bg-gold-light/20'
+                        }`}
+                      >
                         <span
-                          key={type}
-                          className="px-4 py-2 rounded-full bg-gold-medium/10 text-gold-medium text-sm"
-                        >
-                          {type}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <section className="bg-navy-darkest/30 rounded-xl p-6">
-                <h2 className="text-2xl font-semibold text-gold-medium mb-4">Communication Preferences</h2>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-gold-light">Email Notifications</p>
-                      <p className="text-gold-light/70 text-sm">Receive updates about your orders and account</p>
-                    </div>
-                    <button
-                      className={`w-12 h-6 rounded-full transition-colors ${
-                        userProfile.preferences.notifications ? 'bg-gold-medium' : 'bg-gold-light/20'
-                      }`}
-                    >
-                      <span
-                        className={`block w-4 h-4 rounded-full bg-navy-darkest transition-transform ${
-                          userProfile.preferences.notifications ? 'translate-x-7' : 'translate-x-1'
-                        }`}
-                      />
-                    </button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-gold-light">Newsletter Subscription</p>
-                      <p className="text-gold-light/70 text-sm">Stay updated with new releases and exclusive offers</p>
-                    </div>
-                    <button
-                      className={`w-12 h-6 rounded-full transition-colors ${
-                        userProfile.preferences.newsletter ? 'bg-gold-medium' : 'bg-gold-light/20'
-                      }`}
-                    >
-                      <span
-                        className={`block w-4 h-4 rounded-full bg-navy-darkest transition-transform ${
-                          userProfile.preferences.newsletter ? 'translate-x-7' : 'translate-x-1'
-                        }`}
-                      />
-                    </button>
-                  </div>
-                </div>
-              </section>
-            </div>
-          )}
-
-          {activeTab === 'security' && (
-            <div className="space-y-6">
-              <section className="bg-navy-darkest/30 rounded-xl p-6">
-                <h2 className="text-2xl font-semibold text-gold-medium mb-4">Password & Security</h2>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-gold-light mb-2">Change Password</label>
-                    <div className="space-y-3">
-                      <input
-                        type="password"
-                        placeholder="Current Password"
-                        className="w-full px-4 py-2 rounded-lg bg-navy-darkest border border-gold-light/20 text-gold-light focus:border-gold-medium focus:outline-none"
-                      />
-                      <input
-                        type="password"
-                        placeholder="New Password"
-                        className="w-full px-4 py-2 rounded-lg bg-navy-darkest border border-gold-light/20 text-gold-light focus:border-gold-medium focus:outline-none"
-                      />
-                      <input
-                        type="password"
-                        placeholder="Confirm New Password"
-                        className="w-full px-4 py-2 rounded-lg bg-navy-darkest border border-gold-light/20 text-gold-light focus:border-gold-medium focus:outline-none"
-                      />
-                      <button className="px-6 py-2 bg-gold-medium text-navy-darkest rounded-lg hover:bg-gold-light transition-colors">
-                        Update Password
+                          className={`block w-4 h-4 rounded-full bg-navy-darkest transition-transform ${
+                            userProfile.preferences.notifications ? 'translate-x-7' : 'translate-x-1'
+                          }`}
+                        />
                       </button>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gold-light">Newsletter Subscription</p>
+                        <p className="text-gold-light/70 text-sm">Stay updated with new releases and exclusive offers</p>
+                      </div>
+                      <button
+                        className={`w-12 h-6 rounded-full transition-colors ${
+                          userProfile.preferences.newsletter ? 'bg-gold-medium' : 'bg-gold-light/20'
+                        }`}
+                      >
+                        <span
+                          className={`block w-4 h-4 rounded-full bg-navy-darkest transition-transform ${
+                            userProfile.preferences.newsletter ? 'translate-x-7' : 'translate-x-1'
+                          }`}
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {activeTab === 'security' && (
+              <div className="space-y-6">
+                <section className="bg-navy-darkest/30 rounded-xl p-6">
+                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Password & Security</h2>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-gold-light mb-2">Change Password</label>
+                      <div className="space-y-3">
+                        <input
+                          type="password"
+                          placeholder="Current Password"
+                          className="w-full px-4 py-2 rounded-lg bg-navy-darkest border border-gold-light/20 text-gold-light focus:border-gold-medium focus:outline-none"
+                        />
+                        <input
+                          type="password"
+                          placeholder="New Password"
+                          className="w-full px-4 py-2 rounded-lg bg-navy-darkest border border-gold-light/20 text-gold-light focus:border-gold-medium focus:outline-none"
+                        />
+                        <input
+                          type="password"
+                          placeholder="Confirm New Password"
+                          className="w-full px-4 py-2 rounded-lg bg-navy-darkest border border-gold-light/20 text-gold-light focus:border-gold-medium focus:outline-none"
+                        />
+                        <button className="px-6 py-2 bg-gold-medium text-navy-darkest rounded-lg hover:bg-gold-light transition-colors">
+                          Update Password
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </section>
@@ -394,8 +366,11 @@ export default function ProfilePage() {
                 </section>
               </div>
             )}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+
+      <Footer />
+    </div>
   );
 }

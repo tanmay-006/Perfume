@@ -4,20 +4,20 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import SignInModal from '../auth/SignInModal';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface HeaderProps {
   isScrolled?: boolean;
-  theme?: 'light' | 'dark';
-  onThemeToggle?: () => void;
 }
 
-export default function Header({ theme = 'dark', onThemeToggle }: HeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
+  const [isScrolled, setIsScrolled] = useState(initialScrolled || false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [showSignInModal, setShowSignInModal] = useState(false);
   const router = useRouter();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +44,7 @@ export default function Header({ theme = 'dark', onThemeToggle }: HeaderProps) {
 
   return (
     <>
-      <header className={`nav-bar px-4 py-4 ${isScrolled ? 'scrolled' : ''}`}>
+      <header className={`nav-bar px-4 py-4 ${isScrolled ? 'scrolled' : ''} ${theme === 'light' ? 'nav-bar-light' : ''}`}>
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -57,7 +57,7 @@ export default function Header({ theme = 'dark', onThemeToggle }: HeaderProps) {
             </div>
 
             {/* Main Navigation - Desktop */}
-            <nav className="hidden lg:flex space-x-8">
+            <nav className="hidden lg:flex space-x-4">
               <Link href="/" className="nav-link font-medium hover:text-gold-medium transition-colors">
                 Home
               </Link>
@@ -78,17 +78,21 @@ export default function Header({ theme = 'dark', onThemeToggle }: HeaderProps) {
             {/* Right Side Icons */}
             <div className="flex items-center space-x-4">
               {/* Theme Toggle */}
-              {onThemeToggle && (
-                <button 
-                  onClick={onThemeToggle} 
-                  className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors"
-                  aria-label="Toggle theme"
-                >
+              <button 
+                onClick={toggleTheme} 
+                className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? (
                   <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
-                </button>
-              )}
+                ) : (
+                  <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                )}
+              </button>
 
               {/* Search */}
               <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors" aria-label="Search">

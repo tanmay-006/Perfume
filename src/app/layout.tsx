@@ -1,11 +1,7 @@
-'use client';
-
-import { useState } from 'react';
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
+import ThemeProvider from "@/components/providers/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,25 +13,30 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata: Metadata = {
+  title: "Odora - Premium Perfume Brand | Luxury Fragrances",
+  description: "Indulge in exclusive scents at unbeatable prices. Discover Odora's curated collection of premium fragrances crafted with 100% natural ingredients.",
+  keywords: "premium perfume, luxury fragrance, designer scents, high-end perfume, exclusive fragrances, odora perfume",
+  openGraph: {
+    title: "Odora - Premium Perfume Brand",
+    description: "Indulge in exclusive scents at unbeatable prices",
+    type: "website",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [theme, setTheme] = useState('dark');
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
-
   return (
-    <html lang="en" data-theme={theme}>
+    <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-text`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header theme={theme} onThemeToggle={toggleTheme} />
-        {children}
-        <Footer />
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

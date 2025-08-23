@@ -53,7 +53,7 @@ export default function Newsletter({
 
   if (isSubmitted) {
     return (
-      <section className="py-16" style={{background: "linear-gradient(135deg, #52796f 0%, #2f3e46 100%)"}}>
+      <section className="py-16 bg-gradient-to-br from-navy-medium to-navy-darkest">
         <div className="max-w-4xl mx-auto text-center px-4">
           <div className="bg-white bg-opacity-10 rounded-2xl p-8">
             <svg 
@@ -69,10 +69,10 @@ export default function Newsletter({
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" 
               />
             </svg>
-            <h3 className="text-2xl font-bold mb-2" style={{color: "#cad2c5"}}>
+            <h3 className="text-2xl font-bold mb-2 text-gold-lightest">
               Thank you for subscribing!
             </h3>
-            <p className="text-lg" style={{color: "#cad2c5"}}>
+            <p className="text-lg text-gold-lightest">
               You'll be the first to know about our new arrivals and exclusive offers.
             </p>
           </div>
@@ -82,12 +82,12 @@ export default function Newsletter({
   }
 
   return (
-    <section className="py-16" style={{background: "linear-gradient(135deg, #52796f 0%, #2f3e46 100%)"}}>
+    <section className="py-16 bg-gradient-to-br from-navy-medium to-navy-darkest">
       <div className="max-w-4xl mx-auto text-center px-4">
-        <h2 className="text-3xl lg:text-4xl font-bold mb-4" style={{color: "#cad2c5"}}>
+        <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gold-lightest">
           {title}
         </h2>
-        <p className="mb-8 text-lg" style={{color: "#cad2c5"}}>
+        <p className="mb-8 text-lg text-gold-lightest">
           {description}
         </p>
         
@@ -99,8 +99,7 @@ export default function Newsletter({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={placeholder}
-                className="w-full px-6 py-4 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-white"
-                style={{backgroundColor: "#cad2c5", color: "#2f3e46"}}
+                className="w-full px-6 py-4 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-gold-medium bg-gold-lightest text-navy-darkest placeholder-navy-medium"
                 disabled={isSubmitting}
               />
               {error && (
@@ -110,8 +109,7 @@ export default function Newsletter({
             <button 
               type="submit"
               disabled={isSubmitting}
-              className="px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2" 
-              style={{backgroundColor: "#cad2c5", color: "#52796f"}}
+              className="px-8 py-4 rounded-full font-semibold bg-gold-medium text-navy-darkest hover:bg-gold-light hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2" 
             >
               {isSubmitting ? (
                 <>
@@ -139,7 +137,7 @@ export default function Newsletter({
           </div>
         </form>
 
-        <p className="text-sm mt-4" style={{color: "#84a98c"}}>
+        <p className="text-sm mt-4 text-gold-light">
           We respect your privacy. Unsubscribe at any time.
         </p>
       </div>
