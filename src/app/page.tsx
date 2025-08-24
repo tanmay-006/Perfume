@@ -182,34 +182,48 @@ const MFFragranceLoader = () => {
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
+  const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleOnline = () => setIsOnline(true);
+      const handleOffline = () => setIsOnline(false);
+
+      window.addEventListener('online', handleOnline);
+      window.addEventListener('offline', handleOffline);
+
+      return () => {
+        window.removeEventListener('online', handleOnline);
+        window.removeEventListener('offline', handleOffline);
+      };
+    }
+  }, []);
 
   // Handle loader
   useEffect(() => {
-    const minDisplayTime = 1500; // Minimum time in milliseconds to show the loader
-    let loadTimer: NodeJS.Timeout;
-
-    const handlePageLoad = () => {
-      clearTimeout(loadTimer);
+    const hideLoader = () => {
+      document.documentElement.classList.remove('loading');
       setLoading(false);
     };
 
-    // Set a timeout for the minimum display time
-    loadTimer = setTimeout(() => {
-      // If page is already loaded, hide loader immediately after minDisplayTime
+    if (isOnline) {
+      const handlePageLoad = () => {
+        hideLoader();
+      };
+
       if (document.readyState === 'complete') {
-        setLoading(false);
+        hideLoader();
+      } else {
+        window.addEventListener('load', handlePageLoad);
       }
-    }, minDisplayTime);
 
-    // Listen for the page load event
-    window.addEventListener('load', handlePageLoad);
-
-    // Cleanup event listeners and timers
-    return () => {
-      clearTimeout(loadTimer);
-      window.removeEventListener('load', handlePageLoad);
-    };
-  }, []);
+      return () => {
+        window.removeEventListener('load', handlePageLoad);
+      };
+    } else {
+      setLoading(true);
+    }
+  }, [isOnline]);
 
   // Get featured products
   const featuredProducts = products.slice(0, 5).map(p => ({
@@ -254,7 +268,7 @@ export default function Home() {
   return (
     <>
       {loading && <MFFragranceLoader />}
-      <div className="min-h-screen">
+      <div className="min-h-screen" style={{ visibility: loading ? 'hidden' : 'visible' }}>
         <Header />
         
         <Hero />

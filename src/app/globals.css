@@ -161,3 +161,7 @@ body {
 .hover\:bg-earth-dark:hover {
   background-color: var(--earth-dark);
 }
+
+html.loading body {
+  visibility: hidden;
+}

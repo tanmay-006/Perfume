@@ -58,29 +58,13 @@ export default function ProfilePage() {
         isDefault: true
       }
     ],
-    orders: [
-      {
-        orderId: 'ORD-2025-001',
-        date: '2025-08-20',
-        status: 'Delivered',
-        total: 245.00,
-        items: [
-          {
-            name: 'Midnight Orchid Eau de Parfum',
-            quantity: 1,
-            price: 245.00
-          }
-        ]
-      }
-    ],
+        orders: [],
     preferences: {
       fragranceTypes: ['Floral', 'Oriental', 'Woody'],
       notifications: true,
       newsletter: true
     }
   });
-
-  // We no longer need this as we're using the global theme context
 
   return (
     <div data-theme={theme} className="min-h-screen bg-background">
@@ -99,9 +83,7 @@ export default function ProfilePage() {
               {[
                 { id: 'overview', label: 'Overview' },
                 { id: 'orders', label: 'Orders' },
-                { id: 'addresses', label: 'Addresses' },
-                { id: 'preferences', label: 'Preferences' },
-                { id: 'security', label: 'Security' }
+                { id: 'addresses', label: 'Addresses' }
               ].map((item) => (
                 <button
                   key={item.id}
@@ -253,117 +235,6 @@ export default function ProfilePage() {
                     </div>
                   ))}
                 </div>
-              </div>
-            )}
-
-            {activeTab === 'preferences' && (
-              <div className="space-y-6">
-                <section className="bg-navy-darkest/30 rounded-xl p-6">
-                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Fragrance Preferences</h2>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-gold-light mb-2">Preferred Fragrance Types</label>
-                      <div className="flex flex-wrap gap-2">
-                        {userProfile.preferences.fragranceTypes.map((type) => (
-                          <span
-                            key={type}
-                            className="px-4 py-2 rounded-full bg-gold-medium/10 text-gold-medium text-sm"
-                          >
-                            {type}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                <section className="bg-navy-darkest/30 rounded-xl p-6">
-                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Communication Preferences</h2>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gold-light">Email Notifications</p>
-                        <p className="text-gold-light/70 text-sm">Receive updates about your orders and account</p>
-                      </div>
-                      <button
-                        className={`w-12 h-6 rounded-full transition-colors ${
-                          userProfile.preferences.notifications ? 'bg-gold-medium' : 'bg-gold-light/20'
-                        }`}
-                      >
-                        <span
-                          className={`block w-4 h-4 rounded-full bg-navy-darkest transition-transform ${
-                            userProfile.preferences.notifications ? 'translate-x-7' : 'translate-x-1'
-                          }`}
-                        />
-                      </button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gold-light">Newsletter Subscription</p>
-                        <p className="text-gold-light/70 text-sm">Stay updated with new releases and exclusive offers</p>
-                      </div>
-                      <button
-                        className={`w-12 h-6 rounded-full transition-colors ${
-                          userProfile.preferences.newsletter ? 'bg-gold-medium' : 'bg-gold-light/20'
-                        }`}
-                      >
-                        <span
-                          className={`block w-4 h-4 rounded-full bg-navy-darkest transition-transform ${
-                            userProfile.preferences.newsletter ? 'translate-x-7' : 'translate-x-1'
-                          }`}
-                        />
-                      </button>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            )}
-
-            {activeTab === 'security' && (
-              <div className="space-y-6">
-                <section className="bg-navy-darkest/30 rounded-xl p-6">
-                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Password & Security</h2>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-gold-light mb-2">Change Password</label>
-                      <div className="space-y-3">
-                        <input
-                          type="password"
-                          placeholder="Current Password"
-                          className="w-full px-4 py-2 rounded-lg bg-navy-darkest border border-gold-light/20 text-gold-light focus:border-gold-medium focus:outline-none"
-                        />
-                        <input
-                          type="password"
-                          placeholder="New Password"
-                          className="w-full px-4 py-2 rounded-lg bg-navy-darkest border border-gold-light/20 text-gold-light focus:border-gold-medium focus:outline-none"
-                        />
-                        <input
-                          type="password"
-                          placeholder="Confirm New Password"
-                          className="w-full px-4 py-2 rounded-lg bg-navy-darkest border border-gold-light/20 text-gold-light focus:border-gold-medium focus:outline-none"
-                        />
-                        <button className="px-6 py-2 bg-gold-medium text-navy-darkest rounded-lg hover:bg-gold-light transition-colors">
-                          Update Password
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                <section className="bg-navy-darkest/30 rounded-xl p-6">
-                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Two-Factor Authentication</h2>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gold-light">Enable 2FA</p>
-                        <p className="text-gold-light/70 text-sm">Add an extra layer of security to your account</p>
-                      </div>
-                      <button className="w-12 h-6 rounded-full bg-gold-light/20">
-                        <span className="block w-4 h-4 rounded-full bg-navy-darkest translate-x-1" />
-                      </button>
-                    </div>
-                  </div>
-                </section>
               </div>
             )}
           </div>
