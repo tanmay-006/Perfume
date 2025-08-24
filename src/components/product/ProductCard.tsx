@@ -84,11 +84,6 @@ export default function ProductCard({
               NEW
             </div>
           )}
-          {product.originalPrice && product.originalPrice > product.price && (
-            <div className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-              -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
-            </div>
-          )}
         </div>
 
         {/* Out of Stock Overlay */}
