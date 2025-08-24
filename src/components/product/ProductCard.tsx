@@ -49,19 +49,18 @@ export default function ProductCard({
   return (
     <div
       className={`bg-white dark:bg-[var(--navy-darkest)] rounded-xl shadow-sm border border-gray-200 dark:border-[var(--navy-medium)] overflow-hidden hover:shadow-lg transition-all duration-300 group ${
-        !isListView ? '' : 'flex gap-4 h-48'
+        !isListView ? '' : 'flex gap-4 h-auto'
       }`}
     >
       {/* Product Image */}
-      <div className={`relative ${isListView ? 'w-48 h-full flex-shrink-0' : 'aspect-[3/4]'} overflow-hidden`}>
+      <div className={`relative ${isListView ? 'w-48 sm:w-48 md:w-64 lg:w-72 h-48 sm:h-48 md:h-64 lg:h-72 flex-shrink-0' : 'aspect-[3/4]'} overflow-hidden`}>
         <Link href={`/products/${product.id}`}>
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className={`object-cover group-hover:scale-105 transition-transform duration-300 ${
-              isImageLoading ? 'opacity-0' : 'opacity-100'
-            }`}
+            className={`object-cover group-hover:scale-105 transition-transform duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'
+              }`}
             onLoad={() => setIsImageLoading(false)}
           />
           {isImageLoading && (
@@ -97,97 +96,105 @@ export default function ProductCard({
       </div>
 
       {/* Product Info */}
-      <div className={`p-4 ${isListView ? 'flex-1' : ''}`}>
-        {/* Product Name */}
-        <Link href={`/products/${product.id}`}>
-          <h3 className="text-lg font-semibold text-[var(--navy-darkest)] dark:text-[var(--gold-lightest)] hover:text-[var(--navy-dark)] dark:hover:text-[var(--gold-light)] transition-colors duration-200 mb-1">
-            {product.name}
-          </h3>
-        </Link>
+      <div className={`p-4 ${isListView ? 'flex-1 flex flex-col' : ''}`}>
+        {/* Top Section - Name, Rating, Subtitle */}
+        <div className={isListView ? 'flex-1' : ''}>
+          {/* Product Name */}
+          <Link href={`/products/${product.id}`}>
+            <h3 className="text-lg font-semibold text-[var(--navy-darkest)] dark:text-[var(--gold-lightest)] hover:text-[var(--navy-dark)] dark:hover:text-[var(--gold-light)] transition-colors duration-200 mb-1">
+              {product.name}
+            </h3>
+          </Link>
 
-        {/* Subtitle - Only show in list view */}
-        {isListView && product.subtitle && (
-          <p className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] mb-2">
-            {product.subtitle}
-          </p>
-        )}
+          {/* Subtitle - Only show in list view */}
+          {isListView && product.subtitle && (
+            <p className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] mb-2">
+              {product.subtitle}
+            </p>
+          )}
 
-        {/* Description - Only show in list view */}
-        {isListView && product.description && (
-          <p className="text-sm text-[var(--navy-light)] dark:text-[var(--navy-light)] mb-3 line-clamp-2">
-            {product.description}
-          </p>
-        )}
-
-        {/* Rating */}
-        <div className="flex items-center gap-2 mb-2">
-          <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`w-4 h-4 ${
-                  i < Math.floor(product.rating)
-                    ? 'text-yellow-400 fill-current'
-                    : 'text-gray-300 dark:text-[var(--navy-medium)]'
-                }`}
-              />
-            ))}
-          </div>
-          <span className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)]">
-            {product.rating} ({product.reviews} reviews)
-          </span>
-        </div>
-
-        {/* Available Sizes - Only show in list view */}
-        {isListView && product.sizes && product.sizes.length > 0 && (
-          <div className="mb-3">
-            <p className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] mb-1">Available sizes:</p>
-            <div className="flex gap-1 flex-wrap">
-              {product.sizes.map((size, index) => (
-                <span key={index} className="text-xs bg-gray-100 dark:bg-[var(--navy-medium)] text-[var(--navy-dark)] dark:text-[var(--gold-lightest)] px-2 py-1 rounded">
-                  {size.size}
-                </span>
+          {/* Rating */}
+          <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`w-4 h-4 ${
+                    i < Math.floor(product.rating)
+                      ? 'text-yellow-400 fill-current'
+                      : 'text-gray-300 dark:text-[var(--navy-medium)]'
+                  }`}
+                />
               ))}
             </div>
-          </div>
-        )}
-
-        {/* Price */}
-        <div className="flex items-center gap-2 mb-3">
-          {product.originalPrice && product.originalPrice > product.price ? (
-            <>
-              <span className="text-xl font-bold text-[var(--navy-dark)] dark:text-[var(--gold-light)]">
-                ₹{product.price.toLocaleString()}
-              </span>
-              <span className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] line-through">
-                ₹{product.originalPrice.toLocaleString()}
-              </span>
-            </>
-          ) : (
-            <span className="text-xl font-bold text-[var(--navy-darkest)] dark:text-[var(--gold-lightest)]">
-              ₹{product.price.toLocaleString()}
+            <span className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)]">
+              {product.rating} ({product.reviews} reviews)
             </span>
+          </div>
+
+          {/* Description - Only show in list view on desktop */}
+          {isListView && product.description && (
+            <p className="hidden md:block text-sm text-[var(--navy-light)] dark:text-[var(--navy-light)] mb-3 line-clamp-3">
+              {product.description}
+            </p>
+          )}
+
+          {/* Available Sizes - Only show in list view on desktop */}
+          {isListView && product.sizes && product.sizes.length > 0 && (
+            <div className="hidden md:block mb-3">
+              <p className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] mb-1">Available sizes:</p>
+              <div className="flex gap-1 flex-wrap">
+                {product.sizes.map((size, index) => (
+                  <span key={index} className="text-xs bg-gray-100 dark:bg-[var(--navy-medium)] text-[var(--navy-dark)] dark:text-[var(--gold-lightest)] px-2 py-1 rounded">
+                    {size.size}
+                  </span>
+                ))}
+              </div>
+            </div>
           )}
         </div>
 
-        {/* Action Buttons */}
-        <div className={`flex gap-2 ${isListView ? 'flex-row' : 'flex-col'}`}>
-          <button
-            onClick={handleAddToCart}
-            className="flex-1 bg-[var(--navy-dark)] hover:bg-[var(--navy-darkest)] text-[var(--gold-light)] px-4 py-2 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
-            disabled={!product.inStock}
-          >
-            <ShoppingCart className="w-4 h-4" />
-            {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-          </button>
-          {isListView && (
-            <Link
-              href={`/products/${product.id}`}
-              className="flex-1 bg-white dark:bg-[var(--navy-dark)] border border-[var(--navy-dark)] dark:border-[var(--gold-medium)] text-[var(--navy-dark)] dark:text-[var(--gold-light)] hover:bg-[var(--navy-lightest)] dark:hover:bg-[var(--navy-medium)] px-4 py-2 rounded-lg transition-colors duration-200 text-center flex items-center justify-center"
+        {/* Bottom Section - Price and Buttons */}
+        <div className={isListView ? 'mt-auto' : ''}>
+          {/* Price */}
+          <div className="flex items-center gap-2 mb-3">
+            {product.originalPrice && product.originalPrice > product.price ? (
+              <>
+                <span className="text-xl font-bold text-[var(--navy-dark)] dark:text-[var(--gold-light)]">
+                  ₹{product.price.toLocaleString()}
+                </span>
+                <span className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] line-through">
+                  ₹{product.originalPrice.toLocaleString()}
+                </span>
+              </>
+            ) : (
+              <span className="text-xl font-bold text-[var(--navy-darkest)] dark:text-[var(--gold-lightest)]">
+                ₹{product.price.toLocaleString()}
+              </span>
+            )}
+          </div>
+
+          {/* Action Buttons */}
+          <div className={`flex gap-2 ${isListView ? 'flex-row' : 'flex-col'}`}>
+            <button
+              onClick={handleAddToCart}
+              className="flex-1 bg-[var(--navy-dark)] hover:bg-[var(--navy-darkest)] text-[var(--gold-light)] px-2 py-2 sm:px-4 sm:py-2 rounded-lg transition-colors duration-200 flex items-center justify-center gap-1 sm:gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed text-xs sm:text-sm"
+              disabled={!product.inStock}
             >
-              View Details
-            </Link>
-          )}
+              <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{product.inStock ? 'Add to Cart' : 'Out of Stock'}</span>
+              <span className="sm:hidden">{product.inStock ? 'Add' : 'N/A'}</span>
+            </button>
+            {isListView && (
+              <Link
+                href={`/products/${product.id}`}
+                className="flex-1 bg-white dark:bg-[var(--navy-dark)] border border-[var(--navy-dark)] dark:border-[var(--gold-medium)] text-[var(--navy-dark)] dark:text-[var(--gold-light)] hover:bg-[var(--navy-lightest)] dark:hover:bg-[var(--navy-medium)] px-2 py-2 sm:px-4 sm:py-2 rounded-lg transition-colors duration-200 text-center flex items-center justify-center text-xs sm:text-sm"
+              >
+                <span className="hidden sm:inline">View Details</span>
+                <span className="sm:hidden">View</span>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>

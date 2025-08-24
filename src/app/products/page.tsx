@@ -30,6 +30,20 @@ export default function ProductsPage() {
     const [isGridView, setIsGridView] = useState(true);
     const [showFilters, setShowFilters] = useState(false);
 
+    // Load view mode from localStorage on component mount
+    useEffect(() => {
+        const savedViewMode = localStorage.getItem('productViewMode');
+        if (savedViewMode !== null) {
+            setIsGridView(savedViewMode === 'grid');
+        }
+    }, []);
+
+    // Save view mode to localStorage when it changes
+    const handleViewToggle = (isGrid: boolean) => {
+        setIsGridView(isGrid);
+        localStorage.setItem('productViewMode', isGrid ? 'grid' : 'list');
+    };
+
     // Filter products based on current filters
     const filteredProducts = products.filter(product => {
         // Category filter
@@ -165,7 +179,7 @@ export default function ProductsPage() {
                         totalPages={totalPages}
                         sortBy={sortBy}
                         sortOptions={sortOptions}
-                        onViewToggle={setIsGridView}
+                        onViewToggle={handleViewToggle}
                         onSortChange={setSortBy}
                         onPageChange={setCurrentPage}
                         onAddToCart={handleAddToCart}
