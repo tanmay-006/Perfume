@@ -18,12 +18,16 @@ interface ProductCardProps {
 export default function ProductCard({
   product,
   isListView = false,
-  showQuickActions = false,
+  showQuickActions = true,
   onAddToCart,
   onAddToWishlist,
   onQuickView,
 }: ProductCardProps) {
   const [isImageLoading, setIsImageLoading] = useState(true);
+
+  const discountPercentage = product.originalPrice
+    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    : 0;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -53,7 +57,7 @@ export default function ProductCard({
       }`}
     >
       {/* Product Image */}
-      <div className={`relative ${isListView ? 'w-48 sm:w-48 md:w-64 lg:w-72 h-48 sm:h-48 md:h-64 lg:h-72 flex-shrink-0' : 'aspect-[3/4]'} overflow-hidden`}>
+      <div className={`relative ${isListView ? 'w-32 sm:w-48 md:w-64 lg:w-72 h-32 sm:h-48 md:h-64 lg:h-72 flex-shrink-0' : 'aspect-[3/4]'} overflow-hidden`}>
         <Link href={`/products/${product.id}`}>
           <Image
             src={product.image}
@@ -91,6 +95,24 @@ export default function ProductCard({
         {!product.inStock && (
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <span className="text-white font-semibold">Out of Stock</span>
+          </div>
+        )}
+        
+        {/* Quick Actions - Only show in grid view */}
+        {showQuickActions && !isListView && (
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex flex-col items-center justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button
+              onClick={handleAddToCart}
+              disabled={!product.inStock}
+              className={`w-full py-3 px-4 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
+                product.inStock
+                  ? 'bg-navy-dark text-gold-light hover:bg-navy-medium'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+            >
+              <ShoppingCart className="w-4 h-4" />
+              {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+            </button>
           </div>
         )}
       </div>
@@ -165,6 +187,9 @@ export default function ProductCard({
                 </span>
                 <span className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] line-through">
                   ₹{product.originalPrice.toLocaleString()}
+                </span>
+                <span className="text-sm font-semibold text-green-600 dark:text-green-400">
+                  -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% off
                 </span>
               </>
             ) : (
