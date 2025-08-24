@@ -14,11 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Odora - Premium Perfume Brand | Luxury Fragrances",
-  description: "Indulge in exclusive scents at unbeatable prices. Discover Odora's curated collection of premium fragrances crafted with 100% natural ingredients.",
-  keywords: "premium perfume, luxury fragrance, designer scents, high-end perfume, exclusive fragrances, odora perfume",
+  title: "MF Fregrance - Premium Perfume Brand | Luxury Fragrances",
+  description: "Indulge in exclusive scents at unbeatable prices. Discover MF Fregrance's curated collection of premium fragrances crafted with 100% natural ingredients.",
+  keywords: "premium perfume, luxury fragrance, designer scents, high-end perfume, exclusive fragrances, MF Fregrance perfume",
   openGraph: {
-    title: "Odora - Premium Perfume Brand",
+    title: "MF Fregrance - Premium Perfume Brand",
     description: "Indulge in exclusive scents at unbeatable prices",
     type: "website",
   },
