@@ -57,7 +57,7 @@ export default function ProductCard({
       }`}
     >
       {/* Product Image */}
-      <div className={`relative ${isListView ? 'w-32 sm:w-48 md:w-64 lg:w-72 h-32 sm:h-48 md:h-64 lg:h-72 flex-shrink-0' : 'aspect-[3/4]'} overflow-hidden`}>
+      <div className={`relative ${isListView ? 'w-48 sm:w-48 md:w-64 lg:w-72 h-48 sm:h-48 md:h-64 lg:h-72 flex-shrink-0' : 'aspect-[3/4]'} overflow-hidden`}>
         <Link href={`/products/${product.id}`}>
           <Image
             src={product.image}
