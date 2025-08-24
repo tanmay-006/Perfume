@@ -81,11 +81,6 @@ export default function ProductCard({
               NEW
             </div>
           )}
-          {product.originalPrice && product.originalPrice > product.price && (
-            <div className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-              -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
-            </div>
-          )}
         </div>
 
         {/* Out of Stock Overlay */}
@@ -97,7 +92,7 @@ export default function ProductCard({
       </div>
 
       {/* Product Info */}
-      <div className={`p-4 ${isListView ? 'flex-1' : ''}`}>
+      <div className={`p-4 flex flex-col ${isListView ? 'flex-1' : ''}`}>
         {/* Product Name */}
         <Link href={`/products/${product.id}`}>
           <h3 className="text-lg font-semibold text-[var(--navy-darkest)] dark:text-[var(--gold-lightest)] hover:text-[var(--navy-dark)] dark:hover:text-[var(--gold-light)] transition-colors duration-200 mb-1">
@@ -162,6 +157,9 @@ export default function ProductCard({
               <span className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] line-through">
                 ₹{product.originalPrice.toLocaleString()}
               </span>
+              <span className="text-sm font-semibold text-green-600 dark:text-green-400">
+                -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% off
+              </span>
             </>
           ) : (
             <span className="text-xl font-bold text-[var(--navy-darkest)] dark:text-[var(--gold-lightest)]">
@@ -171,22 +169,33 @@ export default function ProductCard({
         </div>
 
         {/* Action Buttons */}
-        <div className={`flex gap-2 ${isListView ? 'flex-row' : 'flex-col'}`}>
-          <button
-            onClick={handleAddToCart}
-            className="flex-1 bg-[var(--navy-dark)] hover:bg-[var(--navy-darkest)] text-[var(--gold-light)] px-4 py-2 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
-            disabled={!product.inStock}
-          >
-            <ShoppingCart className="w-4 h-4" />
-            {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-          </button>
-          {isListView && (
-            <Link
-              href={`/products/${product.id}`}
-              className="flex-1 bg-white dark:bg-[var(--navy-dark)] border border-[var(--navy-dark)] dark:border-[var(--gold-medium)] text-[var(--navy-dark)] dark:text-[var(--gold-light)] hover:bg-[var(--navy-lightest)] dark:hover:bg-[var(--navy-medium)] px-4 py-2 rounded-lg transition-colors duration-200 text-center flex items-center justify-center"
+        <div className="flex gap-2 mt-auto pt-2">
+          {isListView ? (
+            <>
+              <button
+                onClick={handleAddToCart}
+                className="flex-1 bg-[var(--navy-dark)] hover:bg-[var(--navy-darkest)] text-[var(--gold-light)] px-4 py-2 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                disabled={!product.inStock}
+              >
+                <ShoppingCart className="w-4 h-4" />
+                {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+              </button>
+              <Link
+                href={`/products/${product.id}`}
+                className="flex-1 bg-white dark:bg-[var(--navy-dark)] border border-[var(--navy-dark)] dark:border-[var(--gold-medium)] text-[var(--navy-dark)] dark:text-[var(--gold-light)] hover:bg-[var(--navy-lightest)] dark:hover:bg-[var(--navy-medium)] px-4 py-2 rounded-lg transition-colors duration-200 text-center flex items-center justify-center"
+              >
+                View Details
+              </Link>
+            </>
+          ) : (
+            <button
+              onClick={handleAddToCart}
+              className="w-full bg-[var(--navy-dark)] hover:bg-[var(--navy-darkest)] text-[var(--gold-light)] px-4 py-2 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              disabled={!product.inStock}
             >
-              View Details
-            </Link>
+              <ShoppingCart className="w-4 h-4" />
+              {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+            </button>
           )}
         </div>
       </div>
