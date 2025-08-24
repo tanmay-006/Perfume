@@ -18,12 +18,16 @@ interface ProductCardProps {
 export default function ProductCard({
   product,
   isListView = false,
-  showQuickActions = false,
+  showQuickActions = true, // Keep this as true by default
   onAddToCart,
   onAddToWishlist,
   onQuickView,
 }: ProductCardProps) {
   const [isImageLoading, setIsImageLoading] = useState(true);
+
+  const discountPercentage = product.originalPrice
+    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    : 0;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -89,6 +93,25 @@ export default function ProductCard({
             <span className="text-white font-semibold">Out of Stock</span>
           </div>
         )}
+        
+        {/* Quick Actions */}
+        {showQuickActions && (
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex flex-col items-center justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button
+              onClick={handleAddToCart}
+              disabled={!product.inStock}
+              className={`w-full py-3 px-4 rounded-lg font-semibold transition-all ${
+                product.inStock
+                  ? 'bg-navy-dark text-gold-light hover:bg-navy-medium'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+            >
+              <ShoppingCart className="w-4 h-4" />
+              {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+            </button>
+          </div>
+        )}
+
       </div>
 
       {/* Product Info */}
@@ -169,6 +192,7 @@ export default function ProductCard({
         </div>
 
         {/* Action Buttons */}
+<<<<<<< HEAD
         <div className="flex gap-2 mt-auto pt-2">
           {isListView ? (
             <>
@@ -192,6 +216,13 @@ export default function ProductCard({
               onClick={handleAddToCart}
               className="w-full bg-[var(--navy-dark)] hover:bg-[var(--navy-darkest)] text-[var(--gold-light)] px-4 py-2 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
               disabled={!product.inStock}
+=======
+        <div className={`flex gap-2 ${isListView ? 'flex-row' : 'flex-col'}`}>
+          {isListView && (
+            <Link
+              href={`/products/${product.id}`}
+              className="flex-1 bg-white dark:bg-[var(--navy-dark)] border border-[var(--navy-dark)] dark:border-[var(--gold-medium)] text-[var(--navy-dark)] dark:text-[var(--gold-light)] hover:bg-[var(--navy-lightest)] dark:hover:bg-[var(--navy-medium)] px-4 py-2 rounded-lg transition-colors duration-200 text-center flex items-center justify-center"
+>>>>>>> c9d4fbf1a0affb2d87cc08068f49706c76067fc7
             >
               <ShoppingCart className="w-4 h-4" />
               {product.inStock ? 'Add to Cart' : 'Out of Stock'}
