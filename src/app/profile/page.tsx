@@ -37,6 +37,20 @@ interface UserProfile {
   };
 }
 
+const Avatar = ({ name, imageUrl }: { name: string, imageUrl?: string }) => {
+  const initial = name.charAt(0).toUpperCase();
+
+  return (
+    <div className="w-24 h-24 rounded-full bg-gold-medium flex items-center justify-center text-navy-darkest text-5xl font-bold ring-4 ring-gold-light/50">
+      {imageUrl ? (
+        <img src={imageUrl} alt={name} className="w-full h-full rounded-full object-cover" />
+      ) : (
+        <span>{initial}</span>
+      )}
+    </div>
+  );
+};
+
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('overview');
   const { theme } = useTheme();
@@ -58,7 +72,7 @@ export default function ProfilePage() {
         isDefault: true
       }
     ],
-        orders: [],
+    orders: [],
     preferences: {
       fragranceTypes: ['Floral', 'Oriental', 'Woody'],
       notifications: true,
@@ -67,19 +81,19 @@ export default function ProfilePage() {
   });
 
   return (
-    <div data-theme={theme} className="min-h-screen bg-background">
+    <div data-theme={theme} className="min-h-screen bg-gradient-to-b from-navy-darkest to-navy-dark">
       <Header />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gold-medium mb-2">My Profile</h1>
-          <p className="text-gold-light/80">Manage your account preferences and view your orders</p>
+        <div className="mb-12 text-center">
+          <h1 className="text-5xl font-extrabold text-gold-lightest mb-2 tracking-tight">My Profile</h1>
+          <p className="text-lg text-gold-light/80">Manage your account preferences and view your orders</p>
         </div>
 
         {/* Profile Navigation */}
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex flex-col md:flex-row gap-12">
           <aside className="md:w-64">
-            <nav className="space-y-1">
+            <nav className="space-y-2">
               {[
                 { id: 'overview', label: 'Overview' },
                 { id: 'orders', label: 'Orders' },
@@ -88,10 +102,10 @@ export default function ProfilePage() {
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 ${
                     activeTab === item.id
-                      ? 'bg-gold-medium/10 text-gold-medium'
-                      : 'text-gold-light/70 hover:bg-gold-medium/5 hover:text-gold-light'
+                      ? 'bg-gold-medium/20 text-gold-lightest shadow-lg'
+                      : 'text-gold-light/70 hover:bg-gold-medium/10 hover:text-gold-light'
                   }`}
                 >
                   {item.label}
@@ -101,66 +115,70 @@ export default function ProfilePage() {
           </aside>
 
           {/* Main Content Area */}
-          <div className="flex-1 min-h-[600px]">
+          <div key={activeTab} className="flex-1 min-h-[600px] fade-in">
             {activeTab === 'overview' && (
-              <div className="space-y-6">
-                <section className="bg-navy-darkest/30 rounded-xl p-6">
-                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Personal Information</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-8">
+                <section className="bg-navy-dark/50 border border-gold-light/10 rounded-2xl p-8 shadow-2xl">
+                  <h2 className="text-3xl font-bold text-gold-light mb-6">Personal Information</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-gold-light/70 mb-1">Name</label>
-                      <p className="text-gold-light">{userProfile.personalInfo.name}</p>
+                      <label className="block text-sm font-medium text-gold-light/70 mb-1">Name</label>
+                      <p className="text-lg text-gold-lightest">{userProfile.personalInfo.name}</p>
                     </div>
                     <div>
-                      <label className="block text-gold-light/70 mb-1">Email</label>
-                      <p className="text-gold-light">{userProfile.personalInfo.email}</p>
+                      <label className="block text-sm font-medium text-gold-light/70 mb-1">Email</label>
+                      <p className="text-lg text-gold-lightest">{userProfile.personalInfo.email}</p>
                     </div>
                     <div>
-                      <label className="block text-gold-light/70 mb-1">Phone</label>
-                      <p className="text-gold-light">{userProfile.personalInfo.phone}</p>
+                      <label className="block text-sm font-medium text-gold-light/70 mb-1">Phone</label>
+                      <p className="text-lg text-gold-lightest">{userProfile.personalInfo.phone}</p>
                     </div>
                   </div>
                 </section>
 
-                <section className="bg-navy-darkest/30 rounded-xl p-6">
-                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Recent Orders</h2>
+                <section className="bg-navy-dark/50 border border-gold-light/10 rounded-2xl p-8 shadow-2xl">
+                  <h2 className="text-3xl font-bold text-gold-light mb-6">Recent Orders</h2>
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
-                        <tr className="text-gold-light/70 border-b border-gold-light/10">
-                          <th className="text-left py-3">Order ID</th>
-                          <th className="text-left py-3">Date</th>
-                          <th className="text-left py-3">Status</th>
-                          <th className="text-right py-3">Total</th>
+                        <tr className="text-gold-light/70 border-b-2 border-gold-light/10">
+                          <th className="text-left py-4 px-2">Order ID</th>
+                          <th className="text-left py-4 px-2">Date</th>
+                          <th className="text-left py-4 px-2">Status</th>
+                          <th className="text-right py-4 px-2">Total</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {userProfile.orders.map((order) => (
-                          <tr key={order.orderId} className="border-b border-gold-light/10">
-                            <td className="py-4 text-gold-light">{order.orderId}</td>
-                            <td className="py-4 text-gold-light">{order.date}</td>
-                            <td className="py-4">
-                              <span className="px-3 py-1 rounded-full text-sm bg-gold-medium/20 text-gold-medium">
+                        {userProfile.orders.length > 0 ? userProfile.orders.map((order) => (
+                          <tr key={order.orderId} className="border-b border-gold-light/10 hover:bg-navy-dark/30">
+                            <td className="py-4 px-2 text-gold-lightest">{order.orderId}</td>
+                            <td className="py-4 px-2 text-gold-lightest">{order.date}</td>
+                            <td className="py-4 px-2">
+                              <span className={`px-3 py-1 rounded-full text-sm ${order.status === 'Delivered' ? 'bg-green-500/20 text-green-400' : 'bg-gold-medium/20 text-gold-medium'}`}>
                                 {order.status}
                               </span>
                             </td>
-                            <td className="py-4 text-right text-gold-light">
+                            <td className="py-4 px-2 text-right text-gold-lightest">
                               ${order.total.toFixed(2)}
                             </td>
                           </tr>
-                        ))}
+                        )) : (
+                          <tr>
+                            <td colSpan="4" className="text-center py-12 text-gold-light/50">No recent orders</td>
+                          </tr>
+                        )}
                       </tbody>
                     </table>
                   </div>
                 </section>
 
-                <section className="bg-navy-darkest/30 rounded-xl p-6">
-                  <h2 className="text-2xl font-semibold text-gold-medium mb-4">Fragrance Preferences</h2>
-                  <div className="flex flex-wrap gap-2">
+                <section className="bg-navy-dark/50 border border-gold-light/10 rounded-2xl p-8 shadow-2xl">
+                  <h2 className="text-3xl font-bold text-gold-light mb-6">Fragrance Preferences</h2>
+                  <div className="flex flex-wrap gap-3">
                     {userProfile.preferences.fragranceTypes.map((type) => (
                       <span
                         key={type}
-                        className="px-4 py-2 rounded-full bg-gold-medium/10 text-gold-medium text-sm"
+                        className="px-4 py-2 rounded-full bg-gold-medium/10 text-gold-medium text-sm transition-transform transform hover:scale-110"
                       >
                         {type}
                       </span>
@@ -171,63 +189,67 @@ export default function ProfilePage() {
             )}
 
             {activeTab === 'orders' && (
-              <div className="bg-navy-darkest/30 rounded-xl p-6">
-                <h2 className="text-2xl font-semibold text-gold-medium mb-6">Order History</h2>
-                <div className="space-y-6">
-                  {userProfile.orders.map((order) => (
-                    <div key={order.orderId} className="border-b border-gold-light/10 pb-6">
+              <div className="bg-navy-dark/50 border border-gold-light/10 rounded-2xl p-8 shadow-2xl">
+                <h2 className="text-3xl font-bold text-gold-light mb-8">Order History</h2>
+                <div className="space-y-8">
+                  {userProfile.orders.length > 0 ? userProfile.orders.map((order) => (
+                    <div key={order.orderId} className="border-b-2 border-gold-light/10 pb-8 last:border-b-0 last:pb-0">
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <p className="text-gold-medium font-medium">Order {order.orderId}</p>
+                          <p className="text-xl text-gold-lightest font-semibold">Order {order.orderId}</p>
                           <p className="text-gold-light/70">{order.date}</p>
                         </div>
-                        <span className="px-3 py-1 rounded-full text-sm bg-gold-medium/20 text-gold-medium">
+                        <span className={`px-3 py-1 rounded-full text-sm ${order.status === 'Delivered' ? 'bg-green-500/20 text-green-400' : 'bg-gold-medium/20 text-gold-medium'}`}>
                           {order.status}
                         </span>
                       </div>
-                      <div className="space-y-4">
+                      <div className="space-y-4 mt-4">
                         {order.items.map((item, index) => (
                           <div key={index} className="flex justify-between items-center">
                             <div>
-                              <p className="text-gold-light">{item.name}</p>
+                              <p className="text-gold-lightest">{item.name}</p>
                               <p className="text-gold-light/70">Quantity: {item.quantity}</p>
                             </div>
-                            <p className="text-gold-light">${item.price.toFixed(2)}</p>
+                            <p className="text-gold-lightest">${item.price.toFixed(2)}</p>
                           </div>
                         ))}
                       </div>
-                      <div className="mt-4 pt-4 border-t border-gold-light/10 flex justify-between">
+                      <div className="mt-6 pt-4 border-t border-gold-light/10 flex justify-between font-semibold">
                         <span className="text-gold-light">Total</span>
-                        <span className="text-gold-medium font-medium">${order.total.toFixed(2)}</span>
+                        <span className="text-gold-lightest text-lg">${order.total.toFixed(2)}</span>
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-center py-12 text-gold-light/50">
+                      <p>You have no past orders.</p>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
 
             {activeTab === 'addresses' && (
-              <div className="bg-navy-darkest/30 rounded-xl p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-semibold text-gold-medium">Shipping Addresses</h2>
-                  <button className="px-4 py-2 rounded-lg bg-gold-medium text-navy-darkest hover:bg-gold-light transition-colors">
+              <div className="bg-navy-dark/50 border border-gold-light/10 rounded-2xl p-8 shadow-2xl">
+                <div className="flex justify-between items-center mb-8">
+                  <h2 className="text-3xl font-bold text-gold-light">Shipping Addresses</h2>
+                  <button className="px-5 py-2 rounded-lg bg-gold-medium text-navy-darkest hover:bg-gold-light transition-all duration-300 transform hover:scale-105 shadow-lg">
                     Add New Address
                   </button>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {userProfile.shippingAddresses.map((address, index) => (
-                    <div key={index} className="border border-gold-light/10 rounded-lg p-4">
-                      <div className="flex justify-between items-start mb-2">
+                    <div key={index} className="border-2 border-gold-light/10 rounded-xl p-6 hover:border-gold-light/30 transition-all duration-300">
+                      <div className="flex justify-between items-start mb-4">
                         <div>
                           {address.isDefault && (
-                            <span className="inline-block px-2 py-1 rounded text-xs bg-gold-medium/20 text-gold-medium mb-2">
+                            <span className="inline-block px-3 py-1 rounded-full text-xs bg-gold-medium/20 text-gold-medium mb-2">
                               Default
                             </span>
                           )}
                         </div>
-                        <button className="text-gold-light/70 hover:text-gold-light">Edit</button>
+                        <button className="text-gold-light/70 hover:text-gold-lightest transition-colors">Edit</button>
                       </div>
-                      <div className="space-y-1 text-gold-light">
+                      <div className="space-y-2 text-gold-lightest">
                         <p>{address.street}</p>
                         <p>{address.city}, {address.state} {address.zipCode}</p>
                         <p>{address.country}</p>

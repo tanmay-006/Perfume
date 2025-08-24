@@ -10,7 +10,8 @@ interface SignInModalProps {
 export default function SignInModal({ onClose, onSignIn }: SignInModalProps) {
   const [email, setEmail] = useState('');
 
-  const handleSignIn = () => {
+  const handleSignIn = (e: React.FormEvent) => {
+    e.preventDefault();
     // Basic email validation
     if (email.includes('@')) {
       onSignIn(email);
@@ -20,30 +21,52 @@ export default function SignInModal({ onClose, onSignIn }: SignInModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-xl text-gray-800 max-w-sm w-full">
-        <h2 className="text-2xl font-bold mb-4">Sign In</h2>
-        <p className="mb-6">Enter your email to sign in or create an account.</p>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
-          className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-gold-medium"
-        />
-        <div className="flex justify-end space-x-4">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleSignIn}
-            className="px-4 py-2 rounded-md bg-gold-dark text-white hover:bg-gold-medium transition-colors"
-          >
-            Sign In
-          </button>
+    <div className="fixed inset-0 bg-navy-darkest/80 backdrop-blur-sm z-50 flex justify-center items-center fade-in">
+      <div className="bg-navy-dark border border-gold-light/10 rounded-2xl shadow-2xl text-gold-lightest max-w-md w-full m-4">
+        <div className="p-8 space-y-6">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-gold-lightest">Sign In</h2>
+            <p className="text-gold-light/70 mt-2">Enter your email to access your account.</p>
+          </div>
+          <form onSubmit={handleSignIn} className="space-y-6">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gold-light/80 mb-2">
+                Email Address
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="w-full px-4 py-3 bg-navy-darkest/50 border border-gold-light/20 rounded-lg text-gold-lightest focus:outline-none focus:ring-2 focus:ring-gold-medium focus:border-gold-medium transition-all"
+                required
+              />
+            </div>
+            <div className="flex flex-col sm:flex-row-reverse gap-4">
+              <button
+                type="submit"
+                className="w-full px-6 py-3 rounded-lg bg-gold-medium text-navy-darkest font-semibold hover:bg-gold-light transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                Sign In
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="w-full px-6 py-3 rounded-lg text-gold-light/80 hover:bg-navy-light/10 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+          <div className="text-center text-sm text-gold-light/60">
+            <p>
+              Don't have an account?{' '}
+              <button className="font-semibold text-gold-light/80 hover:text-gold-light transition-colors">
+                Register
+              </button>
+            </p>
+          </div>
         </div>
       </div>
     </div>

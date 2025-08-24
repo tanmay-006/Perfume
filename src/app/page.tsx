@@ -91,12 +91,7 @@ const MFFragranceLoader = () => {
           .particle:nth-child(8) { left: 80%; animation-delay: 3.5s; }
           .particle:nth-child(9) { left: 90%; animation-delay: 4s; }
 
-          @keyframes letterReveal {
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
+          
 
           @keyframes colorShift {
             0%, 100% { background-position: 0% 50%; }
