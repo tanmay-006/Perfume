@@ -185,11 +185,30 @@ export default function Home() {
 
   // Handle loader
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 3000); // Hide loader after 3 seconds
+    const minDisplayTime = 1500; // Minimum time in milliseconds to show the loader
+    let loadTimer: NodeJS.Timeout;
 
-    return () => clearTimeout(timer);
+    const handlePageLoad = () => {
+      clearTimeout(loadTimer);
+      setLoading(false);
+    };
+
+    // Set a timeout for the minimum display time
+    loadTimer = setTimeout(() => {
+      // If page is already loaded, hide loader immediately after minDisplayTime
+      if (document.readyState === 'complete') {
+        setLoading(false);
+      }
+    }, minDisplayTime);
+
+    // Listen for the page load event
+    window.addEventListener('load', handlePageLoad);
+
+    // Cleanup event listeners and timers
+    return () => {
+      clearTimeout(loadTimer);
+      window.removeEventListener('load', handlePageLoad);
+    };
   }, []);
 
   // Get featured products
