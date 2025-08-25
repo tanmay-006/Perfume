@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Star, ShoppingCart } from 'lucide-react';
 import { Product } from '@/types/product';
+import { useCart } from '@/contexts/CartContext';
 
 interface ProductCardProps {
   product: Product;
@@ -24,6 +25,7 @@ export default function ProductCard({
   onQuickView,
 }: ProductCardProps) {
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const { addToCart } = useCart();
 
   const discountPercentage = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -31,6 +33,12 @@ export default function ProductCard({
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
+    if (product.inStock && product.sizes.length > 0) {
+      // Add the default size (usually 50ml) to cart
+      const defaultSize = product.sizes.find(size => size.size === '50ml') || product.sizes[0];
+      addToCart(product, defaultSize.size, 1);
+    }
     if (onAddToCart && product.inStock) {
       onAddToCart(product.id);
     }

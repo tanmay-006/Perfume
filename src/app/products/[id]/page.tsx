@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from '@/components/layout/Header';
 import ThemeWrapper from '@/components/providers/ThemeWrapper';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
+import { useCart } from '@/contexts/CartContext';
 import { useState, useEffect, use } from 'react';
 import '../../perfume.css';
 import { products } from '@/data/products';
@@ -12,6 +13,7 @@ import { Product } from '@/types/product';
 
 function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = use(params);
+    const { addToCart } = useCart();
     const [selectedSize, setSelectedSize] = useState('50ml');
     const [quantity, setQuantity] = useState(1);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -19,6 +21,7 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
     const [activeTab, setActiveTab] = useState('description');
     const [product, setProduct] = useState<Product | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [addedToCart, setAddedToCart] = useState(false);
 
     // Fetch product data based on ID
     useEffect(() => {
@@ -121,7 +124,7 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
     }
 
     return (
-        <div className="min-h-screen bg-background" style={{ paddingTop: '40px' }}>
+        <div className="min-h-screen bg-background pt-20">
             {/* Breadcrumb */}
             {/*       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-4">
@@ -286,8 +289,29 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
 
                         {/* Action Buttons */}
                         <div className="space-y-4">
-                            <button className="w-full bg-navy-dark text-gold-light py-4 rounded-xl font-semibold text-lg hover:bg-navy-medium transition-colors">
-                                Add to Cart - ₹{(currentSizeData.price * quantity).toLocaleString()}
+                            <button 
+                                onClick={() => {
+                                    if (product && product.inStock) {
+                                        addToCart(product, selectedSize, quantity);
+                                        setAddedToCart(true);
+                                        setTimeout(() => setAddedToCart(false), 2000);
+                                    }
+                                }}
+                                disabled={!product?.inStock}
+                                className={`w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 ${
+                                    addedToCart 
+                                        ? 'bg-green-600 text-white' 
+                                        : product?.inStock 
+                                            ? 'bg-navy-dark text-gold-light hover:bg-navy-medium' 
+                                            : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                                }`}
+                            >
+                                {addedToCart 
+                                    ? 'Added to Cart! ✓' 
+                                    : product?.inStock 
+                                        ? `Add to Cart - ₹${(currentSizeData.price * quantity).toLocaleString()}`
+                                        : 'Out of Stock'
+                                }
                             </button>
                             <div className="grid grid-cols-2 gap-4">
                                 <button className="border border-gray-300 py-3 rounded-xl font-semibold hover:border-gray-400 transition-colors">

@@ -21,13 +21,13 @@ export default function ShopByGender({
     {
       id: 'him',
       title: 'FOR HIM',
-      image: '/images/gender/men-banner.jpg',
+      image: '/images/gender/luxury-perfume-ad-design_883706-137.jpg',
       link: '/products?category=men'
     },
     {
       id: 'her',
       title: 'FOR HER',
-      image: '/images/gender/picture-bottle-perfume-with-words-touch-front_1031622-539.jpg',
+      image: '/images/gender/bottle-perfume-product-photography-stone_1014647-942.jpg',
       link: '/products?category=women'
     },
     {

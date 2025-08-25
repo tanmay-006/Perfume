@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import SignInModal from '../auth/SignInModal';
 import { useTheme } from '@/components/providers/ThemeProvider';
+import { useCart } from '@/contexts/CartContext';
 
 interface HeaderProps {
   isScrolled?: boolean;
@@ -19,6 +20,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
   const [showSignInModal, setShowSignInModal] = useState(false);
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
+  const { getTotalItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -123,14 +125,18 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
               </button>
 
               {/* Shopping Cart */}
-              <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors relative" aria-label="Shopping cart">
-                <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 2.5M7 13l2.5 2.5m6-7h.01M19 11h.01" />
-                </svg>
-                <span className="nav-badge absolute -top-1 -right-1 text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                  2
-                </span>
-              </button>
+              <Link href="/cart">
+                <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors relative" aria-label="Shopping cart">
+                  <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 2.5M7 13l2.5 2.5m6-7h.01M19 11h.01" />
+                  </svg>
+                  {getTotalItems() > 0 && (
+                    <span className="nav-badge absolute -top-1 -right-1 text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                      {getTotalItems()}
+                    </span>
+                  )}
+                </button>
+              </Link>
 
               {/* Mobile Menu Button */}
               <button 
