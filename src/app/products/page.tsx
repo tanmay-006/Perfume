@@ -54,6 +54,20 @@ function ProductsPageContent() {
                     image: "/images/gender/men-hero.jpg",
                     buttonText: "SHOP MEN'S COLLECTION",
                     buttonLink: "#products-section"
+                }, {
+                    subtitle: "MASCULINE ELEGANCE",
+                    title: "Bold & Confident Scents",
+                    description: "Powerful fragrances that make a statement",
+                    image: "/images/gender/men-banner.jpg",
+                    buttonText: "EXPLORE COLLECTION",
+                    buttonLink: "#products-section"
+                }, {
+                    subtitle: "CLASSIC GENTLEMAN",
+                    title: "Timeless Men's Fragrances",
+                    description: "Traditional scents with a modern twist",
+                    image: "/images/jeroen-van-roij-sLQt9PjsCcs-unsplash.jpg",
+                    buttonText: "SHOP NOW",
+                    buttonLink: "#products-section"
                 }];
             case 'women':
                 return [{
@@ -63,6 +77,20 @@ function ProductsPageContent() {
                     image: "/images/gender/women-hero.jpg",
                     buttonText: "SHOP WOMEN'S COLLECTION",
                     buttonLink: "#products-section"
+                }, {
+                    subtitle: "FEMININE LUXURY",
+                    title: "Graceful & Enchanting",
+                    description: "Delicate fragrances that captivate and inspire",
+                    image: "/images/gender/women-banner.jpg",
+                    buttonText: "DISCOVER MORE",
+                    buttonLink: "#products-section"
+                }, {
+                    subtitle: "TIMELESS BEAUTY",
+                    title: "Classic Women's Perfumes",
+                    description: "Sophisticated scents for the modern woman",
+                    image: "/images/laura-chouette-4sKdeIMiFEI-unsplash.jpg",
+                    buttonText: "SHOP NOW",
+                    buttonLink: "#products-section"
                 }];
             case 'unisex':
                 return [{
@@ -71,6 +99,20 @@ function ProductsPageContent() {
                     description: "Versatile scents that transcend gender boundaries",
                     image: "/images/gender/unisex-hero.jpg",
                     buttonText: "SHOP UNISEX COLLECTION",
+                    buttonLink: "#products-section"
+                }, {
+                    subtitle: "UNIVERSAL APPEAL",
+                    title: "Scents Without Boundaries",
+                    description: "Fresh and modern fragrances for all",
+                    image: "/images/miska-sage-GnF5Xpu-764-unsplash.jpg",
+                    buttonText: "EXPLORE RANGE",
+                    buttonLink: "#products-section"
+                }, {
+                    subtitle: "MODERN CLASSICS",
+                    title: "Contemporary Unisex Scents",
+                    description: "Innovative fragrances that suit every style",
+                    image: "/images/delfina-iacub-nrkgRRskOBo-unsplash.jpg",
+                    buttonText: "DISCOVER",
                     buttonLink: "#products-section"
                 }];
             default:
