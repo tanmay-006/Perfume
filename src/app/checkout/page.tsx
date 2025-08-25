@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -12,6 +12,7 @@ function CheckoutPageContent() {
   const { items, getTotalPrice, clearCart } = useCart();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState({
     // Billing Information
     firstName: '',
@@ -31,6 +32,15 @@ function CheckoutPageContent() {
     // Special Instructions
     instructions: ''
   });
+
+  // Check if cart is empty and redirect if needed
+  useEffect(() => {
+    if (items.length === 0) {
+      router.push('/cart');
+      return;
+    }
+    setIsLoading(false);
+  }, [items.length, router]);
 
   const subtotal = getTotalPrice();
   const shipping = subtotal > 4500 ? 0 : 200;
@@ -56,8 +66,20 @@ function CheckoutPageContent() {
     }, 2000);
   };
 
+  // Show loading state while checking cart
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[var(--background)] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[var(--gold-medium)] mx-auto mb-4"></div>
+          <p className="text-[var(--foreground)]">Loading checkout...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render anything if cart is empty (will redirect)
   if (items.length === 0) {
-    router.push('/cart');
     return null;
   }
 

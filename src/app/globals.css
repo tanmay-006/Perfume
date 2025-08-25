@@ -10,37 +10,60 @@
   --foreground: #212529;
 
   /* Accessible gold palette for light theme */
-  --gold-darkest: #8c6825;   /* Contrast: 5.1:1 */
-  --gold-dark: #a67c2e;     /* Contrast: 3.5:1 (for large text/UI elements) */
-  --gold-medium: #b38633;   /* Contrast: 3.8:1 (for large text/UI elements) */
-  --gold-light: #c89f58;    /* Contrast: 3.0:1 (for large text/UI elements) */
-  --gold-lightest: #d1ae77; /* Contrast: 2.5:1 (for UI elements) */
+  --gold-darkest: #8c6825;
+  /* Contrast: 5.1:1 */
+  --gold-dark: #a67c2e;
+  /* Contrast: 3.5:1 (for large text/UI elements) */
+  --gold-medium: #b38633;
+  /* Contrast: 3.8:1 (for large text/UI elements) */
+  --gold-light: #c89f58;
+  /* Contrast: 3.0:1 (for large text/UI elements) */
+  --gold-lightest: #d1ae77;
+  /* Contrast: 2.5:1 (for UI elements) */
+  --hero-banner: #eee3cf3d;
+  /* Darkest for hero banner text on light backgrounds */
+  /* Contrast: 3.5:1 (for large text/UI elements) */
 
   /* Accessible navy palette for light theme */
-  --navy-darkest: #1a2533;   /* Contrast: 11.4:1 */
-  --navy-dark: #2c3e50;     /* Contrast: 7.8:1 */
-  --navy-medium: #526580;   /* Contrast: 4.1:1 (for large text/UI elements) */
-  --navy-light: #6c757d;    /* Contrast: 4.5:1 */
-  --navy-lightest: #868e96; /* Contrast: 3.5:1 (for large text/UI elements) */
+  --navy-darkest: #1a2533;
+  /* Contrast: 11.4:1 */
+  --navy-dark: #2c3e50;
+  /* Contrast: 7.8:1 */
+  --navy-medium: #526580;
+  /* Contrast: 4.1:1 (for large text/UI elements) */
+  --navy-light: #6c757d;
+  /* Contrast: 4.5:1 */
+  --navy-lightest: #868e96;
 }
 
 [data-theme='dark'] {
   --background: #1a2533;
   --foreground: #f8f0e3;
-  
+
   /* Gold palette for dark theme - lighter colors for text on dark backgrounds */
-  --gold-lightest: #d1ae77;  /* Very light for primary text */
-  --gold-light: #e6d2b5;     /* Light for secondary text */
-  --gold-medium: #d4b485;    /* Medium for accents */
-  --gold-dark: #c19a54;      /* Darker for buttons/highlights */
-  --gold-darkest: #a67c2e;   /* Darkest for button text on light backgrounds */
-  
+  --gold-lightest: #d1ae77;
+  /* Very light for primary text */
+  --gold-light: #e6d2b5;
+  /* Light for secondary text */
+  --gold-medium: #d4b485;
+  /* Medium for accents */
+  --gold-dark: #c19a54;
+  /* Darker for buttons/highlights */
+  --gold-darkest: #a67c2e;
+  /* Darkest for button text on light backgrounds */
+  --hero-banner: #2e3b4d6a;
+  /* Semi-transparent for hero banner background */
   /* Navy palette for dark theme - inverted for proper contrast */
-  --navy-lightest: #e6eaef;  /* Very light for text on dark backgrounds */
-  --navy-light: #a3b0c2;     /* Light for secondary text */
-  --navy-medium: #526580;    /* Medium for UI elements */
-  --navy-dark: #2c3e50;      /* Dark for secondary backgrounds */
-  --navy-darkest: #1a2533;   /* Darkest for main background */
+  --navy-lightest: #e6eaef;
+  /* Very light for text on dark backgrounds */
+  --navy-light: #a3b0c2;
+  /* Light for secondary text */
+  --navy-medium: #526580;
+  /* Medium for UI elements */
+  --navy-dark: #2c3e50;
+  /* Dark for secondary backgrounds */
+  --navy-darkest: #1a2533;
+  /* Darkest for main background */
 }
 
 @theme inline {
@@ -192,6 +215,11 @@ html.loading body::before {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

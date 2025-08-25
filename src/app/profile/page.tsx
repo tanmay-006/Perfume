@@ -1,24 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { useTheme } from '@/components/providers/ThemeProvider';
+import ThemeWrapper from '@/components/providers/ThemeWrapper';
+import '../perfume.css';
 
 interface UserProfile {
   personalInfo: {
     name: string;
     email: string;
     phone: string;
+    joinDate: string;
   };
-  shippingAddresses: {
-    street: string;
-    city: string;
-    state: string;
-    zipCode: string;
-    country: string;
-    isDefault: boolean;
-  }[];
   orders: {
     orderId: string;
     date: string;
@@ -30,240 +25,321 @@ interface UserProfile {
       price: number;
     }[];
   }[];
-  preferences: {
-    fragranceTypes: string[];
-    notifications: boolean;
-    newsletter: boolean;
-  };
+  addresses: {
+    id: string;
+    type: string;
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    isDefault: boolean;
+  }[];
 }
 
-const Avatar = ({ name, imageUrl }: { name: string, imageUrl?: string }) => {
-  const initial = name.charAt(0).toUpperCase();
-
-  return (
-    <div className="w-24 h-24 rounded-full bg-gold-medium flex items-center justify-center text-navy-darkest text-5xl font-bold ring-4 ring-gold-light/50">
-      {imageUrl ? (
-        <img src={imageUrl} alt={name} className="w-full h-full rounded-full object-cover" />
-      ) : (
-        <span>{initial}</span>
-      )}
-    </div>
-  );
-};
-
-export default function ProfilePage() {
-  const [activeTab, setActiveTab] = useState('overview');
-  const { theme } = useTheme();
+function ProfilePageContent() {
+  const [activeTab, setActiveTab] = useState('profile');
+  const [isEditing, setIsEditing] = useState(false);
+  const searchParams = useSearchParams();
   
-  // Dummy data - replace with actual user data from your backend
+  const userEmail = searchParams?.get('email') || 'user@example.com';
+  
   const [userProfile, setUserProfile] = useState<UserProfile>({
     personalInfo: {
-      name: 'Alexandra Smith',
-      email: 'alexandra.smith@example.com',
-      phone: '+1 (555) 123-4567'
+      name: 'Priya Sharma',
+      email: userEmail,
+      phone: '+91 98765 43210',
+      joinDate: 'June 2024'
     },
-    shippingAddresses: [
+    orders: [
       {
-        street: '123 Luxury Lane',
-        city: 'Beverly Hills',
-        state: 'CA',
-        zipCode: '90210',
-        country: 'United States',
-        isDefault: true
+        orderId: 'MF-2024-0085',
+        date: 'August 15, 2025',
+        status: 'Delivered',
+        total: 8500,
+        items: [
+          { name: 'Midnight Rose - 100ml', quantity: 1, price: 6500 },
+          { name: 'Ocean Breeze - 50ml', quantity: 1, price: 2000 }
+        ]
+      },
+      {
+        orderId: 'MF-2024-0072',
+        date: 'July 28, 2025',
+        status: 'Delivered',
+        total: 12500,
+        items: [
+          { name: 'Royal Oud - 100ml', quantity: 1, price: 12500 }
+        ]
       }
     ],
-    orders: [],
-    preferences: {
-      fragranceTypes: ['Floral', 'Oriental', 'Woody'],
-      notifications: true,
-      newsletter: true
-    }
+    addresses: [
+      {
+        id: '1',
+        type: 'Home',
+        street: '123 Marina Drive, Bandra West',
+        city: 'Mumbai',
+        state: 'Maharashtra',
+        zipCode: '400050',
+        isDefault: true
+      },
+      {
+        id: '2',
+        type: 'Office',
+        street: '456 Corporate Plaza, Andheri East',
+        city: 'Mumbai',
+        state: 'Maharashtra',
+        zipCode: '400069',
+        isDefault: false
+      }
+    ]
   });
 
+  const tabs = [
+    { id: 'profile', label: 'Profile' },
+    { id: 'orders', label: 'Orders' },
+    { id: 'addresses', label: 'Addresses' }
+  ];
+
   return (
-    <div data-theme={theme} className="min-h-screen bg-gradient-to-b from-navy-darkest to-navy-dark">
+    <div className="min-h-screen bg-[var(--background)]">
       <Header />
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <div className="mb-12 text-center">
-          <h1 className="text-5xl font-extrabold text-gold-lightest mb-2 tracking-tight">My Profile</h1>
-          <p className="text-lg text-gold-light/80">Manage your account preferences and view your orders</p>
+      {/* Simple Header */}
+      <div className="pt-24 pb-8 px-4 border-b border-[var(--gold-light)]/20">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl font-bold text-[var(--foreground)] mb-2">Account</h1>
+          <p className="text-[var(--navy-medium)]">Manage your profile and view your orders</p>
         </div>
+      </div>
 
-        {/* Profile Navigation */}
-        <div className="flex flex-col md:flex-row gap-12">
-          <aside className="md:w-64">
-            <nav className="space-y-2">
-              {[
-                { id: 'overview', label: 'Overview' },
-                { id: 'orders', label: 'Orders' },
-                { id: 'addresses', label: 'Addresses' }
-              ].map((item) => (
+      {/* Navigation Tabs */}
+      <div className="border-b border-[var(--gold-light)]/20">
+        <div className="max-w-4xl mx-auto px-4">
+          <nav className="flex space-x-8">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === tab.id
+                    ? 'border-[var(--gold-medium)] text-[var(--gold-medium)]'
+                    : 'border-transparent text-[var(--navy-medium)] hover:text-[var(--foreground)] hover:border-[var(--gold-light)]'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      {/* Content */}
+      <main className="max-w-4xl mx-auto px-4 py-8">
+        
+        {activeTab === 'profile' && (
+          <div className="space-y-8">
+            {/* Personal Information */}
+            <section className="bg-white dark:bg-[var(--navy-dark)] rounded-lg border border-[var(--gold-light)]/20 p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold text-[var(--foreground)]">Personal Information</h2>
                 <button
-                  key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 ${
-                    activeTab === item.id
-                      ? 'bg-gold-medium/20 text-gold-lightest shadow-lg'
-                      : 'text-gold-light/70 hover:bg-gold-medium/10 hover:text-gold-light'
-                  }`}
+                  onClick={() => setIsEditing(!isEditing)}
+                  className="text-[var(--gold-medium)] hover:text-[var(--gold-dark)] font-medium text-sm"
                 >
-                  {item.label}
+                  {isEditing ? 'Cancel' : 'Edit'}
                 </button>
-              ))}
-            </nav>
-          </aside>
-
-          {/* Main Content Area */}
-          <div key={activeTab} className="flex-1 min-h-[600px] fade-in">
-            {activeTab === 'overview' && (
-              <div className="space-y-8">
-                <section className="bg-navy-dark/50 border border-gold-light/10 rounded-2xl p-8 shadow-2xl">
-                  <h2 className="text-3xl font-bold text-gold-light mb-6">Personal Information</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gold-light/70 mb-1">Name</label>
-                      <p className="text-lg text-gold-lightest">{userProfile.personalInfo.name}</p>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gold-light/70 mb-1">Email</label>
-                      <p className="text-lg text-gold-lightest">{userProfile.personalInfo.email}</p>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gold-light/70 mb-1">Phone</label>
-                      <p className="text-lg text-gold-lightest">{userProfile.personalInfo.phone}</p>
-                    </div>
-                  </div>
-                </section>
-
-                <section className="bg-navy-dark/50 border border-gold-light/10 rounded-2xl p-8 shadow-2xl">
-                  <h2 className="text-3xl font-bold text-gold-light mb-6">Recent Orders</h2>
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead>
-                        <tr className="text-gold-light/70 border-b-2 border-gold-light/10">
-                          <th className="text-left py-4 px-2">Order ID</th>
-                          <th className="text-left py-4 px-2">Date</th>
-                          <th className="text-left py-4 px-2">Status</th>
-                          <th className="text-right py-4 px-2">Total</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {userProfile.orders.length > 0 ? userProfile.orders.map((order) => (
-                          <tr key={order.orderId} className="border-b border-gold-light/10 hover:bg-navy-dark/30">
-                            <td className="py-4 px-2 text-gold-lightest">{order.orderId}</td>
-                            <td className="py-4 px-2 text-gold-lightest">{order.date}</td>
-                            <td className="py-4 px-2">
-                              <span className={`px-3 py-1 rounded-full text-sm ${order.status === 'Delivered' ? 'bg-green-500/20 text-green-400' : 'bg-gold-medium/20 text-gold-medium'}`}>
-                                {order.status}
-                              </span>
-                            </td>
-                            <td className="py-4 px-2 text-right text-gold-lightest">
-                              ${order.total.toFixed(2)}
-                            </td>
-                          </tr>
-                        )) : (
-                          <tr>
-                            <td colSpan="4" className="text-center py-12 text-gold-light/50">No recent orders</td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </section>
-
-                <section className="bg-navy-dark/50 border border-gold-light/10 rounded-2xl p-8 shadow-2xl">
-                  <h2 className="text-3xl font-bold text-gold-light mb-6">Fragrance Preferences</h2>
-                  <div className="flex flex-wrap gap-3">
-                    {userProfile.preferences.fragranceTypes.map((type) => (
-                      <span
-                        key={type}
-                        className="px-4 py-2 rounded-full bg-gold-medium/10 text-gold-medium text-sm transition-transform transform hover:scale-110"
-                      >
-                        {type}
-                      </span>
-                    ))}
-                  </div>
-                </section>
               </div>
-            )}
 
-            {activeTab === 'orders' && (
-              <div className="bg-navy-dark/50 border border-gold-light/10 rounded-2xl p-8 shadow-2xl">
-                <h2 className="text-3xl font-bold text-gold-light mb-8">Order History</h2>
-                <div className="space-y-8">
-                  {userProfile.orders.length > 0 ? userProfile.orders.map((order) => (
-                    <div key={order.orderId} className="border-b-2 border-gold-light/10 pb-8 last:border-b-0 last:pb-0">
-                      <div className="flex justify-between items-start mb-4">
-                        <div>
-                          <p className="text-xl text-gold-lightest font-semibold">Order {order.orderId}</p>
-                          <p className="text-gold-light/70">{order.date}</p>
-                        </div>
-                        <span className={`px-3 py-1 rounded-full text-sm ${order.status === 'Delivered' ? 'bg-green-500/20 text-green-400' : 'bg-gold-medium/20 text-gold-medium'}`}>
-                          {order.status}
-                        </span>
-                      </div>
-                      <div className="space-y-4 mt-4">
-                        {order.items.map((item, index) => (
-                          <div key={index} className="flex justify-between items-center">
-                            <div>
-                              <p className="text-gold-lightest">{item.name}</p>
-                              <p className="text-gold-light/70">Quantity: {item.quantity}</p>
-                            </div>
-                            <p className="text-gold-lightest">${item.price.toFixed(2)}</p>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="mt-6 pt-4 border-t border-gold-light/10 flex justify-between font-semibold">
-                        <span className="text-gold-light">Total</span>
-                        <span className="text-gold-lightest text-lg">${order.total.toFixed(2)}</span>
-                      </div>
-                    </div>
-                  )) : (
-                    <div className="text-center py-12 text-gold-light/50">
-                      <p>You have no past orders.</p>
-                    </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-[var(--navy-medium)] mb-2">
+                    Full Name
+                  </label>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      value={userProfile.personalInfo.name}
+                      onChange={(e) => setUserProfile({
+                        ...userProfile,
+                        personalInfo: { ...userProfile.personalInfo, name: e.target.value }
+                      })}
+                      className="w-full px-3 py-2 border border-[var(--gold-light)]/30 rounded-md bg-white dark:bg-[var(--navy-darkest)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--gold-medium)] focus:border-transparent"
+                    />
+                  ) : (
+                    <p className="text-[var(--foreground)]">{userProfile.personalInfo.name}</p>
                   )}
                 </div>
-              </div>
-            )}
 
-            {activeTab === 'addresses' && (
-              <div className="bg-navy-dark/50 border border-gold-light/10 rounded-2xl p-8 shadow-2xl">
-                <div className="flex justify-between items-center mb-8">
-                  <h2 className="text-3xl font-bold text-gold-light">Shipping Addresses</h2>
-                  <button className="px-5 py-2 rounded-lg bg-gold-medium text-navy-darkest hover:bg-gold-light transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    Add New Address
+                <div>
+                  <label className="block text-sm font-medium text-[var(--navy-medium)] mb-2">
+                    Email Address
+                  </label>
+                  <p className="text-[var(--foreground)]">{userProfile.personalInfo.email}</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-[var(--navy-medium)] mb-2">
+                    Phone Number
+                  </label>
+                  {isEditing ? (
+                    <input
+                      type="tel"
+                      value={userProfile.personalInfo.phone}
+                      onChange={(e) => setUserProfile({
+                        ...userProfile,
+                        personalInfo: { ...userProfile.personalInfo, phone: e.target.value }
+                      })}
+                      className="w-full px-3 py-2 border border-[var(--gold-light)]/30 rounded-md bg-white dark:bg-[var(--navy-darkest)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--gold-medium)] focus:border-transparent"
+                    />
+                  ) : (
+                    <p className="text-[var(--foreground)]">{userProfile.personalInfo.phone}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-[var(--navy-medium)] mb-2">
+                    Member Since
+                  </label>
+                  <p className="text-[var(--foreground)]">{userProfile.personalInfo.joinDate}</p>
+                </div>
+              </div>
+
+              {isEditing && (
+                <div className="mt-6 pt-6 border-t border-[var(--gold-light)]/20">
+                  <button
+                    onClick={() => setIsEditing(false)}
+                    className="px-4 py-2 bg-[var(--gold-medium)] text-[var(--navy-darkest)] rounded-md font-medium hover:bg-[var(--gold-light)] transition-colors"
+                  >
+                    Save Changes
                   </button>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {userProfile.shippingAddresses.map((address, index) => (
-                    <div key={index} className="border-2 border-gold-light/10 rounded-xl p-6 hover:border-gold-light/30 transition-all duration-300">
-                      <div className="flex justify-between items-start mb-4">
-                        <div>
-                          {address.isDefault && (
-                            <span className="inline-block px-3 py-1 rounded-full text-xs bg-gold-medium/20 text-gold-medium mb-2">
-                              Default
-                            </span>
-                          )}
-                        </div>
-                        <button className="text-gold-light/70 hover:text-gold-lightest transition-colors">Edit</button>
-                      </div>
-                      <div className="space-y-2 text-gold-lightest">
-                        <p>{address.street}</p>
-                        <p>{address.city}, {address.state} {address.zipCode}</p>
-                        <p>{address.country}</p>
-                      </div>
+              )}
+            </section>
+
+            {/* Account Summary */}
+            <section className="bg-white dark:bg-[var(--navy-dark)] rounded-lg border border-[var(--gold-light)]/20 p-6">
+              <h2 className="text-xl font-semibold text-[var(--foreground)] mb-6">Account Summary</h2>
+              
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="text-center p-4 bg-[var(--gold-light)]/10 rounded-lg">
+                  <div className="text-2xl font-bold text-[var(--foreground)] mb-1">
+                    {userProfile.orders.length}
+                  </div>
+                  <div className="text-sm text-[var(--navy-medium)]">Total Orders</div>
+                </div>
+                
+                <div className="text-center p-4 bg-[var(--gold-light)]/10 rounded-lg">
+                  <div className="text-2xl font-bold text-[var(--foreground)] mb-1">
+                    ₹{userProfile.orders.reduce((sum, order) => sum + order.total, 0).toLocaleString()}
+                  </div>
+                  <div className="text-sm text-[var(--navy-medium)]">Total Spent</div>
+                </div>
+                
+                <div className="text-center p-4 bg-[var(--gold-light)]/10 rounded-lg">
+                  <div className="text-2xl font-bold text-[var(--foreground)] mb-1">
+                    {userProfile.addresses.length}
+                  </div>
+                  <div className="text-sm text-[var(--navy-medium)]">Saved Addresses</div>
+                </div>
+              </div>
+            </section>
+          </div>
+        )}
+
+        {activeTab === 'orders' && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-[var(--foreground)]">Order History</h2>
+              <p className="text-sm text-[var(--navy-medium)]">{userProfile.orders.length} orders</p>
+            </div>
+
+            {userProfile.orders.map((order) => (
+              <div key={order.orderId} className="bg-white dark:bg-[var(--navy-dark)] rounded-lg border border-[var(--gold-light)]/20 p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
+                  <div>
+                    <h3 className="font-semibold text-[var(--foreground)]">Order #{order.orderId}</h3>
+                    <p className="text-sm text-[var(--navy-medium)]">{order.date}</p>
+                  </div>
+                  <div className="flex items-center gap-4 mt-2 sm:mt-0">
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      order.status === 'Delivered' 
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                        : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
+                    }`}>
+                      {order.status}
+                    </span>
+                    <span className="font-semibold text-[var(--foreground)]">₹{order.total.toLocaleString()}</span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  {order.items.map((item, index) => (
+                    <div key={index} className="flex justify-between items-center py-2 text-sm">
+                      <span className="text-[var(--foreground)]">{item.name} × {item.quantity}</span>
+                      <span className="text-[var(--navy-medium)]">₹{item.price.toLocaleString()}</span>
                     </div>
                   ))}
                 </div>
+
+                <div className="mt-4 pt-4 border-t border-[var(--gold-light)]/20 flex justify-between items-center">
+                  <button className="text-[var(--gold-medium)] hover:text-[var(--gold-dark)] font-medium text-sm">
+                    View Details
+                  </button>
+                  <button className="text-[var(--gold-medium)] hover:text-[var(--gold-dark)] font-medium text-sm">
+                    Reorder
+                  </button>
+                </div>
               </div>
-            )}
+            ))}
           </div>
-        </div>
+        )}
+
+        {activeTab === 'addresses' && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-[var(--foreground)]">Saved Addresses</h2>
+              <button className="px-4 py-2 bg-[var(--gold-medium)] text-[var(--navy-darkest)] rounded-md font-medium hover:bg-[var(--gold-light)] transition-colors text-sm">
+                Add New Address
+              </button>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {userProfile.addresses.map((address) => (
+                <div key={address.id} className="bg-white dark:bg-[var(--navy-dark)] rounded-lg border border-[var(--gold-light)]/20 p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="font-semibold text-[var(--foreground)] mb-1">{address.type}</h3>
+                      {address.isDefault && (
+                        <span className="inline-block px-2 py-1 bg-[var(--gold-light)]/20 text-[var(--gold-medium)] text-xs rounded-md font-medium">
+                          Default
+                        </span>
+                      )}
+                    </div>
+                    <button className="text-[var(--gold-medium)] hover:text-[var(--gold-dark)] text-sm font-medium">
+                      Edit
+                    </button>
+                  </div>
+                  
+                  <div className="text-sm text-[var(--navy-medium)] space-y-1">
+                    <p>{address.street}</p>
+                    <p>{address.city}, {address.state} {address.zipCode}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </main>
 
       <Footer />
     </div>
+  );
+}
+
+export default function ProfilePage() {
+  return (
+    <ThemeWrapper>
+      <ProfilePageContent />
+    </ThemeWrapper>
   );
 }

@@ -165,7 +165,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(44, 62, 80, 0.7) 0%, rgba(26, 37, 51, 0.8) 100%);
+  background: var(--hero-banner);
   z-index: 2;
 }
 

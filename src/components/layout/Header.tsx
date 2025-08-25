@@ -76,9 +76,6 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
               <Link href="/products" className="nav-link font-medium hover:text-gold-medium transition-colors">
                 Shop
               </Link>
-              <Link href="/collections" className="nav-link font-medium hover:text-gold-medium transition-colors">
-                Collections
-              </Link>
               <Link href="/about" className="nav-link font-medium hover:text-gold-medium transition-colors">
                 About
               </Link>
@@ -160,7 +157,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
                   className="nav-link font-medium py-2 px-4 rounded hover:bg-white hover:bg-opacity-10 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Home
+                  Home  
                 </Link>
                 <Link 
                   href="/products" 
@@ -168,13 +165,6 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Shop
-                </Link>
-                <Link 
-                  href="/collections" 
-                  className="nav-link font-medium py-2 px-4 rounded hover:bg-white hover:bg-opacity-10 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Collections
                 </Link>
                 <Link 
                   href="/about" 
