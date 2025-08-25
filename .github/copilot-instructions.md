@@ -24,3 +24,6 @@ This workspace is for developing a modern, luxury perfume brand website with:
 - E-commerce functionality
 - Modern web technologies (Next.js recommended)
 - Premium user experience focused on luxury branding
+
+
+the website server is always running and accessible.so you dont need to include code for starting the server.just tell me to check it

@@ -3,101 +3,64 @@
 import Image from "next/image";
 import Link from "next/link";
 import Header from '@/components/layout/Header';
+import ThemeWrapper from '@/components/providers/ThemeWrapper';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { useState, useEffect } from 'react';
 import '../../perfume.css';
-import { useTheme } from '@/components/providers/ThemeProvider';
+import { products } from '@/data/products';
+import { Product } from '@/types/product';
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
-    // Use global theme context
-    const { theme } = useTheme();
-
+function ProductDetailPageContent({ params }: { params: { id: string } }) {
     const [selectedSize, setSelectedSize] = useState('50ml');
     const [quantity, setQuantity] = useState(1);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [showFullDescription, setShowFullDescription] = useState(false);
     const [activeTab, setActiveTab] = useState('description');
+    const [product, setProduct] = useState<Product | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Mock product data - in real app, fetch based on params.id
-    const product = {
-        id: parseInt(params.id),
-        name: "Royal Essence Premium",
-        subtitle: "Luxury Collection",
-        price: 285,
-        originalPrice: 320,
-        rating: 4.9,
-        reviews: 156,
-        category: 'women',
-        badge: 'Best Seller',
-        isNew: false,
-        images: [
-            "/images/laura-chouette-4sKdeIMiFEI-unsplash.jpg",
-            "/images/miska-sage-GnF5Xpu-764-unsplash.jpg",
-            "/images/delfina-iacub-nrkgRRskOBo-unsplash.jpg",
-            "/images/charlesdeluvio-3IMl0kCxpHQ-unsplash.jpg"
-        ],
-        description: "Royal Essence Premium is a sophisticated blend of the finest jasmine and sandalwood, creating an unforgettable fragrance experience. This luxury perfume embodies elegance and refinement, perfect for the discerning individual who appreciates exceptional quality.",
-        longDescription: "Crafted with meticulous attention to detail, Royal Essence Premium represents the pinnacle of perfumery artistry. Each bottle contains a harmonious blend of carefully selected ingredients sourced from the world's most prestigious fragrance houses. The jasmine petals are hand-picked at dawn when their scent is most potent, while the sandalwood is aged for years to develop its rich, creamy character. This exquisite fragrance opens with bright top notes that gradually reveal a heart of pure elegance, finishing with a warm, lasting base that lingers beautifully on the skin.",
-        sizes: [
-            { size: '30ml', price: 185, originalPrice: 210 },
-            { size: '50ml', price: 285, originalPrice: 320 },
-            { size: '100ml', price: 450, originalPrice: 520 }
-        ],
-        inStock: true,
-        stockCount: 12,
-        notes: {
-            top: ['Bergamot', 'Pink Pepper', 'Mandarin'],
-            middle: ['Jasmine', 'Rose', 'Lily of Valley'],
-            base: ['Sandalwood', 'Musk', 'Amber']
-        },
-        details: {
-            concentration: 'Eau de Parfum',
-            longevity: '8-12 hours',
-            sillage: 'Moderate to Strong',
-            season: 'All Seasons',
-            occasion: 'Evening, Special Events',
-            gender: 'Women',
-            brand: 'Odora',
-            country: 'France'
-        },
-        ingredients: "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Benzyl Salicylate, Linalool, Hexyl Cinnamal, Alpha-Isomethyl Ionone, Citronellol, Geraniol, Benzyl Benzoate, Coumarin, Eugenol, Isoeugenol, Benzyl Alcohol, Cinnamyl Alcohol"
-    };
-
-    const relatedProducts = [
-        {
-            id: 2,
-            name: "Diamond Orchid Luxury",
-            price: 245,
-            originalPrice: 280,
-            rating: 4.8,
-            image: "/images/miska-sage-GnF5Xpu-764-unsplash.jpg"
-        },
-        {
-            id: 3,
-            name: "Golden Amber Elite",
-            price: 195,
-            originalPrice: 230,
-            rating: 4.7,
-            image: "/images/delfina-iacub-nrkgRRskOBo-unsplash.jpg"
-        },
-        {
-            id: 4,
-            name: "Midnight Noir Intense",
-            price: 225,
-            originalPrice: 260,
-            rating: 4.9,
-            image: "/images/charlesdeluvio-3IMl0kCxpHQ-unsplash.jpg"
-        },
-        {
-            id: 5,
-            name: "Ocean Breeze Premium",
-            price: 165,
-            originalPrice: 195,
-            rating: 4.6,
-            image: "/images/william-bout-TY4QMCrS6P4-unsplash.jpg"
+    // Fetch product data based on ID
+    useEffect(() => {
+        const productId = parseInt(params.id);
+        const foundProduct = products.find(p => p.id === productId);
+        
+        if (foundProduct) {
+            // Ensure the product has all required fields
+            const completeProduct: Product = {
+                ...foundProduct,
+                longDescription: foundProduct.longDescription || foundProduct.description,
+                details: foundProduct.details || {
+                    concentration: 'Eau de Parfum',
+                    longevity: '6-8 hours',
+                    sillage: 'Moderate',
+                    season: 'All Seasons',
+                    occasion: 'Daily Wear',
+                    gender: foundProduct.category === 'men' ? 'Men' : foundProduct.category === 'women' ? 'Women' : 'Unisex',
+                    brand: 'Odora',
+                    country: 'France'
+                },
+                images: foundProduct.images || [foundProduct.image],
+                notes: foundProduct.notes || {
+                    top: ['Bergamot', 'Lemon'],
+                    middle: ['Rose', 'Jasmine'],
+                    base: ['Sandalwood', 'Musk']
+                }
+            };
+            setProduct(completeProduct);
         }
-    ];
+        setIsLoading(false);
+    }, [params.id]);
 
-    const currentSizeData = product.sizes.find(s => s.size === selectedSize) || product.sizes[1];
+    const relatedProducts = products.filter(p => 
+        p.id !== product?.id && 
+        p.category === product?.category
+    ).slice(0, 4);
+
+    const currentSizeData = product?.sizes?.find(s => s.size === selectedSize) || product?.sizes?.[0] || {
+        size: '50ml',
+        price: product?.price || 0,
+        originalPrice: product?.originalPrice
+    };
 
     const reviews = [
         {
@@ -132,6 +95,30 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         }
     ];
 
+    // Show loading state while product is loading
+    if (isLoading) {
+        return <LoadingSpinner />;
+    }
+
+    // Show not found if product doesn't exist
+    if (!product) {
+        return (
+            <div className="min-h-screen bg-background">
+                <Header />
+                <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+                    <h1 className="text-4xl font-bold text-gray-900 mb-4">Product Not Found</h1>
+                    <p className="text-gray-600 mb-8">The product you're looking for doesn't exist.</p>
+                    <Link 
+                        href="/products" 
+                        className="bg-navy-dark text-gold-light px-6 py-3 rounded-lg font-semibold hover:bg-navy-medium transition-colors"
+                    >
+                        Back to Products
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-background" style={{ paddingTop: '40px' }}>
             {/* Breadcrumb */}
@@ -154,36 +141,40 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                     <div className="space-y-4">
                         {/* Main Image */}
                         <div className="aspect-square rounded-2xl overflow-hidden bg-white border border-gray-200">
-                            <Image
-                                src={product.images[activeImageIndex]}
-                                alt={product.name}
-                                width={600}
-                                height={600}
-                                className="w-full h-full object-cover"
-                            />
+                            {product.images && product.images.length > 0 && (
+                                <Image
+                                    src={product.images[activeImageIndex]}
+                                    alt={product.name}
+                                    width={600}
+                                    height={600}
+                                    className="w-full h-full object-cover"
+                                />
+                            )}
                         </div>
 
                         {/* Thumbnail Images */}
-                        <div className="grid grid-cols-4 gap-4">
-                            {product.images.map((image, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setActiveImageIndex(index)}
-                                    className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${activeImageIndex === index
-                                            ? 'border-navy-dark'
-                                            : 'border-gray-200 hover:border-gray-300'
-                                        }`}
-                                >
-                                    <Image
-                                        src={image}
-                                        alt={`${product.name} view ${index + 1}`}
-                                        width={150}
-                                        height={150}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </button>
-                            ))}
-                        </div>
+                        {product.images && product.images.length > 1 && (
+                            <div className="grid grid-cols-4 gap-4">
+                                {product.images.map((image, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setActiveImageIndex(index)}
+                                        className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${activeImageIndex === index
+                                                ? 'border-navy-dark'
+                                                : 'border-gray-200 hover:border-gray-300'
+                                            }`}
+                                    >
+                                        <Image
+                                            src={image}
+                                            alt={`${product.name} view ${index + 1}`}
+                                            width={150}
+                                            height={150}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {/* Product Info */}
@@ -374,28 +365,30 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                                 <div>
                                     <h3 className="font-semibold text-gray-900 mb-4">Product Details</h3>
                                     <dl className="space-y-3">
-                                        {Object.entries(product.details).map(([key, value]) => (
+                                        {product.details && Object.entries(product.details).map(([key, value]) => (
                                             <div key={key} className="flex justify-between">
                                                 <dt className="text-gray-600 capitalize">{key.replace('_', ' ')}:</dt>
-                                                <dd className="font-medium text-gray-900">{value}</dd>
+                                                <dd className="font-medium text-gray-900">{String(value)}</dd>
                                             </div>
                                         ))}
                                     </dl>
                                 </div>
                                 <div>
                                     <h3 className="font-semibold text-gray-900 mb-4">Ingredients</h3>
-                                    <p className="text-sm text-gray-700 leading-relaxed">{product.ingredients}</p>
+                                    <p className="text-sm text-gray-700 leading-relaxed">
+                                        {product.longDescription || "Premium fragrance ingredients carefully selected for the finest quality."}
+                                    </p>
                                 </div>
                             </div>
                         )}
 
                         {activeTab === 'notes' && (
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                {Object.entries(product.notes).map(([category, notes]) => (
+                                {product.notes && Object.entries(product.notes).map(([category, notes]) => (
                                     <div key={category} className="text-center">
                                         <h3 className="font-semibold text-gray-900 mb-4 capitalize">{category} Notes</h3>
                                         <div className="space-y-2">
-                                            {notes.map((note, index) => (
+                                            {Array.isArray(notes) && notes.map((note: string, index: number) => (
                                                 <span
                                                     key={index}
                                                     className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm mx-1 mb-1"
@@ -531,5 +524,13 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function ProductDetailPage({ params }: { params: { id: string } }) {
+    return (
+        <ThemeWrapper>
+            <ProductDetailPageContent params={params} />
+        </ThemeWrapper>
     );
 }

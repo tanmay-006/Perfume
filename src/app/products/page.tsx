@@ -7,15 +7,12 @@ import ProductFilter from '@/components/product/ProductFilter';
 import ProductGrid from '@/components/product/ProductGrid';
 import Newsletter from '@/components/ui/Newsletter';
 import Footer from '@/components/layout/Footer';
+import ThemeWrapper from '@/components/providers/ThemeWrapper';
 import { Product, FilterState } from '@/types/product';
 import { products, categories, sortOptions } from '@/data/products';
 import '../perfume.css';
-import { useTheme } from '@/components/providers/ThemeProvider';
 
-export default function ProductsPage() {
-    // Use global theme context
-    const { theme } = useTheme();
-    
+function ProductsPageContent() {
     const [filters, setFilters] = useState<FilterState>({
         category: 'all',
         priceRange: [0, 500],
@@ -181,5 +178,13 @@ export default function ProductsPage() {
             {/* Footer */}
             <Footer />
         </div>
+    );
+}
+
+export default function ProductsPage() {
+    return (
+        <ThemeWrapper>
+            <ProductsPageContent />
+        </ThemeWrapper>
     );
 }
