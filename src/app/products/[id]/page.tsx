@@ -5,12 +5,13 @@ import Link from "next/link";
 import Header from '@/components/layout/Header';
 import ThemeWrapper from '@/components/providers/ThemeWrapper';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import '../../perfume.css';
 import { products } from '@/data/products';
 import { Product } from '@/types/product';
 
-function ProductDetailPageContent({ params }: { params: { id: string } }) {
+function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> }) {
+    const resolvedParams = use(params);
     const [selectedSize, setSelectedSize] = useState('50ml');
     const [quantity, setQuantity] = useState(1);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -21,7 +22,7 @@ function ProductDetailPageContent({ params }: { params: { id: string } }) {
 
     // Fetch product data based on ID
     useEffect(() => {
-        const productId = parseInt(params.id);
+        const productId = parseInt(resolvedParams.id);
         const foundProduct = products.find(p => p.id === productId);
         
         if (foundProduct) {
@@ -49,7 +50,7 @@ function ProductDetailPageContent({ params }: { params: { id: string } }) {
             setProduct(completeProduct);
         }
         setIsLoading(false);
-    }, [params.id]);
+    }, [resolvedParams.id]);
 
     const relatedProducts = products.filter(p => 
         p.id !== product?.id && 
@@ -527,7 +528,7 @@ function ProductDetailPageContent({ params }: { params: { id: string } }) {
     );
 }
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
     return (
         <ThemeWrapper>
             <ProductDetailPageContent params={params} />

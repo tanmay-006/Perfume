@@ -4,6 +4,7 @@ import './perfume.css';
 import { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import Hero from '@/components/ui/Hero';
+import ShopByGender from '@/components/ui/ShopByGender';
 import FeaturedProducts from '@/components/product/FeaturedProducts';
 import PromoSection from '@/components/ui/PromoSection';
 import BrandStory from '@/components/ui/BrandStory';
@@ -267,6 +268,8 @@ export default function Home() {
         <Header />
         
         <Hero />
+        
+        <ShopByGender />
         
         <FeaturedProducts 
           title="Product Set" 

@@ -57,7 +57,7 @@ export default function ProductCard({
       }`}
     >
       {/* Product Image */}
-      <div className={`relative ${isListView ? 'w-32 sm:w-48 md:w-64 lg:w-72 h-32 sm:h-48 md:h-64 lg:h-72 flex-shrink-0' : 'aspect-[3/4]'} overflow-hidden`}>
+      <div className={`relative ${isListView ? 'w-32 sm:w-48 md:w-64 lg:w-72 h-32 sm:h-48 md:h-64 lg:h-76 flex-shrink-0' : 'aspect-[3/4]'} overflow-hidden`}>
         <Link href={`/products/${product.id}`}>
           <Image
             src={product.image}
@@ -99,7 +99,7 @@ export default function ProductCard({
       </div>
 
       {/* Product Info */}
-      <div className={` ${isListView ? 'flex-1 flex flex-col' : 'relative overflow-visible'}`}>
+      <div className={` ${isListView ? 'flex-1 flex flex-col p-4' : 'relative overflow-visible'}`}>
         {/* Grid Mode - All Content (Moves up on hover to reveal button) */}
         {!isListView && (
           <div className="bg-white dark:bg-[var(--navy-darkest)] group-hover:bg-white/95 dark:group-hover:bg-[var(--navy-darkest)]/95 p-4 rounded-b-xl transition-all duration-300 group-hover:transform group-hover:-translate-y-12 relative z-10">
@@ -234,7 +234,7 @@ export default function ProductCard({
             </div>
 
             {/* Bottom Section - Price and Buttons */}
-            <div className="mt-auto">
+            <div className="mt-auto pt-3">
               {/* Price */}
               <div className="flex items-center gap-2 mb-3">
                 {product.originalPrice && product.originalPrice > product.price ? (
