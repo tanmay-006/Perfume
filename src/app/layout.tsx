@@ -14,13 +14,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MF Fregrance - Premium Perfume Brand | Luxury Fragrances",
-  description: "Indulge in exclusive scents at unbeatable prices. Discover MF Fregrance's curated collection of premium fragrances crafted with 100% natural ingredients.",
-  keywords: "premium perfume, luxury fragrance, designer scents, high-end perfume, exclusive fragrances, MF Fregrance perfume",
+  title: "MF Fragrance - Premium Perfume Brand | Luxury Fragrances",
+  description: "Indulge in exclusive scents at unbeatable prices. Discover MF Fragrance's curated collection of premium fragrances crafted with 100% natural ingredients.",
+  keywords: "premium perfume, luxury fragrance, designer scents, high-end perfume, exclusive fragrances, MF Fragrance perfume",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
-    title: "MF Fregrance - Premium Perfume Brand",
+    title: "MF Fragrance - Premium Perfume Brand",
     description: "Indulge in exclusive scents at unbeatable prices",
     type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 400,
+        height: 400,
+        alt: "MF Fragrance Logo",
+      }
+    ],
   },
 };
 

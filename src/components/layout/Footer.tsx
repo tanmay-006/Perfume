@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 
 interface FooterLink {
   href: string;
@@ -56,9 +57,18 @@ export default function Footer({ sections = defaultSections }: FooterProps) {
           {/* Brand Section */}
           <div className="space-y-4">
             <Link href="/">
-              <h3 className="text-2xl font-bold cursor-pointer hover:opacity-80 transition-opacity text-gold-medium">
-                MF fragrance
-              </h3>
+              <div className="flex items-center space-x-2 cursor-pointer group">
+                <Image 
+                  src="/logo.png" 
+                  alt="MF Fragrance Logo" 
+                  width={40} 
+                  height={40}
+                  className="object-contain group-hover:opacity-80 transition-opacity"
+                />
+                <h3 className="text-2xl font-bold group-hover:opacity-80 transition-opacity text-gold-medium">
+                  MF Fragrance
+                </h3>
+              </div>
             </Link>
             <p className="leading-relaxed text-gold-lightest">
               Premium fragrances crafted with passion and precision for the discerning individual.

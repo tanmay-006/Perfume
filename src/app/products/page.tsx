@@ -19,7 +19,7 @@ function ProductsPageContent() {
     
     const [filters, setFilters] = useState<FilterState>({
         category: categoryParam || 'all',
-        priceRange: [0, 500],
+        priceRange: [0, 22500],
         inStock: false,
         newArrivals: false,
         onSale: false,

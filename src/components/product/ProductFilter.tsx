@@ -31,7 +31,7 @@ export default function ProductFilter({
   const resetFilters = () => {
     onFiltersChange({
       category: 'all',
-      priceRange: [0, 500],
+      priceRange: [0, 22500],
       inStock: false,
       newArrivals: false,
       onSale: false,
@@ -96,8 +96,8 @@ export default function ProductFilter({
             <h4 className="font-semibold text-gray-900 mb-3">Price Range</h4>
             <div className="space-y-3">
               <div className="flex justify-between text-sm text-gray-600">
-                <span>${filters.priceRange[0]}</span>
-                <span>${filters.priceRange[1]}</span>
+                <span>₹{filters.priceRange[0].toLocaleString()}</span>
+                <span>₹{filters.priceRange[1].toLocaleString()}</span>
               </div>
               <div className="px-3">
                 <input

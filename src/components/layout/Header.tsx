@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import SignInModal from '../auth/SignInModal';
@@ -50,9 +51,18 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
             {/* Logo */}
             <div className="flex items-center">
               <Link href="/">
-                <h1 className="nav-logo text-3xl font-bold tracking-tight cursor-pointer">
-                  MF fragrance
-                </h1>
+                <div className="flex items-center space-x-2 cursor-pointer">
+                  <Image 
+                    src="/logo.png" 
+                    alt="MF Fragrance Logo" 
+                    width={50} 
+                    height={50}
+                    className="object-contain"
+                  />
+                  <h1 className="nav-logo text-xl lg:text-2xl font-bold tracking-tight">
+                    MF Fragrance
+                  </h1>
+                </div>
               </Link>
             </div>
 

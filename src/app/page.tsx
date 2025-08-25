@@ -2,6 +2,7 @@
 
 import './perfume.css';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Header from '@/components/layout/Header';
 import Hero from '@/components/ui/Hero';
 import ShopByGender from '@/components/ui/ShopByGender';
@@ -123,6 +124,22 @@ const MFFragranceLoader = () => {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
           }
+
+          .brand-name {
+            font-size: 2.5rem !important;
+          }
+
+          @media (min-width: 481px) {
+            .brand-name {
+              font-size: 3.5rem !important;
+            }
+          }
+
+          @media (min-width: 769px) {
+            .brand-name {
+              font-size: 5rem !important;
+            }
+          }
         `}
       </style>
 
@@ -144,10 +161,27 @@ const MFFragranceLoader = () => {
         textAlign: 'center',
         position: 'relative'
       }}>
+        {/* Logo */}
+        <div style={{
+          marginBottom: '2rem',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <Image 
+            src="/logo.png" 
+            alt="MF Fragrance Logo" 
+            width={80} 
+            height={80}
+            style={{
+              filter: 'brightness(0) invert(1)',
+              opacity: '0.9'
+            }}
+          />
+        </div>
+
         <div className="brand-name" style={{
-          fontSize: typeof window !== 'undefined' ? 
-            window.innerWidth <= 480 ? '2.5rem' : 
-            window.innerWidth <= 768 ? '3.5rem' : '5rem' : '5rem',
+          fontSize: '2.5rem',
           fontWeight: 'bold',
           letterSpacing: '0.3em',
           marginBottom: '2rem',

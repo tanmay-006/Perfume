@@ -218,15 +218,15 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
                         {/* Price */}
                         <div className="space-y-2">
                             <div className="flex items-center gap-3">
-                                <span className="text-3xl font-bold text-navy-dark">${currentSizeData.price}</span>
+                                <span className="text-3xl font-bold text-navy-dark">₹{currentSizeData.price.toLocaleString()}</span>
                                 {currentSizeData.originalPrice && (
-                                    <span className="text-xl text-gray-500 line-through">${currentSizeData.originalPrice}</span>
+                                    <span className="text-xl text-gray-500 line-through">₹{currentSizeData.originalPrice.toLocaleString()}</span>
                                 )}
                             </div>
                             {currentSizeData.originalPrice && (
                                 <div className="flex items-center gap-2">
                                     <span className="text-green-600 font-semibold">
-                                        You save ${currentSizeData.originalPrice - currentSizeData.price}
+                                        You save ₹{(currentSizeData.originalPrice - currentSizeData.price).toLocaleString()}
                                     </span>
                                     <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">
                                         {Math.round(((currentSizeData.originalPrice - currentSizeData.price) / currentSizeData.originalPrice) * 100)}% OFF
@@ -249,7 +249,7 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
                                             }`}
                                     >
                                         <div className="font-semibold">{sizeOption.size}</div>
-                                        <div className="text-sm opacity-75">${sizeOption.price}</div>
+                                        <div className="text-sm opacity-75">₹{sizeOption.price.toLocaleString()}</div>
                                     </button>
                                 ))}
                             </div>
@@ -287,7 +287,7 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
                         {/* Action Buttons */}
                         <div className="space-y-4">
                             <button className="w-full bg-navy-dark text-gold-light py-4 rounded-xl font-semibold text-lg hover:bg-navy-medium transition-colors">
-                                Add to Cart - ${(currentSizeData.price * quantity).toFixed(0)}
+                                Add to Cart - ₹{(currentSizeData.price * quantity).toLocaleString()}
                             </button>
                             <div className="grid grid-cols-2 gap-4">
                                 <button className="border border-gray-300 py-3 rounded-xl font-semibold hover:border-gray-400 transition-colors">
@@ -303,7 +303,7 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
                         <div className="grid grid-cols-2 gap-4 p-4 bg-gray-100 rounded-xl">
                             <div className="text-center">
                                 <div className="font-semibold text-gray-900">Free Shipping</div>
-                                <div className="text-sm text-gray-600">On orders over $100</div>
+                                <div className="text-sm text-gray-600">On orders over ₹4,500</div>
                             </div>
                             <div className="text-center">
                                 <div className="font-semibold text-gray-900">30-Day Returns</div>
@@ -499,9 +499,9 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
                                 <div className="p-4">
                                     <h3 className="font-semibold text-gray-900 mb-2">{relatedProduct.name}</h3>
                                     <div className="flex items-center gap-2 mb-2">
-                                        <span className="font-bold text-navy-dark">${relatedProduct.price}</span>
+                                        <span className="font-bold text-navy-dark">₹{relatedProduct.price.toLocaleString()}</span>
                                         {relatedProduct.originalPrice && (
-                                            <span className="text-sm text-gray-500 line-through">${relatedProduct.originalPrice}</span>
+                                            <span className="text-sm text-gray-500 line-through">₹{relatedProduct.originalPrice.toLocaleString()}</span>
                                         )}
                                     </div>
                                     <div className="flex items-center gap-1">

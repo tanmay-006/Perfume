@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface SignInModalProps {
   onClose: () => void;
@@ -25,6 +26,15 @@ export default function SignInModal({ onClose, onSignIn }: SignInModalProps) {
       <div className="bg-navy-dark border border-gold-light/10 rounded-2xl shadow-2xl text-gold-lightest max-w-md w-full m-4">
         <div className="p-8 space-y-6">
           <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <Image 
+                src="/logo.png" 
+                alt="MF Fragrance Logo" 
+                width={60} 
+                height={60}
+                className="object-contain opacity-90"
+              />
+            </div>
             <h2 className="text-4xl font-bold text-gold-lightest">Sign In</h2>
             <p className="text-gold-light/70 mt-2">Enter your email to access your account.</p>
           </div>

@@ -49,15 +49,15 @@ export default function ShopByGender({
         </div>
 
         {/* Gender Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-8">
           {categories.map((category, index) => (
             <Link
               key={category.id}
               href={category.link}
-              className="group relative overflow-hidden rounded-2xl bg-white dark:bg-navy-dark shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              className="group relative overflow-hidden rounded-xl md:rounded-2xl bg-white dark:bg-navy-dark shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
               {/* Category Image */}
-              <div className="relative aspect-[4/5] overflow-hidden">
+              <div className="relative aspect-[3/4] sm:aspect-[4/5] overflow-hidden">
                 <Image
                   src={category.image}
                   alt={category.title}
@@ -69,16 +69,16 @@ export default function ShopByGender({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
                 
                 {/* Category Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
+                <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-4 md:p-6 lg:p-8">
                   <div className="text-center">
-                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 transform transition-transform duration-300 group-hover:translate-y-[-8px]">
+                    <h3 className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold text-white mb-2 sm:mb-3 md:mb-4 transform transition-transform duration-300 group-hover:translate-y-[-8px]">
                       {category.title}
                     </h3>
                     
                     {/* Arrow Icon */}
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white transform transition-all duration-300 group-hover:bg-white/30 group-hover:scale-110">
+                    <div className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white transform transition-all duration-300 group-hover:bg-white/30 group-hover:scale-110">
                       <svg 
-                        className="w-6 h-6 transform transition-transform duration-300 group-hover:translate-x-1" 
+                        className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transform transition-transform duration-300 group-hover:translate-x-1" 
                         fill="none" 
                         stroke="currentColor" 
                         viewBox="0 0 24 24"
