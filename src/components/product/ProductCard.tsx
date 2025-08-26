@@ -50,7 +50,7 @@ export default function ProductCard({
 
   return (
     <div
-      className={`bg-white dark:bg-[var(--navy-darkest)] rounded-xl shadow-sm border border-gray-200 dark:border-[var(--navy-medium)] overflow-hidden hover:shadow-lg transition-all duration-300 group ${
+      className={`product-card bg-white dark:bg-[var(--navy-darkest)] rounded-xl shadow-sm border border-gray-200 dark:border-[var(--navy-medium)] overflow-hidden hover:shadow-lg transition-all duration-300 group ${
         !isListView ? '' : 'flex gap-4 h-auto'
       }`}
     >
@@ -122,14 +122,14 @@ export default function ProductCard({
           <div className="bg-white dark:bg-[var(--navy-darkest)] group-hover:bg-white/95 dark:group-hover:bg-[var(--navy-darkest)]/95 p-4 rounded-b-xl transition-all duration-300 group-hover:transform group-hover:-translate-y-12 relative z-10">
             {/* Product Name */}
             <Link href={`/products/${product.id}`}>
-              <h3 className="text-lg font-semibold text-[var(--navy-darkest)] dark:text-[var(--gold-lightest)] group-hover:text-white dark:group-hover:text-[var(--gold-lightest)] hover:text-[var(--navy-dark)] dark:hover:text-[var(--gold-light)] transition-colors duration-200 mb-1">
+              <h3 className="product-name text-lg font-bold mb-1">
                 {product.name}
               </h3>
             </Link>
 
             {/* Subtitle */}
             {product.subtitle && (
-              <p className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] group-hover:text-gray-200 dark:group-hover:text-[var(--navy-light)] mb-2 line-clamp-2">
+              <p className="product-subtitle text-sm mb-2 line-clamp-2">
                 {product.subtitle}
               </p>
             )}
@@ -148,7 +148,7 @@ export default function ProductCard({
                   />
                 ))}
               </div>
-              <span className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] group-hover:text-gray-200 dark:group-hover:text-[var(--navy-light)]">
+              <span className="product-rating-text text-sm">
                 {product.rating} ({product.reviews} reviews)
               </span>
             </div>
@@ -157,18 +157,18 @@ export default function ProductCard({
             <div className="flex items-center gap-2">
               {product.originalPrice && product.originalPrice > product.price ? (
                 <>
-                  <span className="text-xl font-bold text-[var(--navy-dark)] dark:text-[var(--gold-light)] group-hover:text-white dark:group-hover:text-[var(--gold-light)]">
+                  <span className="product-price text-xl font-bold">
                     ₹{product.price.toLocaleString()}
                   </span>
-                  <span className="text-sm text-[var(--navy-medium)] dark:text-[var(--navy-light)] group-hover:text-gray-300 dark:group-hover:text-[var(--navy-light)] line-through">
+                  <span className="product-original-price text-sm line-through">
                     ₹{product.originalPrice.toLocaleString()}
                   </span>
-                  <span className="text-sm font-semibold text-green-600 dark:text-green-400 group-hover:text-green-300">
+                  <span className="text-sm font-semibold text-green-600 dark:text-green-400 group-hover:text-green-500">
                     -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% off
                   </span>
                 </>
               ) : (
-                <span className="text-xl font-bold text-[var(--navy-darkest)] dark:text-[var(--gold-lightest)] group-hover:text-white dark:group-hover:text-[var(--gold-lightest)]">
+                <span className="product-price text-xl font-bold">
                   ₹{product.price.toLocaleString()}
                 </span>
               )}

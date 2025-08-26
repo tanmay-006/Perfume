@@ -74,19 +74,19 @@ body {
 }
 
 [data-theme='dark'] .text-gray-700 {
-  color: var(--pale-dogwood) !important;
+  color: var(--isabelline) !important; /* Changed from pale-dogwood to isabelline for better contrast */
 }
 
 [data-theme='dark'] .text-gray-600 {
-  color: var(--pale-dogwood) !important;
+  color: var(--pale-dogwood) !important; /* Much lighter than rose-quartz */
 }
 
 [data-theme='dark'] .text-gray-500 {
-  color: var(--rose-quartz) !important;
+  color: var(--pale-dogwood) !important; /* Much lighter than rose-quartz */
 }
 
 [data-theme='dark'] .text-gray-400 {
-  color: var(--rose-quartz) !important;
+  color: var(--pale-dogwood) !important; /* Much lighter than rose-quartz */
 }
 
 /* Light theme overrides for consistency */
@@ -114,6 +114,16 @@ body {
   color: var(--rose-quartz) !important;
 }
 
+/* Header text should be dark in light theme */
+[data-theme='light'] .nav-link,
+[data-theme='light'] .text-white {
+  color: var(--space-cadet) !important;
+}
+
+[data-theme='light'] .text-foreground {
+  color: var(--space-cadet) !important;
+}
+
 /* Theme-aware background color overrides */
 [data-theme='dark'] .bg-gray-50 {
   background-color: var(--space-cadet) !important;
@@ -136,11 +146,11 @@ body {
 }
 
 [data-theme='light'] .bg-gray-100 {
-  background-color: var(--pale-dogwood) !important;
+  background-color: #ffffff !important; /* Pure white for better card separation */
 }
 
 [data-theme='light'] .bg-gray-200 {
-  background-color: var(--pale-dogwood) !important;
+  background-color: #ffffff !important;
 }
 
 [data-theme='light'] .bg-white {
@@ -178,23 +188,101 @@ body {
 }
 
 [data-theme='dark'] .text-secondary {
-  color: var(--rose-quartz);
+  color: var(--pale-dogwood); /* Changed from rose-quartz for better contrast */
+}
+
+/* Hero banner text protection */
+.hero-text-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 34, 59, 0.8) 0%,
+    rgba(34, 34, 59, 0.6) 50%,
+    rgba(34, 34, 59, 0.8) 100%
+  );
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.hero-text-protected {
+  color: var(--isabelline) !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-button-protected {
+  background-color: var(--pale-dogwood) !important;
+  color: var(--space-cadet) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.hero-button-protected:hover {
+  background-color: var(--isabelline) !important;
+  transform: scale(1.05);
+}
+
+/* Force --isabelline color for all header and hero text in both themes */
+.hero-title-primary,
+.hero-title-accent,
+.hero-description,
+.hero-subtitle,
+.nav-logo,
+.nav-link {
+  color: var(--isabelline) !important;
+}
+
+/* Override theme-specific styles for header and hero */
+[data-theme='light'] .hero-title-primary,
+[data-theme='light'] .hero-title-accent,
+[data-theme='light'] .hero-description,
+[data-theme='light'] .hero-subtitle,
+[data-theme='light'] .nav-logo,
+[data-theme='light'] .nav-link {
+  color: var(--isabelline) !important;
+}
+
+[data-theme='dark'] .hero-title-primary,
+[data-theme='dark'] .hero-title-accent,
+[data-theme='dark'] .hero-description,
+[data-theme='dark'] .hero-subtitle,
+[data-theme='dark'] .nav-logo,
+[data-theme='dark'] .nav-link {
+  color: var(--isabelline) !important;
+}
+
+/* Shop by Gender banner text styling */
+.shop-by-gender-title,
+.shop-by-gender-category {
+  color: var(--isabelline) !important;
+}
+
+[data-theme='light'] .shop-by-gender-title,
+[data-theme='light'] .shop-by-gender-category {
+  color: var(--isabelline) !important;
+}
+
+[data-theme='dark'] .shop-by-gender-title,
+[data-theme='dark'] .shop-by-gender-category {
+  color: var(--isabelline) !important;
 }
 
 .bg-card {
   background-color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 [data-theme='dark'] .bg-card {
   background-color: var(--ultra-violet);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
 
 .bg-card-subtle {
-  background-color: var(--pale-dogwood);
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
 }
 
 [data-theme='dark'] .bg-card-subtle {
   background-color: var(--ultra-violet);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary {
@@ -215,6 +303,10 @@ body {
   color: var(--rose-quartz);
 }
 
+[data-theme='dark'] .text-wishlist {
+  color: var(--pale-dogwood); /* Much lighter for better visibility */
+}
+
 .text-price {
   color: var(--space-cadet);
   font-weight: 600;
@@ -226,6 +318,111 @@ body {
 
 .text-discount {
   color: #dc3545; /* Red for discounts */
+}
+
+/* Footer improvements */
+.footer-text {
+  font-size: 0.95rem; /* Increased from typical 0.875rem */
+  color: var(--space-cadet);
+}
+
+[data-theme='dark'] .footer-text {
+  color: var(--isabelline);
+}
+
+.footer-link-text {
+  font-size: 0.95rem; /* Increased size */
+  color: var(--space-cadet);
+}
+
+[data-theme='dark'] .footer-link-text {
+  color: var(--isabelline);
+}
+
+.footer-link-text:hover {
+  color: var(--ultra-violet);
+}
+
+[data-theme='dark'] .footer-link-text:hover {
+  color: var(--pale-dogwood);
+}
+
+/* Newsletter section improvements */
+.newsletter-text {
+  color: var(--space-cadet) !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+[data-theme='dark'] .newsletter-text {
+  color: var(--isabelline) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Section headings and product set text */
+.section-heading {
+  color: var(--space-cadet);
+}
+
+[data-theme='dark'] .section-heading {
+  color: var(--isabelline);
+}
+
+.product-set-text {
+  color: var(--space-cadet) !important;
+}
+
+[data-theme='dark'] .product-set-text {
+  color: var(--isabelline) !important;
+}
+
+/* Override any light colored text in light theme */
+[data-theme='light'] .text-gold-lightest,
+[data-theme='light'] .text-gold-light,
+[data-theme='light'] .text-gold-medium {
+  color: var(--space-cadet) !important;
+}
+
+[data-theme='light'] .text-navy-lightest,
+[data-theme='light'] .text-navy-light {
+  color: var(--space-cadet) !important;
+}
+
+/* Enhanced product card separation */
+.product-card-enhanced {
+  background-color: #ffffff;
+  border: 1px solid rgba(34, 34, 59, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.product-card-enhanced:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  border-color: var(--ultra-violet);
+}
+
+[data-theme='dark'] .product-card-enhanced {
+  background-color: var(--ultra-violet);
+  border-color: var(--rose-quartz);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .product-card-enhanced:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  border-color: var(--pale-dogwood);
+}
+
+/* Star ratings enhancement */
+.star-rating-light {
+  color: var(--ultra-violet);
+}
+
+[data-theme='dark'] .star-rating-light {
+  color: var(--pale-dogwood);
+}
+
+.star-rating-active {
+  color: #fbbf24; /* Golden yellow for active stars */
 }
 
 /* Custom earth-tone hover effects - updated for new palette */

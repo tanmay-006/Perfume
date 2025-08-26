@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import SignInModal from '../auth/SignInModal';
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { useCart } from '@/contexts/CartContext';
@@ -20,6 +21,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
   const [userEmail, setUserEmail] = useState('');
   const [showSignInModal, setShowSignInModal] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const { getTotalItems } = useCart();
   const { wishlistCount } = useWishlist();
@@ -63,7 +65,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
                     height={50}
                     className="object-contain"
                   />
-                  <h1 className="nav-logo text-xl lg:text-2xl font-bold tracking-tight">
+                  <h1 className="nav-logo text-xl font-bold lg:text-2xl tracking-tight" style={{color: 'var(--isabelline) !important'}}>
                     MF Fragrance
                   </h1>
                 </div>
@@ -72,16 +74,52 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
 
             {/* Main Navigation - Desktop */}
             <nav className="hidden lg:flex space-x-4">
-              <Link href="/" className="nav-link font-medium hover:text-gold-medium transition-colors">
+              <Link 
+                href="/" 
+                className={`nav-link text-lg transition-all duration-300 hover:opacity-80 ${
+                  pathname === '/' ? 'border-b-2' : ''
+                }`} 
+                style={{
+                  color: 'var(--isabelline) !important',
+                  borderColor: pathname === '/' ? 'var(--isabelline)' : 'transparent'
+                }}
+              >
                 Home
               </Link>
-              <Link href="/products" className="nav-link font-medium hover:text-gold-medium transition-colors">
+              <Link 
+                href="/products" 
+                className={`nav-link text-lg transition-all duration-300 hover:opacity-80 ${
+                  pathname === '/products' ? 'border-b-2' : ''
+                }`} 
+                style={{
+                  color: 'var(--isabelline) !important',
+                  borderColor: pathname === '/products' ? 'var(--isabelline)' : 'transparent'
+                }}
+              >
                 Shop
               </Link>
-              <Link href="/about" className="nav-link font-medium hover:text-gold-medium transition-colors">
+              <Link 
+                href="/about" 
+                className={`nav-link text-lg transition-all duration-300 hover:opacity-80 ${
+                  pathname === '/about' ? 'border-b-2' : ''
+                }`} 
+                style={{
+                  color: 'var(--isabelline) !important',
+                  borderColor: pathname === '/about' ? 'var(--isabelline)' : 'transparent'
+                }}
+              >
                 About
               </Link>
-              <Link href="/contact" className="nav-link font-medium hover:text-gold-medium transition-colors">
+              <Link 
+                href="/contact" 
+                className={`nav-link text-lg transition-all duration-300 hover:opacity-80 ${
+                  pathname === '/contact' ? 'border-b-2' : ''
+                }`} 
+                style={{
+                  color: 'var(--isabelline) !important',
+                  borderColor: pathname === '/contact' ? 'var(--isabelline)' : 'transparent'
+                }}
+              >
                 Contact
               </Link>
             </nav>
@@ -95,11 +133,11 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? (
-                  <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{color: 'var(--isabelline) !important'}}>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 ) : (
-                  <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{color: 'var(--isabelline) !important'}}>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                   </svg>
                 )}
@@ -107,7 +145,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
 
               {/* Search */}
               <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors" aria-label="Search">
-                <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{color: 'var(--isabelline) !important'}}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </button>
@@ -118,7 +156,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
                 className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors" 
                 aria-label="Account"
               >
-                <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{color: 'var(--isabelline) !important'}}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </button>
@@ -126,7 +164,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
               {/* Wishlist */}
               <Link href="/wishlist">
                 <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors relative" aria-label="Wishlist">
-                  <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{color: 'var(--isabelline) !important'}}>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                   {wishlistCount > 0 && (
@@ -140,7 +178,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
               {/* Shopping Cart */}
               <Link href="/cart">
                 <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors relative" aria-label="Shopping cart">
-                  <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{color: 'var(--isabelline) !important'}}>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 2.5M7 13l2.5 2.5m6-7h.01M19 11h.01" />
                   </svg>
                   {getTotalItems() > 0 && (
@@ -157,7 +195,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle mobile menu"
               >
-                <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{color: 'var(--isabelline) !important'}}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
@@ -170,43 +208,61 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
               <div className="flex flex-col space-y-2">
                 <Link 
                   href="/" 
-                  className="nav-link font-medium py-2 px-4 rounded hover:bg-white hover:bg-opacity-10 transition-colors"
+                  className={`nav-link text-lg py-2 px-4 rounded transition-all duration-300 hover:bg-white hover:bg-opacity-10 ${
+                    pathname === '/' ? 'bg-white bg-opacity-10' : ''
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
+                  style={{color: 'var(--isabelline) !important'}}
                 >
                   Home  
                 </Link>
                 <Link 
                   href="/products" 
-                  className="nav-link font-medium py-2 px-4 rounded hover:bg-white hover:bg-opacity-10 transition-colors"
+                  className={`nav-link text-lg py-2 px-4 rounded transition-all duration-300 hover:bg-white hover:bg-opacity-10 ${
+                    pathname === '/products' ? 'bg-white bg-opacity-10' : ''
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
+                  style={{color: 'var(--isabelline) !important'}}
                 >
                   Shop
                 </Link>
                 <Link 
                   href="/about" 
-                  className="nav-link font-medium py-2 px-4 rounded hover:bg-white hover:bg-opacity-10 transition-colors"
+                  className={`nav-link text-lg py-2 px-4 rounded transition-all duration-300 hover:bg-white hover:bg-opacity-10 ${
+                    pathname === '/about' ? 'bg-white bg-opacity-10' : ''
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
+                  style={{color: 'var(--isabelline) !important'}}
                 >
                   About
                 </Link>
                 <Link 
                   href="/contact" 
-                  className="nav-link font-medium py-2 px-4 rounded hover:bg-white hover:bg-opacity-10 transition-colors"
+                  className={`nav-link text-lg py-2 px-4 rounded transition-all duration-300 hover:bg-white hover:bg-opacity-10 ${
+                    pathname === '/contact' ? 'bg-white bg-opacity-10' : ''
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
+                  style={{color: 'var(--isabelline) !important'}}
                 >
                   Contact
                 </Link>
                 <Link 
                   href="/wishlist" 
-                  className="nav-link font-medium py-2 px-4 rounded hover:bg-white hover:bg-opacity-10 transition-colors"
+                  className={`nav-link text-lg py-2 px-4 rounded transition-all duration-300 hover:bg-white hover:bg-opacity-10 ${
+                    pathname === '/wishlist' ? 'bg-white bg-opacity-10' : ''
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
+                  style={{color: 'var(--isabelline) !important'}}
                 >
                   Wishlist
                 </Link>
                 <Link 
                   href="/faq" 
-                  className="nav-link font-medium py-2 px-4 rounded hover:bg-white hover:bg-opacity-10 transition-colors"
+                  className={`nav-link text-lg py-2 px-4 rounded transition-all duration-300 hover:bg-white hover:bg-opacity-10 ${
+                    pathname === '/faq' ? 'bg-white bg-opacity-10' : ''
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
+                  style={{color: 'var(--isabelline) !important'}}
                 >
                   FAQ
                 </Link>

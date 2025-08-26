@@ -47,18 +47,26 @@ function CartPageContent() {
     return (
       <div className="min-h-screen bg-[var(--background)]">
         <Header />
-      <main className="max-w-7xl mx-auto px-4 py-16 pt-24">
+        
+        {/* Hero Section */}
+        <section className="pt-20 pb-16 px-4 bg-gradient-to-r from-[var(--navy-darkest)] to-[var(--navy-dark)]">
+          <div className="max-w-4xl mx-auto text-center pt-8">
+            <h1 className="text-4xl md:text-5xl font-bold text-white/90 mb-4">Your Cart is Empty</h1>
+            <p className="text-xl text-white/70">Discover our luxury fragrances and add them to your cart.</p>
+          </div>
+        </section>
+        
+      <main className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center">
             <div className="mb-8">
               <svg className="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 7a2 2 0 01-2 2H8a2 2 0 01-2-2L5 9z" />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-[var(--foreground)] mb-4">Your Cart is Empty</h1>
-            <p className="text-[var(--navy-medium)] mb-8">Discover our luxury fragrances and add them to your cart.</p>
+            <p className="text-ultra-violet dark:text-pale-dogwood mb-8">Discover our luxury fragrances and add them to your cart.</p>
             <Link 
               href="/products"
-              className="inline-block bg-[var(--navy-dark)] text-[var(--gold-light)] px-8 py-3 rounded-lg font-semibold hover:bg-[var(--navy-darkest)] transition-colors"
+              className="inline-block bg-ultra-violet dark:bg-navy-dark text-isabelline dark:text-gold-light px-8 py-3 rounded-lg font-semibold hover:bg-space-cadet dark:hover:bg-navy-darkest transition-colors"
             >
               Continue Shopping
             </Link>
@@ -73,10 +81,17 @@ function CartPageContent() {
     <div className="min-h-screen bg-[var(--background)]">
       <Header />
       
-      <main className="max-w-7xl mx-auto px-4 py-8 pt-24">
+      {/* Hero Section */}
+      <section className="pt-20 pb-16 px-4 bg-gradient-to-r from-[var(--navy-darkest)] to-[var(--navy-dark)]">
+        <div className="max-w-4xl mx-auto text-center pt-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-white/90 mb-4">Shopping Cart</h1>
+          <p className="text-xl text-white/70">Review your items and proceed to checkout.</p>
+        </div>
+      </section>
+      
+      <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[var(--foreground)] mb-2">Shopping Cart</h1>
-          <p className="text-[var(--navy-medium)]">{cartItems.length} item{cartItems.length !== 1 ? 's' : ''} in your cart</p>
+          <p className="text-ultra-violet dark:text-pale-dogwood">{cartItems.length} item{cartItems.length !== 1 ? 's' : ''} in your cart</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -100,13 +115,13 @@ function CartPageContent() {
                   <div className="flex-1">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <h3 className="font-semibold text-[var(--foreground)]">
-                          <Link href={`/products/${item.product.id}`} className="hover:text-[var(--navy-medium)] transition-colors">
+                        <h3 className="font-semibold text-space-cadet dark:text-isabelline">
+                          <Link href={`/products/${item.product.id}`} className="hover:text-ultra-violet dark:hover:text-pale-dogwood transition-colors">
                             {item.product.name}
                           </Link>
                         </h3>
-                        <p className="text-sm text-[var(--navy-medium)]">{item.product.subtitle}</p>
-                        <p className="text-sm text-[var(--navy-light)]">Size: {item.size}</p>
+                        <p className="text-sm text-ultra-violet dark:text-pale-dogwood">{item.product.subtitle}</p>
+                        <p className="text-sm text-rose-quartz dark:text-navy-light">Size: {item.size}</p>
                       </div>
                       <button
                         onClick={() => removeItem(item.id)}
@@ -131,7 +146,7 @@ function CartPageContent() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                           </svg>
                         </button>
-                        <span className="w-8 text-center font-medium text-[var(--foreground)]">{item.quantity}</span>
+                        <span className="w-8 text-center font-medium text-space-cadet dark:text-isabelline">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
                           className="w-8 h-8 rounded-full border border-gray-300 dark:border-[var(--navy-medium)] flex items-center justify-center hover:bg-gray-100 dark:hover:bg-[var(--navy-medium)] transition-colors"
@@ -142,11 +157,11 @@ function CartPageContent() {
                         </button>
                       </div>
                       <div className="text-right">
-                        <div className="font-bold text-lg text-[var(--foreground)]">
+                        <div className="font-bold text-lg text-space-cadet dark:text-isabelline">
                           ₹{(item.price * item.quantity).toLocaleString()}
                         </div>
                         {item.quantity > 1 && (
-                          <div className="text-sm text-[var(--navy-medium)]">
+                          <div className="text-sm text-ultra-violet dark:text-pale-dogwood">
                             ₹{item.price.toLocaleString()} each
                           </div>
                         )}
@@ -161,11 +176,11 @@ function CartPageContent() {
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-white dark:bg-[var(--navy-dark)] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[var(--navy-medium)] sticky top-24">
-              <h2 className="text-xl font-bold text-[var(--foreground)] mb-6">Order Summary</h2>
+              <h2 className="text-xl font-bold text-space-cadet dark:text-isabelline mb-6">Order Summary</h2>
 
               {/* Promo Code */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                <label className="block text-sm font-medium text-space-cadet dark:text-isabelline mb-2">
                   Promo Code
                 </label>
                 {appliedPromo ? (
@@ -190,7 +205,7 @@ function CartPageContent() {
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
                       placeholder="Enter promo code"
-                      className="flex-1 px-3 py-2 border border-gray-300 dark:border-[var(--navy-medium)] rounded-lg bg-white dark:bg-[var(--navy-darkest)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--gold-medium)]"
+                      className="flex-1 px-3 py-2 border border-gray-300 dark:border-[var(--navy-medium)] rounded-lg bg-white dark:bg-[var(--navy-darkest)] text-space-cadet dark:text-isabelline focus:outline-none focus:ring-2 focus:ring-[var(--gold-medium)]"
                     />
                     <button
                       onClick={applyPromoCode}
@@ -204,7 +219,7 @@ function CartPageContent() {
 
               {/* Price Breakdown */}
               <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-[var(--foreground)]">
+                <div className="flex justify-between text-space-cadet dark:text-isabelline">
                   <span>Subtotal</span>
                   <span>₹{subtotal.toLocaleString()}</span>
                 </div>
@@ -216,19 +231,19 @@ function CartPageContent() {
                   </div>
                 )}
                 
-                <div className="flex justify-between text-[var(--foreground)]">
+                <div className="flex justify-between text-space-cadet dark:text-isabelline">
                   <span>Shipping</span>
                   <span>{shipping === 0 ? 'Free' : `₹${shipping.toLocaleString()}`}</span>
                 </div>
                 
-                <div className="flex justify-between text-[var(--foreground)]">
+                <div className="flex justify-between text-space-cadet dark:text-isabelline">
                   <span>Tax (GST 18%)</span>
                   <span>₹{tax.toLocaleString()}</span>
                 </div>
                 
                 <hr className="border-gray-200 dark:border-[var(--navy-medium)]" />
                 
-                <div className="flex justify-between text-lg font-bold text-[var(--foreground)]">
+                <div className="flex justify-between text-lg font-bold text-space-cadet dark:text-isabelline">
                   <span>Total</span>
                   <span>₹{total.toLocaleString()}</span>
                 </div>
@@ -245,7 +260,7 @@ function CartPageContent() {
 
               {/* Checkout Button */}
               <Link href="/checkout">
-                <button className="w-full bg-[var(--navy-dark)] text-[var(--gold-light)] py-4 rounded-xl font-semibold text-lg hover:bg-[var(--navy-darkest)] transition-colors mb-4">
+                <button className="w-full bg-ultra-violet dark:bg-navy-dark text-isabelline dark:text-gold-light py-4 rounded-xl font-semibold text-lg hover:bg-space-cadet dark:hover:bg-navy-darkest transition-colors mb-4">
                   Proceed to Checkout
                 </button>
               </Link>
@@ -253,13 +268,13 @@ function CartPageContent() {
               {/* Continue Shopping */}
               <Link 
                 href="/products"
-                className="block w-full text-center border border-[var(--navy-dark)] text-[var(--navy-dark)] py-3 rounded-xl font-semibold hover:bg-[var(--navy-dark)] hover:text-[var(--gold-light)] transition-colors"
+                className="block w-full text-center border border-ultra-violet dark:border-navy-dark text-ultra-violet dark:text-navy-dark py-3 rounded-xl font-semibold hover:bg-ultra-violet dark:hover:bg-navy-dark hover:text-isabelline dark:hover:text-gold-light transition-colors"
               >
                 Continue Shopping
               </Link>
 
               {/* Security Notice */}
-              <div className="mt-6 flex items-center gap-2 text-sm text-[var(--navy-medium)]">
+              <div className="mt-6 flex items-center gap-2 text-sm text-ultra-violet dark:text-pale-dogwood">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -271,7 +286,7 @@ function CartPageContent() {
 
         {/* Recommended Products */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-8">You might also like</h2>
+          <h2 className="text-2xl font-bold text-space-cadet dark:text-isabelline mb-8">You might also like</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.slice(4, 8).map((product) => (
               <Link key={product.id} href={`/products/${product.id}`}>
@@ -285,10 +300,10 @@ function CartPageContent() {
                     />
                   </div>
                   <div className="p-4">
-                    <h3 className="font-semibold text-[var(--foreground)] mb-1">{product.name}</h3>
-                    <p className="text-sm text-[var(--navy-medium)] mb-2">{product.subtitle}</p>
+                    <h3 className="font-semibold text-space-cadet dark:text-isabelline mb-1">{product.name}</h3>
+                    <p className="text-sm text-ultra-violet dark:text-pale-dogwood mb-2">{product.subtitle}</p>
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-[var(--foreground)]">₹{product.price.toLocaleString()}</span>
+                      <span className="font-bold text-space-cadet dark:text-isabelline">₹{product.price.toLocaleString()}</span>
                       {product.originalPrice && (
                         <span className="text-sm text-gray-500 line-through">₹{product.originalPrice.toLocaleString()}</span>
                       )}

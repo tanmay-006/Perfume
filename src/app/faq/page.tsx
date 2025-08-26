@@ -200,11 +200,11 @@ function FAQContent() {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4 bg-gradient-to-r from-[var(--navy-darkest)] to-[var(--navy-dark)]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Frequently Asked Questions</h1>
-          <p className="text-xl text-[var(--gold-light)]">Find answers to common questions</p>
-          <p className="text-[var(--gold-lightest)] mt-2">Need more help? Contact our support team</p>
+      <section className="pt-20 pb-16 px-4 bg-gradient-to-r from-[var(--navy-darkest)] to-[var(--navy-dark)]">
+        <div className="max-w-4xl mx-auto text-center pt-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-white/90 mb-4">Frequently Asked Questions</h1>
+          <p className="text-xl text-white/70">Find answers to common questions</p>
+          <p className="text-white/60 mt-2">Need more help? Contact our support team</p>
         </div>
       </section>
 

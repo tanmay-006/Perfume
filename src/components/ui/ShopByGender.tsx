@@ -43,7 +43,7 @@ export default function ShopByGender({
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gold-lightest mb-4">
+          <h2 className="shop-by-gender-title text-3xl md:text-4xl font-bold mb-4" style={{color: 'var(--isabelline) !important'}}>
             {title}
           </h2>
         </div>
@@ -71,7 +71,7 @@ export default function ShopByGender({
                 {/* Category Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-4 md:p-6 lg:p-8">
                   <div className="text-center">
-                    <h3 className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold text-white mb-2 sm:mb-3 md:mb-4 transform transition-transform duration-300 group-hover:translate-y-[-8px]">
+                    <h3 className="shop-by-gender-category text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3 md:mb-4 transform transition-transform duration-300 group-hover:translate-y-[-8px]" style={{color: 'var(--isabelline) !important'}}>
                       {category.title}
                     </h3>
                     

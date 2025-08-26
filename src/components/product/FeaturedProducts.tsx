@@ -31,9 +31,9 @@ export default function FeaturedProducts({
     <section className="px-4 py-16">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gold-lightest mb-4">{title}</h2>
+          <h2 className="section-title text-3xl lg:text-4xl font-bold mb-4">{title}</h2>
           {description && (
-            <p className="text-gold-light max-w-2xl mx-auto">
+            <p className="section-description max-w-2xl mx-auto">
               {description}
             </p>
           )}
@@ -63,11 +63,11 @@ export default function FeaturedProducts({
               </Link>
               
               <div className="space-y-2">
-                <h3 className="product-name font-semibold text-sm text-foreground">{product.name}</h3>
+                <h3 className="product-name font-semibold text-sm">{product.name}</h3>
                 <div className="flex items-center space-x-2">
-                  <span className="product-price font-bold text-gold-dark">${product.price.toFixed(2)}</span>
+                  <span className="product-price font-bold">${product.price.toFixed(2)}</span>
                   {product.originalPrice && (
-                    <span className="product-original-price text-sm line-through text-gold-light">
+                    <span className="product-original-price text-sm line-through">
                       ${product.originalPrice.toFixed(2)}
                     </span>
                   )}
@@ -82,9 +82,9 @@ export default function FeaturedProducts({
                         </svg>
                       ))}
                     </div>
-                    <span className="product-rating-text text-xs text-gold-light">({product.rating})</span>
+                    <span className="product-rating-text text-xs">({product.rating})</span>
                   </div>
-                  <span className="product-rating-text text-xs text-gold-light">{product.reviews} reviews</span>
+                  <span className="product-rating-text text-xs">{product.reviews} reviews</span>
                 </div>
                 <button className="add-to-cart-button w-full py-2 rounded-lg font-semibold text-sm">
                   Add to Cart
