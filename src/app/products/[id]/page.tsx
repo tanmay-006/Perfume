@@ -119,12 +119,12 @@ function ProductDetailPageContent() {
                 <section className="pt-20 pb-16 px-4 bg-gradient-to-r from-[var(--navy-darkest)] to-[var(--navy-dark)]">
                     <div className="max-w-4xl mx-auto text-center pt-8">
                         <h1 className="text-4xl md:text-5xl font-bold text-white/90 mb-4">Product Not Found</h1>
-                        <p className="text-xl text-white/70">The product you're looking for doesn't exist</p>
+                        <p className="text-xl text-white/70">The product you&apos;re looking for doesn&apos;t exist</p>
                     </div>
                 </section>
                 
                 <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-                    <p className="text-ultra-violet dark:text-pale-dogwood mb-8">We couldn't find the product you're looking for.</p>
+                    <p className="text-ultra-violet dark:text-pale-dogwood mb-8">We couldn&apos;t find the product you&apos;re looking for.</p>
                     <Link 
                         href="/products" 
                         className="bg-ultra-violet dark:bg-navy-dark text-isabelline dark:text-gold-light px-6 py-3 rounded-lg font-semibold hover:bg-space-cadet dark:hover:bg-navy-medium transition-colors"

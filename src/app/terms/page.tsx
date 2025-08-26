@@ -42,7 +42,7 @@ export default function TermsConditionsPage() {
               Use License
             </h2>
             <div className="text-ultra-violet dark:text-pale-dogwood space-y-3">
-              <p>Permission is granted to temporarily download one copy of the materials on MF Fragrance's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+              <p>Permission is granted to temporarily download one copy of the materials on MF Fragrance&apos;s website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>modify or copy the materials</li>
                 <li>use the materials for any commercial purpose or for any public display</li>
@@ -179,7 +179,7 @@ export default function TermsConditionsPage() {
                 <li>Violating any applicable laws or regulations</li>
                 <li>Transmitting harmful, offensive, or inappropriate content</li>
                 <li>Attempting to gain unauthorized access to our systems</li>
-                <li>Interfering with the website's operation or security</li>
+                <li>Interfering with the website&apos;s operation or security</li>
                 <li>Impersonating others or providing false information</li>
                 <li>Using automated systems to access our website</li>
                 <li>Collecting user information without permission</li>
