@@ -63,11 +63,15 @@ function ToastItem({ toast, onRemove }: ToastItemProps) {
 
   const getBgColor = () => {
     switch (toast.type) {
-      case 'success': return 'bg-gradient-to-r from-white to-green-50 dark:from-gray-800 dark:to-green-900/20 border-l-4 border-l-green-500 shadow-2xl ring-1 ring-black/5';
-      case 'error': return 'bg-gradient-to-r from-white to-red-50 dark:from-gray-800 dark:to-red-900/20 border-l-4 border-l-red-500 shadow-2xl ring-1 ring-black/5';
-      case 'warning': return 'bg-gradient-to-r from-white to-yellow-50 dark:from-gray-800 dark:to-yellow-900/20 border-l-4 border-l-yellow-500 shadow-2xl ring-1 ring-black/5';
+      case 'success': 
+        return 'bg-gradient-to-r from-white to-green-50 dark:from-ultra-violet dark:to-green-900/20 border-l-4 border-l-green-500 shadow-2xl ring-1 ring-rose-quartz/20';
+      case 'error': 
+        return 'bg-gradient-to-r from-white to-red-50 dark:from-ultra-violet dark:to-red-900/20 border-l-4 border-l-red-500 shadow-2xl ring-1 ring-rose-quartz/20';
+      case 'warning': 
+        return 'bg-gradient-to-r from-white to-yellow-50 dark:from-ultra-violet dark:to-yellow-900/20 border-l-4 border-l-yellow-500 shadow-2xl ring-1 ring-rose-quartz/20';
       case 'info': 
-      default: return 'bg-gradient-to-r from-white to-blue-50 dark:from-gray-800 dark:to-blue-900/20 border-l-4 border-l-blue-500 shadow-2xl ring-1 ring-black/5';
+      default: 
+        return 'bg-gradient-to-r from-white to-blue-50 dark:from-ultra-violet dark:to-blue-900/20 border-l-4 border-l-blue-500 shadow-2xl ring-1 ring-rose-quartz/20';
     }
   };
 
@@ -76,18 +80,18 @@ function ToastItem({ toast, onRemove }: ToastItemProps) {
       className={`
         transform transition-all duration-500 ease-out
         ${isVisible && !isLeaving ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-full opacity-0 scale-95'}
-        max-w-md w-full ${getBgColor()} backdrop-blur-sm rounded-xl p-4 border border-gray-200 dark:border-gray-700
+        max-w-md w-full ${getBgColor()} backdrop-blur-sm rounded-xl p-4 border border-pale-dogwood dark:border-rose-quartz
       `}
     >
       <div className="flex items-start space-x-3">
         {getIcon()}
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-semibold text-gray-900 dark:text-white">
+            <p className="text-sm font-semibold text-space-cadet dark:text-isabelline">
               {toast.title}
             </p>
             <button
-              className="ml-3 inline-flex text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none transition-colors"
+              className="ml-3 inline-flex text-rose-quartz hover:text-ultra-violet dark:hover:text-pale-dogwood focus:outline-none transition-colors"
               onClick={handleRemove}
             >
               <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
@@ -96,7 +100,7 @@ function ToastItem({ toast, onRemove }: ToastItemProps) {
             </button>
           </div>
           {toast.message && (
-            <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+            <p className="mt-1 text-sm text-ultra-violet dark:text-rose-quartz">
               {toast.message}
             </p>
           )}

@@ -1,76 +1,60 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f2e9e4;
+  --foreground: #22223b;
 }
 
 [data-theme='light'] {
-  --background: #f8f9fa;
-  --foreground: #212529;
+  --background: #f2e9e4; /* isabelline - off-white background */
+  --foreground: #22223b; /* space-cadet - primary text */
 
-  /* Accessible gold palette for light theme */
-  --gold-darkest: #8c6825;
-  /* Contrast: 5.1:1 */
-  --gold-dark: #a67c2e;
-  /* Contrast: 3.5:1 (for large text/UI elements) */
-  --gold-medium: #b38633;
-  /* Contrast: 3.8:1 (for large text/UI elements) */
-  --gold-light: #c89f58;
-  /* Contrast: 3.0:1 (for large text/UI elements) */
-  --gold-lightest: #d1ae77;
-  /* Contrast: 2.5:1 (for UI elements) */
-  --hero-banner: #eee3cf3d;
-  /* Darkest for hero banner text on light backgrounds */
-  /* Contrast: 3.5:1 (for large text/UI elements) */
+  /* New palette for light theme */
+  --space-cadet: #22223b; /* Very dark blue-gray - primary text */
+  --ultra-violet: #4a4e69; /* Dark violet - secondary text, primary buttons */
+  --rose-quartz: #9a8c98; /* Muted mauve/gray - wishlist/icons */
+  --pale-dogwood: #c9ada7; /* Warm pale pink-beige - cards, subtle backgrounds */
+  --isabelline: #f2e9e4; /* Off-white - main background */
 
-  /* Accessible navy palette for light theme */
-  --navy-darkest: #1a2533;
-  /* Contrast: 11.4:1 */
-  --navy-dark: #2c3e50;
-  /* Contrast: 7.8:1 */
-  --navy-medium: #526580;
-  /* Contrast: 4.1:1 (for large text/UI elements) */
-  --navy-light: #6c757d;
-  /* Contrast: 4.5:1 */
-  --navy-lightest: #868e96;
+  /* Legacy mappings for compatibility */
+  --gold-darkest: #22223b;
+  --gold-dark: #4a4e69;
+  --gold-medium: #9a8c98;
+  --gold-light: #c9ada7;
+  --gold-lightest: #f2e9e4;
+  --hero-banner: #c9ada73d;
+
+  --navy-darkest: #22223b;
+  --navy-dark: #4a4e69;
+  --navy-medium: #9a8c98;
+  --navy-light: #c9ada7;
+  --navy-lightest: #f2e9e4;
 }
 
 [data-theme='dark'] {
-  --background: #1a2533;
-  --foreground: #f8f0e3;
+  --background: #22223b; /* space-cadet - dark background */
+  --foreground: #f2e9e4; /* isabelline - primary text on dark */
 
-  /* Gold palette for dark theme - lighter colors for text on dark backgrounds */
-  --gold-lightest: #d1ae77;
-  /* Very light for primary text */
-  --gold-light: #e6d2b5;
-  /* Light for secondary text */
-  --gold-medium: #d4b485;
-  /* Medium for accents */
-  --gold-dark: #c19a54;
-  /* Darker for buttons/highlights */
-  --gold-darkest: #a67c2e;
-  /* Darkest for button text on light backgrounds */
-  --hero-banner: #2e3b4d6a;
-  /* Semi-transparent for hero banner background */
-  /* Navy palette for dark theme - inverted for proper contrast */
-  --navy-lightest: #e6eaef;
-  /* Very light for text on dark backgrounds */
-  --navy-light: #a3b0c2;
-  /* Light for secondary text */
-  --navy-medium: #526580;
-  /* Medium for UI elements */
-  --navy-dark: #2c3e50;
-  /* Dark for secondary backgrounds */
-  --navy-darkest: #1a2533;
-  /* Darkest for main background */
-}
+  /* New palette for dark theme */
+  --space-cadet: #22223b; /* Background */
+  --ultra-violet: #4a4e69; /* Cards */
+  --rose-quartz: #9a8c98; /* Secondary text, accents */
+  --pale-dogwood: #c9ada7; /* Primary buttons, highlights */
+  --isabelline: #f2e9e4; /* Primary text */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Legacy mappings for compatibility */
+  --gold-lightest: #f2e9e4;
+  --gold-light: #c9ada7;
+  --gold-medium: #9a8c98;
+  --gold-dark: #4a4e69;
+  --gold-darkest: #22223b;
+  --hero-banner: #4a4e696a;
+
+  --navy-lightest: #f2e9e4;
+  --navy-light: #c9ada7;
+  --navy-medium: #9a8c98;
+  --navy-dark: #4a4e69;
+  --navy-darkest: #22223b;
 }
 
 body {
@@ -82,107 +66,175 @@ body {
 
 /* Theme-aware text color overrides for proper contrast */
 [data-theme='dark'] .text-gray-900 {
-  color: var(--gold-lightest) !important;
+  color: var(--isabelline) !important;
 }
 
 [data-theme='dark'] .text-gray-800 {
-  color: var(--gold-lightest) !important;
+  color: var(--isabelline) !important;
 }
 
 [data-theme='dark'] .text-gray-700 {
-  color: var(--gold-light) !important;
+  color: var(--pale-dogwood) !important;
 }
 
 [data-theme='dark'] .text-gray-600 {
-  color: var(--gold-light) !important;
+  color: var(--pale-dogwood) !important;
 }
 
 [data-theme='dark'] .text-gray-500 {
-  color: var(--gold-medium) !important;
+  color: var(--rose-quartz) !important;
 }
 
 [data-theme='dark'] .text-gray-400 {
-  color: var(--gold-medium) !important;
+  color: var(--rose-quartz) !important;
 }
 
 /* Light theme overrides for consistency */
 [data-theme='light'] .text-gray-900 {
-  color: var(--navy-darkest) !important;
+  color: var(--space-cadet) !important;
 }
 
 [data-theme='light'] .text-gray-800 {
-  color: var(--navy-dark) !important;
+  color: var(--space-cadet) !important;
 }
 
 [data-theme='light'] .text-gray-700 {
-  color: var(--navy-medium) !important;
+  color: var(--ultra-violet) !important;
 }
 
 [data-theme='light'] .text-gray-600 {
-  color: var(--navy-medium) !important;
+  color: var(--ultra-violet) !important;
 }
 
 [data-theme='light'] .text-gray-500 {
-  color: var(--navy-light) !important;
+  color: var(--rose-quartz) !important;
 }
 
 [data-theme='light'] .text-gray-400 {
-  color: var(--navy-light) !important;
+  color: var(--rose-quartz) !important;
 }
 
 /* Theme-aware background color overrides */
 [data-theme='dark'] .bg-gray-50 {
-  background-color: var(--background) !important;
+  background-color: var(--space-cadet) !important;
 }
 
 [data-theme='dark'] .bg-gray-100 {
-  background-color: var(--navy-dark) !important;
+  background-color: var(--ultra-violet) !important;
 }
 
 [data-theme='dark'] .bg-gray-200 {
-  background-color: var(--navy-medium) !important;
+  background-color: var(--ultra-violet) !important;
 }
 
 [data-theme='dark'] .bg-white {
-  background-color: var(--navy-dark) !important;
+  background-color: var(--ultra-violet) !important;
 }
 
 [data-theme='light'] .bg-gray-50 {
-  background-color: var(--background) !important;
+  background-color: var(--isabelline) !important;
 }
 
 [data-theme='light'] .bg-gray-100 {
-  background-color: #f8f9fa !important;
+  background-color: var(--pale-dogwood) !important;
 }
 
 [data-theme='light'] .bg-gray-200 {
-  background-color: #e9ecef !important;
+  background-color: var(--pale-dogwood) !important;
+}
+
+[data-theme='light'] .bg-white {
+  background-color: #ffffff !important;
 }
 
 /* Theme-aware border color overrides */
 [data-theme='dark'] .border-gray-200 {
-  border-color: var(--navy-medium) !important;
+  border-color: var(--rose-quartz) !important;
 }
 
 [data-theme='dark'] .border-gray-300 {
-  border-color: var(--navy-medium) !important;
+  border-color: var(--rose-quartz) !important;
 }
 
 [data-theme='light'] .border-gray-200 {
-  border-color: var(--navy-lightest) !important;
+  border-color: var(--pale-dogwood) !important;
 }
 
 [data-theme='light'] .border-gray-300 {
-  border-color: var(--navy-light) !important;
+  border-color: var(--rose-quartz) !important;
 }
 
-/* Custom earth-tone hover effects */
+/* Custom theme-specific utilities */
+.text-primary {
+  color: var(--space-cadet);
+}
+
+[data-theme='dark'] .text-primary {
+  color: var(--isabelline);
+}
+
+.text-secondary {
+  color: var(--ultra-violet);
+}
+
+[data-theme='dark'] .text-secondary {
+  color: var(--rose-quartz);
+}
+
+.bg-card {
+  background-color: #ffffff;
+}
+
+[data-theme='dark'] .bg-card {
+  background-color: var(--ultra-violet);
+}
+
+.bg-card-subtle {
+  background-color: var(--pale-dogwood);
+}
+
+[data-theme='dark'] .bg-card-subtle {
+  background-color: var(--ultra-violet);
+}
+
+.btn-primary {
+  background-color: var(--ultra-violet);
+  color: #ffffff;
+}
+
+[data-theme='dark'] .btn-primary {
+  background-color: var(--pale-dogwood);
+  color: var(--space-cadet);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.text-wishlist {
+  color: var(--rose-quartz);
+}
+
+.text-price {
+  color: var(--space-cadet);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .text-price {
+  color: var(--isabelline);
+}
+
+.text-discount {
+  color: #dc3545; /* Red for discounts */
+}
+
+/* Custom earth-tone hover effects - updated for new palette */
 .hover\:text-earth-medium:hover {
-  color: var(--earth-medium);
+  color: var(--rose-quartz);
 }
 
 .hover\:bg-earth-dark:hover {
-  background-color: var(--earth-dark);
+  background-color: var(--ultra-violet);
 }
 
 html.loading body {
@@ -208,9 +260,9 @@ html.loading body::before {
   display: inline-block;
   width: 40px;
   height: 40px;
-  border: 4px solid #f3f3f3;
+  border: 4px solid var(--pale-dogwood);
   border-radius: 50%;
-  border-top: 4px solid var(--navy-dark, #2c3e50);
+  border-top: 4px solid var(--ultra-violet);
   animation: spin 1s linear infinite;
 }
 

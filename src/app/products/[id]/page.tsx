@@ -323,7 +323,11 @@ function ProductDetailPageContent() {
                                     onClick={() => {
                                         if (product) {
                                             const isInWishlist = wishlistItems.some(item => item.id === product.id);
-                                            isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product);
+                                            if (isInWishlist) {
+                                                removeFromWishlist(product.id);
+                                            } else {
+                                                addToWishlist(product);
+                                            }
                                         }
                                     }}
                                     className={`border py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2 ${
