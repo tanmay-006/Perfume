@@ -19,6 +19,7 @@ interface CartContextType {
   clearCart: () => void;
   getTotalItems: () => number;
   getTotalPrice: () => number;
+  showCartToast?: (type: 'add' | 'update', product: Product, size: string) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);

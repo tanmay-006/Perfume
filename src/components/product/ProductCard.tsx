@@ -5,8 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Star, ShoppingCart, Heart } from 'lucide-react';
 import { Product } from '@/types/product';
-import { useCart } from '@/contexts/CartContext';
-import { useWishlist } from '@/contexts/WishlistContext';
+import { useCartWithToast, useWishlistWithToast } from '@/hooks/useToastActions';
 
 interface ProductCardProps {
   product: Product;
@@ -23,8 +22,8 @@ export default function ProductCard({
   onAddToCart,
 }: ProductCardProps) {
   const [isImageLoading, setIsImageLoading] = useState(true);
-  const { addToCart } = useCart();
-  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCartWithToast();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlistWithToast();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();

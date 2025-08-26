@@ -4,6 +4,8 @@ import "./globals.css";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import { CartProvider } from "@/contexts/CartContext";
 import { WishlistProvider } from "@/contexts/WishlistContext";
+import { ToastProvider } from "@/contexts/ToastContext";
+import ToastContainer from "@/components/ui/Toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,11 +51,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <CartProvider>
-            <WishlistProvider>
-              {children}
-            </WishlistProvider>
-          </CartProvider>
+          <ToastProvider>
+            <CartProvider>
+              <WishlistProvider>
+                {children}
+                <ToastContainer />
+              </WishlistProvider>
+            </CartProvider>
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

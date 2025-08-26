@@ -5,8 +5,7 @@ import Link from "next/link";
 import Header from '@/components/layout/Header';
 import ThemeWrapper from '@/components/providers/ThemeWrapper';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import { useCart } from '@/contexts/CartContext';
-import { useWishlist } from '@/contexts/WishlistContext';
+import { useCartWithToast, useWishlistWithToast } from '@/hooks/useToastActions';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import '../../perfume.css';
@@ -15,8 +14,8 @@ import { Product } from '@/types/product';
 
 function ProductDetailPageContent() {
     const params = useParams();
-    const { addToCart } = useCart();
-    const { wishlistItems, addToWishlist, removeFromWishlist } = useWishlist();
+    const { addToCart } = useCartWithToast();
+    const { wishlistItems, addToWishlist, removeFromWishlist } = useWishlistWithToast();
     const [selectedSize, setSelectedSize] = useState('50ml');
     const [quantity, setQuantity] = useState(1);
     const [activeImageIndex, setActiveImageIndex] = useState(0);

@@ -73,6 +73,12 @@ export const products: Product[] = [
     badge: 'Premium',
     isNew: true,
     image: "/images/miska-sage-GnF5Xpu-764-unsplash.jpg",
+    images: [
+      "/images/miska-sage-GnF5Xpu-764-unsplash.jpg",
+      "/images/delfina-iacub-nrkgRRskOBo-unsplash.jpg",
+      "/images/kelvin-lutan-5f4yovjJw4c-unsplash.jpg",
+      "/images/yixian-zhao-q7iZCOXGOWY-unsplash.jpg"
+    ],
     description: "Exotic orchid with hints of vanilla and cedar",
     sizes: [
       { size: '30ml', price: 7425, originalPrice: 8550 },
@@ -99,6 +105,12 @@ export const products: Product[] = [
     badge: 'Popular',
     isNew: false,
     image: "/images/delfina-iacub-nrkgRRskOBo-unsplash.jpg",
+    images: [
+      "/images/delfina-iacub-nrkgRRskOBo-unsplash.jpg",
+      "/images/william-bout-TY4QMCrS6P4-unsplash.jpg",
+      "/images/jeroen-van-roij-sLQt9PjsCcs-unsplash.jpg",
+      "/images/trung-nhan-tran-BfSTSfEVWfA-unsplash.jpg"
+    ],
     description: "Warm amber with spicy undertones",
     sizes: [
       { size: '30ml', price: 6075, originalPrice: 6975 },
@@ -125,6 +137,12 @@ export const products: Product[] = [
     badge: 'Exclusive',
     isNew: false,
     image: "/images/charlesdeluvio-3IMl0kCxpHQ-unsplash.jpg",
+    images: [
+      "/images/charlesdeluvio-3IMl0kCxpHQ-unsplash.jpg",
+      "/images/ulysse-pointcheval--j6LLsAehUo-unsplash.jpg",
+      "/images/birgith-roosipuu-nka_sIQpKEU-unsplash.jpg",
+      "/images/karly-jones-4i9ef6xU738-unsplash.jpg"
+    ],
     description: "Bold and masculine with woody base notes",
     sizes: [
       { size: '30ml', price: 6975, originalPrice: 8100 },
@@ -150,7 +168,13 @@ export const products: Product[] = [
     category: 'unisex',
     badge: 'Fresh',
     isNew: true,
-    image: "/images/william-bout-TY4QMCrS6P4-unsplash.jpg",
+    image: "/images/kelvin-lutan-5f4yovjJw4c-unsplash.jpg",
+    images: [
+      "/images/kelvin-lutan-5f4yovjJw4c-unsplash.jpg",
+      "/images/laura-chouette-4sKdeIMiFEI-unsplash.jpg",
+      "/images/miska-sage-GnF5Xpu-764-unsplash.jpg",
+      "/images/yixian-zhao-q7iZCOXGOWY-unsplash.jpg"
+    ],
     description: "Refreshing marine scent with citrus top notes",
     sizes: [
       { size: '30ml', price: 5175, originalPrice: 6075 },
