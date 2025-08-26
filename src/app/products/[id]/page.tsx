@@ -112,14 +112,22 @@ function ProductDetailPageContent() {
     // Show not found if product doesn't exist
     if (!product) {
         return (
-            <div className="min-h-screen bg-background">
+            <div className="min-h-screen bg-isabelline dark:bg-navy-darkest">
                 <Header />
+                
+                {/* Hero Banner */}
+                <section className="pt-20 pb-16 px-4 bg-gradient-to-r from-[var(--navy-darkest)] to-[var(--navy-dark)]">
+                    <div className="max-w-4xl mx-auto text-center pt-8">
+                        <h1 className="text-4xl md:text-5xl font-bold text-white/90 mb-4">Product Not Found</h1>
+                        <p className="text-xl text-white/70">The product you're looking for doesn't exist</p>
+                    </div>
+                </section>
+                
                 <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-4">Product Not Found</h1>
-                    <p className="text-gray-600 mb-8">The product you&apos;re looking for doesn&apos;t exist.</p>
+                    <p className="text-ultra-violet dark:text-pale-dogwood mb-8">We couldn't find the product you're looking for.</p>
                     <Link 
                         href="/products" 
-                        className="bg-navy-dark text-gold-light px-6 py-3 rounded-lg font-semibold hover:bg-navy-medium transition-colors"
+                        className="bg-ultra-violet dark:bg-navy-dark text-isabelline dark:text-gold-light px-6 py-3 rounded-lg font-semibold hover:bg-space-cadet dark:hover:bg-navy-medium transition-colors"
                     >
                         Back to Products
                     </Link>
@@ -129,20 +137,16 @@ function ProductDetailPageContent() {
     }
 
     return (
-        <div className="min-h-screen bg-background pt-20">
-            {/* Breadcrumb */}
-            {/*       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <nav className="flex items-center space-x-2 text-sm">
-            <Link href="/" className="text-gray-500 hover:text-gray-700">Home</Link>
-            <span className="text-gray-400">/</span>
-            <Link href="/products" className="text-gray-500 hover:text-gray-700">Products</Link>
-            <span className="text-gray-400">/</span>
-            <span className="text-gray-900 font-medium">{product.name}</span>
-          </nav>
-        </div>
-      </div> */}
+        <div className="min-h-screen bg-isabelline dark:bg-navy-darkest">
             <Header />
+            
+            {/* Hero Banner */}
+            <section className="pt-20 pb-16 px-4 bg-gradient-to-r from-[var(--navy-darkest)] to-[var(--navy-dark)]">
+                <div className="max-w-4xl mx-auto text-center pt-8">
+                    <h1 className="text-4xl md:text-5xl font-bold text-white/90 mb-4">{product.name}</h1>
+                    <p className="text-xl text-white/70">Discover the essence of luxury fragrance</p>
+                </div>
+            </section>
 
             <div className="max-w-7xl mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
