@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 import ThemeWrapper from '@/components/providers/ThemeWrapper';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { useCartWithToast, useWishlistWithToast } from '@/hooks/useToastActions';
@@ -567,6 +568,7 @@ function ProductDetailPageContent() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }
