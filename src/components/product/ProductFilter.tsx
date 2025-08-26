@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Category, FilterState } from '@/types/product';
 
 interface ProductFilterProps {

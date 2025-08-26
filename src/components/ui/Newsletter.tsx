@@ -44,7 +44,7 @@ export default function Newsletter({
       }
       setIsSubmitted(true);
       setEmail('');
-    } catch (err) {
+    } catch {
       setError('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -73,7 +73,7 @@ export default function Newsletter({
               Thank you for subscribing!
             </h3>
             <p className="text-lg text-gold-lightest">
-              You'll be the first to know about our new arrivals and exclusive offers.
+              You&apos;ll be the first to know about our new arrivals and exclusive offers.
             </p>
           </div>
         </div>

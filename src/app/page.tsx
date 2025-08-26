@@ -14,7 +14,6 @@ import BestSellers from '@/components/product/BestSellers';
 import Newsletter from '@/components/ui/Newsletter';
 import Footer from '@/components/layout/Footer';
 import { products } from '@/data/products';
-import { useTheme } from '@/components/providers/ThemeProvider';
 
 const MFFragranceLoader = () => {
   const brandLetters = ['M', 'F', ' ', 'F', 'R', 'A', 'G', 'R', 'A', 'N', 'C', 'E'];
@@ -211,7 +210,6 @@ const MFFragranceLoader = () => {
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const { theme } = useTheme();
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
 
   useEffect(() => {

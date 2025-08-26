@@ -71,7 +71,7 @@ export default function SignInModal({ onClose, onSignIn }: SignInModalProps) {
           </form>
           <div className="text-center text-sm text-gold-light/60">
             <p>
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <button className="font-semibold text-gold-light/80 hover:text-gold-light transition-colors">
                 Register
               </button>

@@ -31,18 +31,18 @@ const defaultSections: FooterSection[] = [
     title: "Support",
     links: [
       { href: "/contact", label: "Contact Us" },
-      { href: "/shipping", label: "Shipping Info" },
-      { href: "/returns", label: "Returns & Exchanges" },
-      { href: "/size-guide", label: "Size Guide" }
+      { href: "/shipping", label: "Shipping & Returns" },
+      { href: "/faq", label: "FAQ" },
+      { href: "/about", label: "About Us" }
     ]
   },
   {
-    title: "Company",
+    title: "Legal",
     links: [
-      { href: "/about", label: "About Us" },
-      { href: "/story", label: "Our Story" },
-      { href: "/careers", label: "Careers" },
-      { href: "/press", label: "Press" }
+      { href: "/privacy", label: "Privacy Policy" },
+      { href: "/terms", label: "Terms & Conditions" },
+      { href: "/shipping", label: "Shipping Policy" },
+      { href: "/wishlist", label: "My Wishlist" }
     ]
   }
 ];

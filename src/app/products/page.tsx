@@ -9,7 +9,7 @@ import ProductGrid from '@/components/product/ProductGrid';
 import Newsletter from '@/components/ui/Newsletter';
 import Footer from '@/components/layout/Footer';
 import ThemeWrapper from '@/components/providers/ThemeWrapper';
-import { Product, FilterState } from '@/types/product';
+import { FilterState } from '@/types/product';
 import { products, categories, sortOptions } from '@/data/products';
 import '../perfume.css';
 

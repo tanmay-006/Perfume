@@ -50,7 +50,7 @@ export default function ShopByGender({
 
         {/* Gender Categories Grid */}
         <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-8">
-          {categories.map((category, index) => (
+          {categories.map((category) => (
             <Link
               key={category.id}
               href={category.link}

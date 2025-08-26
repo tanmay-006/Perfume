@@ -87,7 +87,7 @@ function AboutPageContent() {
                 Our Mission
               </h2>
               <p className="text-lg text-[var(--navy-medium)] leading-relaxed mb-6">
-                At MF Fragrance, we're a passionate startup dedicated to revolutionizing the fragrance industry. We believe that luxury should be accessible, and that every individual deserves to express their unique personality through exceptional scents.
+                At MF Fragrance, we&apos;re a passionate startup dedicated to revolutionizing the fragrance industry. We believe that luxury should be accessible, and that every individual deserves to express their unique personality through exceptional scents.
               </p>
               <p className="text-lg text-[var(--navy-medium)] leading-relaxed mb-8">
                 Our mission is to create extraordinary fragrances using premium ingredients and innovative techniques, while building genuine relationships with our customers and making luxury accessible to everyone.
@@ -181,7 +181,7 @@ function AboutPageContent() {
                   Competitive Pricing
                 </h3>
                 <p className="text-[var(--navy-medium)] leading-relaxed">
-                  Premium quality doesn't have to mean premium prices. We offer luxury fragrances at accessible prices without compromising on quality.
+                  Premium quality doesn&apos;t have to mean premium prices. We offer luxury fragrances at accessible prices without compromising on quality.
                 </p>
               </div>
 
@@ -195,7 +195,7 @@ function AboutPageContent() {
                   Modern Approach
                 </h3>
                 <p className="text-[var(--navy-medium)] leading-relaxed">
-                  We leverage the latest technology and contemporary design philosophies to create fragrances that resonate with today's discerning customers.
+                  We leverage the latest technology and contemporary design philosophies to create fragrances that resonate with today&apos;s discerning customers.
                 </p>
               </div>
             </div>
@@ -236,7 +236,7 @@ function AboutPageContent() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
+            {values.map((value) => (
               <div key={value.title} className="text-center group">
                 <div className="w-20 h-20 bg-[var(--gold-light)] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-4xl">{value.icon}</span>
@@ -266,7 +266,7 @@ function AboutPageContent() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
+            {teamMembers.map((member) => (
               <div key={member.name} className="text-center group">
                 <div className="relative w-48 h-48 mx-auto mb-6 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                   <Image

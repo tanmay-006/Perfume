@@ -111,7 +111,7 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
                 <Header />
                 <div className="max-w-7xl mx-auto px-4 py-16 text-center">
                     <h1 className="text-4xl font-bold text-gray-900 mb-4">Product Not Found</h1>
-                    <p className="text-gray-600 mb-8">The product you're looking for doesn't exist.</p>
+                    <p className="text-gray-600 mb-8">The product you&apos;re looking for doesn&apos;t exist.</p>
                     <Link 
                         href="/products" 
                         className="bg-navy-dark text-gold-light px-6 py-3 rounded-lg font-semibold hover:bg-navy-medium transition-colors"

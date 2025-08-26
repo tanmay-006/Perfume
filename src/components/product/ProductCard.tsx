@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star, ShoppingCart } from 'lucide-react';
+import { Star, ShoppingCart, Heart } from 'lucide-react';
 import { Product } from '@/types/product';
 import { useCart } from '@/contexts/CartContext';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 interface ProductCardProps {
   product: Product;
@@ -19,17 +20,11 @@ interface ProductCardProps {
 export default function ProductCard({
   product,
   isListView = false,
-  showQuickActions = true,
   onAddToCart,
-  onAddToWishlist,
-  onQuickView,
 }: ProductCardProps) {
   const [isImageLoading, setIsImageLoading] = useState(true);
   const { addToCart } = useCart();
-
-  const discountPercentage = product.originalPrice
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
-    : 0;
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -44,17 +39,13 @@ export default function ProductCard({
     }
   };
 
-  const handleAddToWishlist = (e: React.MouseEvent) => {
+  const handleWishlistToggle = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (onAddToWishlist) {
-      onAddToWishlist(product.id);
-    }
-  };
-
-  const handleQuickView = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (onQuickView) {
-      onQuickView(product.id);
+    e.stopPropagation();
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
     }
   };
 
@@ -96,6 +87,25 @@ export default function ProductCard({
               NEW
             </div>
           )}
+        </div>
+
+        {/* Wishlist Button */}
+        <div className="absolute top-3 right-3">
+          <button
+            onClick={handleWishlistToggle}
+            className={`p-2 rounded-full transition-all duration-300 ${
+              isInWishlist(product.id)
+                ? 'bg-red-500 text-white hover:bg-red-600'
+                : 'bg-white/80 hover:bg-white text-gray-600 hover:text-red-500'
+            } backdrop-blur-sm shadow-sm hover:shadow-md`}
+            aria-label={isInWishlist(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+          >
+            <Heart 
+              className={`w-4 h-4 transition-all duration-300 ${
+                isInWishlist(product.id) ? 'fill-current' : ''
+              }`} 
+            />
+          </button>
         </div>
 
         {/* Out of Stock Overlay */}

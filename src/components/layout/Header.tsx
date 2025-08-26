@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import SignInModal from '../auth/SignInModal';
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { useCart } from '@/contexts/CartContext';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 interface HeaderProps {
   isScrolled?: boolean;
@@ -21,6 +22,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
   const { getTotalItems } = useCart();
+  const { wishlistCount } = useWishlist();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -121,6 +123,20 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
                 </svg>
               </button>
 
+              {/* Wishlist */}
+              <Link href="/wishlist">
+                <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors relative" aria-label="Wishlist">
+                  <svg className="w-5 h-5 nav-link" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                  {wishlistCount > 0 && (
+                    <span className="nav-badge absolute -top-1 -right-1 text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                      {wishlistCount}
+                    </span>
+                  )}
+                </button>
+              </Link>
+
               {/* Shopping Cart */}
               <Link href="/cart">
                 <button className="p-2 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors relative" aria-label="Shopping cart">
@@ -179,6 +195,20 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Contact
+                </Link>
+                <Link 
+                  href="/wishlist" 
+                  className="nav-link font-medium py-2 px-4 rounded hover:bg-white hover:bg-opacity-10 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Wishlist
+                </Link>
+                <Link 
+                  href="/faq" 
+                  className="nav-link font-medium py-2 px-4 rounded hover:bg-white hover:bg-opacity-10 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  FAQ
                 </Link>
               </div>
             </nav>

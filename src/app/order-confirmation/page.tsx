@@ -85,7 +85,7 @@ function OrderConfirmationContent() {
 
         {/* Next Steps */}
         <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 mb-8">
-          <h3 className="text-lg font-bold text-blue-900 dark:text-blue-300 mb-4">What's Next?</h3>
+          <h3 className="text-lg font-bold text-blue-900 dark:text-blue-300 mb-4">What&apos;s Next?</h3>
           <ul className="space-y-2 text-blue-800 dark:text-blue-400">
             <li className="flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,7 +103,7 @@ function OrderConfirmationContent() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              You'll receive tracking information within 24 hours
+              You&apos;ll receive tracking information within 24 hours
             </li>
             <li className="flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
