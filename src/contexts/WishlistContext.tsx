@@ -32,17 +32,21 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     const savedWishlist = localStorage.getItem('mf-wishlist');
     if (savedWishlist) {
       try {
-        const wishlistData = JSON.parse(savedWishlist);
+        const wishlistData = JSON.parse(savedWishlist) as unknown[];
         // Validate and filter out invalid items
-        const validItems = wishlistData.filter((item: any) => {
+        const validItems = wishlistData.filter((item: unknown): item is WishlistItem => {
+          if (!item || typeof item !== 'object' || item === null) {
+            return false;
+          }
+          
+          const typedItem = item as Record<string, unknown>;
           return (
-            item &&
-            typeof item.id === 'number' &&
-            typeof item.name === 'string' &&
-            typeof item.price === 'number' &&
-            typeof item.image === 'string' &&
-            typeof item.brand === 'string' &&
-            typeof item.addedDate === 'string'
+            typeof typedItem.id === 'number' &&
+            typeof typedItem.name === 'string' &&
+            typeof typedItem.price === 'number' &&
+            typeof typedItem.image === 'string' &&
+            typeof typedItem.brand === 'string' &&
+            typeof typedItem.addedDate === 'string'
           );
         });
         setWishlistItems(validItems);

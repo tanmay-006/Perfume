@@ -6,14 +6,17 @@ import Header from '@/components/layout/Header';
 import ThemeWrapper from '@/components/providers/ThemeWrapper';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { useCart } from '@/contexts/CartContext';
-import { useState, useEffect, use } from 'react';
+import { useWishlist } from '@/contexts/WishlistContext';
+import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import '../../perfume.css';
 import { products } from '@/data/products';
 import { Product } from '@/types/product';
 
-function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> }) {
-    const resolvedParams = use(params);
+function ProductDetailPageContent() {
+    const params = useParams();
     const { addToCart } = useCart();
+    const { wishlistItems, addToWishlist, removeFromWishlist } = useWishlist();
     const [selectedSize, setSelectedSize] = useState('50ml');
     const [quantity, setQuantity] = useState(1);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -25,7 +28,9 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
 
     // Fetch product data based on ID
     useEffect(() => {
-        const productId = parseInt(resolvedParams.id);
+        if (!params?.id) return;
+        
+        const productId = parseInt(params.id as string);
         const foundProduct = products.find(p => p.id === productId);
         
         if (foundProduct) {
@@ -53,7 +58,7 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
             setProduct(completeProduct);
         }
         setIsLoading(false);
-    }, [resolvedParams.id]);
+    }, [params?.id]);
 
     const relatedProducts = products.filter(p => 
         p.id !== product?.id && 
@@ -314,8 +319,23 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
                                 }
                             </button>
                             <div className="grid grid-cols-2 gap-4">
-                                <button className="border border-gray-300 py-3 rounded-xl font-semibold hover:border-gray-400 transition-colors">
-                                    Add to Wishlist
+                                <button 
+                                    onClick={() => {
+                                        if (product) {
+                                            const isInWishlist = wishlistItems.some(item => item.id === product.id);
+                                            isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product);
+                                        }
+                                    }}
+                                    className={`border py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2 ${
+                                        wishlistItems.some(item => item?.id === product?.id) 
+                                        ? "bg-red-50 border-red-200 text-red-500 hover:bg-red-100" 
+                                        : "border-gray-300 hover:border-gray-400"
+                                    }`}
+                                >
+                                    <svg className="w-5 h-5" fill={wishlistItems.some(item => item?.id === product?.id) ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={wishlistItems.some(item => item?.id === product?.id) ? 0 : 2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                    {wishlistItems.some(item => item?.id === product?.id) ? "Remove from Wishlist" : "Add to Wishlist"}
                                 </button>
                                 <button className="border border-gray-300 py-3 rounded-xl font-semibold hover:border-gray-400 transition-colors">
                                     Quick Buy
@@ -552,10 +572,10 @@ function ProductDetailPageContent({ params }: { params: Promise<{ id: string }> 
     );
 }
 
-export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
+export default function ProductDetailPage() {
     return (
         <ThemeWrapper>
-            <ProductDetailPageContent params={params} />
+            <ProductDetailPageContent />
         </ThemeWrapper>
     );
 }
