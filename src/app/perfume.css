@@ -1,16 +1,22 @@
 /* Perfume Website Custom Styles */
 
+/* Body adjustments for fixed header */
+body {
+  padding-top: 0;
+}
+
 /* Navigation Styles - Theme Aware */
 .nav-bar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 1000;
   background: transparent;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  min-height: 70px;
 }
 
 .nav-bar.scrolled {
@@ -18,11 +24,33 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(34, 34, 59, 0.15);
+  min-height: 70px;
 }
 
 [data-theme='dark'] .nav-bar.scrolled {
   background: rgba(34, 34, 59, 0.95);
   border-bottom: 1px solid rgba(201, 173, 167, 0.15);
+}
+
+/* Navigation Badge styles */
+.nav-badge {
+  background-color: var(--gold-medium);
+  font-size: 0.625rem;
+  font-weight: 600;
+  line-height: 1;
+  min-width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .nav-badge {
+    font-size: 0.75rem;
+    min-width: 16px;
+    height: 16px;
+  }
 }
 
 .nav-logo {
@@ -94,7 +122,7 @@
 /* Hero Section - Full Width Banner with Slider */
 .hero-section {
   position: relative;
-  min-height:70vh;
+  min-height: 100vh;
   overflow: hidden;
   background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-darkest) 100%);
 }
@@ -296,6 +324,7 @@
   display: flex;
   align-items: center;
   padding-top: 80px; /* Account for transparent header */
+  min-height: 100vh;
 }
 
 .hero-content {
@@ -453,19 +482,44 @@
     grid-template-columns: 1fr;
     text-align: center;
     gap: 2rem;
+    padding: 0 1rem;
   }
   
   .hero-title-primary {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .hero-image-square {
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
   }
   
   .slider-nav {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-bar {
+    min-height: 60px;
+  }
+  
+  .nav-bar.scrolled {
+    min-height: 60px;
+  }
+  
+  .hero-content-container {
+    padding-top: 60px;
+    min-height: 100vh;
+  }
+  
+  .hero-title-primary {
+    font-size: 1.875rem;
+  }
+  
+  .hero-image-square {
+    width: 250px;
+    height: 250px;
   }
 }
 
