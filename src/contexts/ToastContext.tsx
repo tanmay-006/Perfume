@@ -27,18 +27,21 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 
   const showToast = useCallback((toast: Omit<Toast, 'id' | 'duration'> & { duration?: number }) => {
     const id = Math.random().toString(36).substr(2, 9);
+    const duration = toast.duration || 4000; // Increased default duration for better UX
     const newToast: Toast = {
       ...toast,
       id,
-      duration: toast.duration || 3000,
+      duration,
     };
 
     setToasts(prev => [...prev, newToast]);
 
     // Auto remove toast after duration
-    setTimeout(() => {
-      removeToast(id);
-    }, newToast.duration);
+    if (duration > 0) {
+      setTimeout(() => {
+        removeToast(id);
+      }, duration);
+    }
   }, [removeToast]);
 
   return (

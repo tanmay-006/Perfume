@@ -74,6 +74,23 @@
   color: var(--space-cadet);
 }
 
+/* Theme-aware text color classes */
+.text-isabelline {
+  color: #f4f3ee !important;
+}
+
+[data-theme='dark'] .text-isabelline {
+  color: #f4f3ee !important;
+}
+
+.text-isabelline\/90 {
+  color: rgba(244, 243, 238, 0.9) !important;
+}
+
+[data-theme='dark'] .text-isabelline\/90 {
+  color: rgba(244, 243, 238, 0.9) !important;
+}
+
 /* Hero Section - Full Width Banner with Slider */
 .hero-section {
   position: relative;

@@ -77,12 +77,12 @@ export default function ProductCard({
         {/* Badges */}
         <div className="absolute top-3 left-3 space-y-2">
           {product.badge && (
-            <div className="bg-[var(--navy-dark)] text-[var(--gold-light)] px-2 py-1 rounded-full text-xs font-semibold">
+            <div className="bg-navy-dark text-isabelline dark:bg-gold-light dark:text-navy-dark px-2 py-1 rounded-full text-xs font-semibold">
               {product.badge}
             </div>
           )}
           {product.isNew && (
-            <div className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+            <div className="bg-green-500 text-white dark:bg-green-400 dark:text-green-900 px-2 py-1 rounded-full text-xs font-semibold">
               NEW
             </div>
           )}

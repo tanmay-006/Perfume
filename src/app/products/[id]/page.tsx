@@ -195,7 +195,7 @@ function ProductDetailPageContent() {
                         {/* Header */}
                         <div>
                             <div className="flex items-center gap-3 mb-2">
-                                <span className="bg-navy-dark text-gold-light px-3 py-1 rounded-full text-sm font-semibold">
+                                <span className="bg-navy-dark text-isabelline dark:bg-gold-light dark:text-navy-dark px-3 py-1 rounded-full text-sm font-semibold">
                                     {product.badge}
                                 </span>
                                 {product.isNew && (
@@ -204,8 +204,8 @@ function ProductDetailPageContent() {
                                     </span>
                                 )}
                             </div>
-                            <p className="text-gray-600 text-lg">{product.subtitle}</p>
-                            <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mt-2">{product.name}</h1>
+                            <p className="text-gray-600 dark:text-rose-quartz text-lg">{product.subtitle}</p>
+                            <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-isabelline mt-2">{product.name}</h1>
                         </div>
 
                         {/* Rating */}
@@ -222,25 +222,25 @@ function ProductDetailPageContent() {
                                         </svg>
                                     ))}
                                 </div>
-                                <span className="font-semibold">{product.rating}</span>
+                                <span className="font-semibold text-gray-900 dark:text-isabelline">{product.rating}</span>
                             </div>
-                            <span className="text-gray-600">({product.reviews} reviews)</span>
+                            <span className="text-gray-600 dark:text-rose-quartz">({product.reviews} reviews)</span>
                         </div>
 
                         {/* Price */}
                         <div className="space-y-2">
                             <div className="flex items-center gap-3">
-                                <span className="text-3xl font-bold text-navy-dark">₹{currentSizeData.price.toLocaleString()}</span>
+                                <span className="text-3xl font-bold text-navy-dark dark:text-gold-light">₹{currentSizeData.price.toLocaleString()}</span>
                                 {currentSizeData.originalPrice && (
-                                    <span className="text-xl text-gray-500 line-through">₹{currentSizeData.originalPrice.toLocaleString()}</span>
+                                    <span className="text-xl text-gray-500 dark:text-gray-400 line-through">₹{currentSizeData.originalPrice.toLocaleString()}</span>
                                 )}
                             </div>
                             {currentSizeData.originalPrice && (
                                 <div className="flex items-center gap-2">
-                                    <span className="text-green-600 font-semibold">
+                                    <span className="text-green-600 dark:text-green-400 font-semibold">
                                         You save ₹{(currentSizeData.originalPrice - currentSizeData.price).toLocaleString()}
                                     </span>
-                                    <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">
+                                    <span className="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 px-2 py-1 rounded text-sm">
                                         {Math.round(((currentSizeData.originalPrice - currentSizeData.price) / currentSizeData.originalPrice) * 100)}% OFF
                                     </span>
                                 </div>
@@ -249,15 +249,15 @@ function ProductDetailPageContent() {
 
                         {/* Size Selection */}
                         <div>
-                            <h3 className="font-semibold text-gray-900 mb-3">Size</h3>
+                            <h3 className="font-semibold text-gray-900 dark:text-isabelline mb-3">Size</h3>
                             <div className="grid grid-cols-3 gap-3">
                                 {product.sizes.map((sizeOption) => (
                                     <button
                                         key={sizeOption.size}
                                         onClick={() => setSelectedSize(sizeOption.size)}
                                         className={`p-4 border-2 rounded-lg text-center transition-all ${selectedSize === sizeOption.size
-                                                ? 'border-navy-dark bg-navy-dark text-gold-light'
-                                                : 'border-gray-300 hover:border-gray-400'
+                                                ? 'border-navy-dark bg-navy-dark text-isabelline dark:border-gold-light dark:bg-gold-light dark:text-navy-dark'
+                                                : 'border-gray-300 hover:border-gray-400 text-gray-900 dark:text-isabelline dark:border-gray-600 dark:hover:border-gray-500'
                                             }`}
                                     >
                                         <div className="font-semibold">{sizeOption.size}</div>
@@ -269,28 +269,28 @@ function ProductDetailPageContent() {
 
                         {/* Quantity */}
                         <div>
-                            <h3 className="font-semibold text-gray-900 mb-3">Quantity</h3>
+                            <h3 className="font-semibold text-gray-900 dark:text-isabelline mb-3">Quantity</h3>
                             <div className="flex items-center gap-4">
-                                <div className="flex border border-gray-300 rounded-lg">
+                                <div className="flex border border-gray-300 dark:border-gray-600 rounded-lg">
                                     <button
                                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                        className="p-3 hover:bg-gray-100 transition-colors"
+                                        className="p-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-900 dark:text-isabelline"
                                     >
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                                         </svg>
                                     </button>
-                                    <span className="px-4 py-3 font-semibold">{quantity}</span>
+                                    <span className="px-4 py-3 font-semibold text-gray-900 dark:text-isabelline">{quantity}</span>
                                     <button
                                         onClick={() => setQuantity(quantity + 1)}
-                                        className="p-3 hover:bg-gray-100 transition-colors"
+                                        className="p-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-900 dark:text-isabelline"
                                     >
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                                         </svg>
                                     </button>
                                 </div>
-                                <span className="text-gray-600">
+                                <span className="text-gray-600 dark:text-rose-quartz">
                                     {product.stockCount} items remaining
                                 </span>
                             </div>
@@ -311,7 +311,7 @@ function ProductDetailPageContent() {
                                     addedToCart 
                                         ? 'bg-green-600 text-white' 
                                         : product?.inStock 
-                                            ? 'bg-navy-dark text-gold-light hover:bg-navy-medium' 
+                                            ? 'bg-navy-dark text-isabelline dark:bg-gold-light dark:text-navy-dark hover:bg-navy-medium dark:hover:bg-yellow-300' 
                                             : 'bg-gray-400 text-gray-600 cursor-not-allowed'
                                 }`}
                             >
@@ -336,8 +336,8 @@ function ProductDetailPageContent() {
                                     }}
                                     className={`border py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2 ${
                                         wishlistItems.some(item => item?.id === product?.id) 
-                                        ? "bg-red-50 border-red-200 text-red-500 hover:bg-red-100" 
-                                        : "border-gray-300 hover:border-gray-400"
+                                        ? "bg-red-50 border-red-200 text-red-500 hover:bg-red-100 dark:bg-red-900/20 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-900/30" 
+                                        : "border-gray-300 hover:border-gray-400 text-gray-900 dark:text-isabelline dark:border-gray-600 dark:hover:border-gray-500"
                                     }`}
                                 >
                                     <svg className="w-5 h-5" fill={wishlistItems.some(item => item?.id === product?.id) ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
@@ -345,29 +345,29 @@ function ProductDetailPageContent() {
                                     </svg>
                                     {wishlistItems.some(item => item?.id === product?.id) ? "Remove from Wishlist" : "Add to Wishlist"}
                                 </button>
-                                <button className="border border-gray-300 py-3 rounded-xl font-semibold hover:border-gray-400 transition-colors">
+                                <button className="border border-gray-300 dark:border-gray-600 py-3 rounded-xl font-semibold hover:border-gray-400 dark:hover:border-gray-500 transition-colors text-gray-900 dark:text-isabelline">
                                     Quick Buy
                                 </button>
                             </div>
                         </div>
 
                         {/* Key Features */}
-                        <div className="grid grid-cols-2 gap-4 p-4 bg-gray-100 rounded-xl">
+                        <div className="grid grid-cols-2 gap-4 p-4 bg-gray-100 dark:bg-navy-dark rounded-xl">
                             <div className="text-center">
-                                <div className="font-semibold text-gray-900">Free Shipping</div>
-                                <div className="text-sm text-gray-600">On orders over ₹4,500</div>
+                                <div className="font-semibold text-gray-900 dark:text-isabelline">Free Shipping</div>
+                                <div className="text-sm text-gray-600 dark:text-rose-quartz">On orders over ₹4,500</div>
                             </div>
                             <div className="text-center">
-                                <div className="font-semibold text-gray-900">30-Day Returns</div>
-                                <div className="text-sm text-gray-600">Easy returns policy</div>
+                                <div className="font-semibold text-gray-900 dark:text-isabelline">30-Day Returns</div>
+                                <div className="text-sm text-gray-600 dark:text-rose-quartz">Easy returns policy</div>
                             </div>
                             <div className="text-center">
-                                <div className="font-semibold text-gray-900">Authentic</div>
-                                <div className="text-sm text-gray-600">100% genuine products</div>
+                                <div className="font-semibold text-gray-900 dark:text-isabelline">Authentic</div>
+                                <div className="text-sm text-gray-600 dark:text-rose-quartz">100% genuine products</div>
                             </div>
                             <div className="text-center">
-                                <div className="font-semibold text-gray-900">Gift Wrapping</div>
-                                <div className="text-sm text-gray-600">Luxury packaging available</div>
+                                <div className="font-semibold text-gray-900 dark:text-isabelline">Gift Wrapping</div>
+                                <div className="text-sm text-gray-600 dark:text-rose-quartz">Luxury packaging available</div>
                             </div>
                         </div>
                     </div>
@@ -387,8 +387,8 @@ function ProductDetailPageContent() {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === tab.id
-                                            ? 'border-navy-dark text-navy-dark'
-                                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                            ? 'border-navy-dark dark:border-gold-light text-navy-dark dark:text-gold-light'
+                                            : 'border-transparent text-gray-500 dark:text-rose-quartz hover:text-gray-700 dark:hover:text-isabelline hover:border-gray-300'
                                         }`}
                                 >
                                     {tab.name}
@@ -400,13 +400,13 @@ function ProductDetailPageContent() {
                     <div className="py-8">
                         {activeTab === 'description' && (
                             <div className="max-w-4xl">
-                                <p className="text-gray-700 leading-relaxed mb-4">{product.description}</p>
+                                <p className="text-gray-700 dark:text-rose-quartz leading-relaxed mb-4">{product.description}</p>
                                 {showFullDescription && (
-                                    <p className="text-gray-700 leading-relaxed">{product.longDescription}</p>
+                                    <p className="text-gray-700 dark:text-rose-quartz leading-relaxed">{product.longDescription}</p>
                                 )}
                                 <button
                                     onClick={() => setShowFullDescription(!showFullDescription)}
-                                    className="text-navy-dark font-semibold mt-4 hover:text-navy-medium transition-colors"
+                                    className="text-navy-dark dark:text-gold-light font-semibold mt-4 hover:text-navy-medium dark:hover:text-yellow-300 transition-colors"
                                 >
                                     {showFullDescription ? 'Show Less' : 'Read More'}
                                 </button>
@@ -416,19 +416,19 @@ function ProductDetailPageContent() {
                         {activeTab === 'details' && (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div>
-                                    <h3 className="font-semibold text-gray-900 mb-4">Product Details</h3>
+                                    <h3 className="font-semibold text-gray-900 dark:text-isabelline mb-4">Product Details</h3>
                                     <dl className="space-y-3">
                                         {product.details && Object.entries(product.details).map(([key, value]) => (
                                             <div key={key} className="flex justify-between">
-                                                <dt className="text-gray-600 capitalize">{key.replace('_', ' ')}:</dt>
-                                                <dd className="font-medium text-gray-900">{String(value)}</dd>
+                                                <dt className="text-gray-600 dark:text-rose-quartz capitalize">{key.replace('_', ' ')}:</dt>
+                                                <dd className="font-medium text-gray-900 dark:text-isabelline">{String(value)}</dd>
                                             </div>
                                         ))}
                                     </dl>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-gray-900 mb-4">Ingredients</h3>
-                                    <p className="text-sm text-gray-700 leading-relaxed">
+                                    <h3 className="font-semibold text-gray-900 dark:text-isabelline mb-4">Ingredients</h3>
+                                    <p className="text-sm text-gray-700 dark:text-rose-quartz leading-relaxed">
                                         {product.longDescription || "Premium fragrance ingredients carefully selected for the finest quality."}
                                     </p>
                                 </div>
@@ -439,12 +439,12 @@ function ProductDetailPageContent() {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {product.notes && Object.entries(product.notes).map(([category, notes]) => (
                                     <div key={category} className="text-center">
-                                        <h3 className="font-semibold text-gray-900 mb-4 capitalize">{category} Notes</h3>
+                                        <h3 className="font-semibold text-gray-900 dark:text-isabelline mb-4 capitalize">{category} Notes</h3>
                                         <div className="space-y-2">
                                             {Array.isArray(notes) && notes.map((note: string, index: number) => (
                                                 <span
                                                     key={index}
-                                                    className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm mx-1 mb-1"
+                                                    className="inline-block bg-gray-100 dark:bg-navy-dark text-gray-700 dark:text-rose-quartz px-3 py-1 rounded-full text-sm mx-1 mb-1"
                                                 >
                                                     {note}
                                                 </span>
@@ -460,9 +460,9 @@ function ProductDetailPageContent() {
                                 {/* Review Summary */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div>
-                                        <h3 className="font-semibold text-gray-900 mb-4">Customer Reviews</h3>
+                                        <h3 className="font-semibold text-gray-900 dark:text-isabelline mb-4">Customer Reviews</h3>
                                         <div className="flex items-center gap-4 mb-4">
-                                            <span className="text-3xl font-bold">{product.rating}</span>
+                                            <span className="text-3xl font-bold text-gray-900 dark:text-isabelline">{product.rating}</span>
                                             <div>
                                                 <div className="flex text-yellow-400 mb-1">
                                                     {[...Array(5)].map((_, i) => (
@@ -471,12 +471,12 @@ function ProductDetailPageContent() {
                                                         </svg>
                                                     ))}
                                                 </div>
-                                                <p className="text-gray-600">Based on {product.reviews} reviews</p>
+                                                <p className="text-gray-600 dark:text-rose-quartz">Based on {product.reviews} reviews</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div>
-                                        <button className="bg-navy-dark text-gold-light px-6 py-3 rounded-lg font-semibold hover:bg-navy-medium transition-colors">
+                                        <button className="bg-navy-dark dark:bg-gold-light text-gold-light dark:text-navy-dark px-6 py-3 rounded-lg font-semibold hover:bg-navy-medium dark:hover:bg-yellow-300 transition-colors">
                                             Write a Review
                                         </button>
                                     </div>
@@ -485,13 +485,13 @@ function ProductDetailPageContent() {
                                 {/* Individual Reviews */}
                                 <div className="space-y-6">
                                     {reviews.map((review) => (
-                                        <div key={review.id} className="border-b border-gray-200 pb-6">
+                                        <div key={review.id} className="border-b border-gray-200 dark:border-gray-600 pb-6">
                                             <div className="flex items-start justify-between mb-3">
                                                 <div>
                                                     <div className="flex items-center gap-2 mb-1">
-                                                        <span className="font-semibold">{review.name}</span>
+                                                        <span className="font-semibold text-gray-900 dark:text-isabelline">{review.name}</span>
                                                         {review.verified && (
-                                                            <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">
+                                                            <span className="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 px-2 py-1 rounded text-xs">
                                                                 Verified Purchase
                                                             </span>
                                                         )}
@@ -508,17 +508,17 @@ function ProductDetailPageContent() {
                                                                 </svg>
                                                             ))}
                                                         </div>
-                                                        <span className="text-gray-500 text-sm">{review.date}</span>
+                                                        <span className="text-gray-500 dark:text-rose-quartz text-sm">{review.date}</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h4 className="font-semibold mb-2">{review.title}</h4>
-                                            <p className="text-gray-700 mb-3">{review.comment}</p>
+                                            <h4 className="font-semibold text-gray-900 dark:text-isabelline mb-2">{review.title}</h4>
+                                            <p className="text-gray-700 dark:text-rose-quartz mb-3">{review.comment}</p>
                                             <div className="flex items-center gap-4 text-sm">
-                                                <button className="text-gray-500 hover:text-gray-700">
+                                                <button className="text-gray-500 dark:text-rose-quartz hover:text-gray-700 dark:hover:text-isabelline">
                                                     Helpful ({review.helpful})
                                                 </button>
-                                                <button className="text-gray-500 hover:text-gray-700">
+                                                <button className="text-gray-500 dark:text-rose-quartz hover:text-gray-700 dark:hover:text-isabelline">
                                                     Report
                                                 </button>
                                             </div>
@@ -532,7 +532,7 @@ function ProductDetailPageContent() {
 
                 {/* Related Products */}
                 <div className="mt-16">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-8">You May Also Like</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-isabelline mb-8">You May Also Like</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {relatedProducts.map((relatedProduct) => (
                             <Link

@@ -68,11 +68,11 @@ function AboutPageContent() {
           <div className="absolute inset-0 bg-black/50" />
         </div>
         
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-isabelline">
             Our Story
           </h1>
-          <p className="text-xl md:text-2xl leading-relaxed opacity-90">
+          <p className="text-xl md:text-2xl leading-relaxed text-isabelline/90">
             A fresh startup dedicated to making luxury fragrances accessible, innovative, and personal for everyone.
           </p>
         </div>
