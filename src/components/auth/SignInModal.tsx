@@ -6,9 +6,10 @@ import Image from 'next/image';
 interface SignInModalProps {
   onClose: () => void;
   onSignIn: (email: string) => void;
+  onSwitchToRegister: () => void;
 }
 
-export default function SignInModal({ onClose, onSignIn }: SignInModalProps) {
+export default function SignInModal({ onClose, onSignIn, onSwitchToRegister }: SignInModalProps) {
   const [email, setEmail] = useState('');
 
   const handleSignIn = (e: React.FormEvent) => {
@@ -23,24 +24,24 @@ export default function SignInModal({ onClose, onSignIn }: SignInModalProps) {
 
   return (
     <div className="fixed inset-0 bg-navy-darkest/80 backdrop-blur-sm z-50 flex justify-center items-center fade-in">
-      <div className="bg-navy-dark border border-gold-light/10 rounded-2xl shadow-2xl text-gold-lightest max-w-md w-full m-4">
+      <div className="bg-[#f2e9e4] rounded-lg shadow-2xl text-gold-lightest max-w-md w-full m-4">
         <div className="p-8 space-y-6">
           <div className="text-center">
-            <div className="flex justify-center mb-4">
+            <div className="flex justify-center mb-2">
               <Image 
                 src="/logo.png" 
                 alt="MF Fragrance Logo" 
-                width={60} 
-                height={60}
-                className="object-contain opacity-90"
+                width={40} 
+                height={40}
+                className="object-contain opacity-70"
               />
             </div>
-            <h2 className="text-4xl font-bold text-gold-lightest">Sign In</h2>
-            <p className="text-gold-light/70 mt-2">Enter your email to access your account.</p>
+            <h2 className="text-3xl font-bold text-[#1a1b25] mb-1">Sign In</h2>
+            <p className="text-[#3a3b45] text-sm mb-4">Enter your email to access your account.</p>
           </div>
-          <form onSubmit={handleSignIn} className="space-y-6">
+          <form onSubmit={handleSignIn} className="space-y-5">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gold-light/80 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-[#3a3b45] mb-1">
                 Email Address
               </label>
               <input
@@ -49,30 +50,33 @@ export default function SignInModal({ onClose, onSignIn }: SignInModalProps) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 bg-navy-darkest/50 border border-gold-light/20 rounded-lg text-gold-lightest focus:outline-none focus:ring-2 focus:ring-gold-medium focus:border-gold-medium transition-all"
+                className="w-full px-4 py-3 rounded-lg bg-[#f2e9e4] border border-[#dbd3cd] text-[#3a3b45] focus:outline-none"
                 required
               />
             </div>
-            <div className="flex flex-col sm:flex-row-reverse gap-4">
-              <button
-                type="submit"
-                className="w-full px-6 py-3 rounded-lg bg-gold-medium text-navy-darkest font-semibold hover:bg-gold-light transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                Sign In
-              </button>
+            <div className="flex flex-row justify-between mt-6 gap-4">
               <button
                 type="button"
                 onClick={onClose}
-                className="w-full px-6 py-3 rounded-lg text-gold-light/80 hover:bg-navy-light/10 transition-colors"
+                className="px-6 py-3 rounded-lg bg-[#f2e9e4] text-[#3a3b45] border border-[#dbd3cd] hover:bg-[#e8e0db] w-1/2 font-medium"
               >
                 Cancel
               </button>
+              <button
+                type="submit"
+                className="px-6 py-3 rounded-lg bg-white text-[#1a1b25] font-semibold shadow-md w-1/2"
+              >
+                Sign In
+              </button>
             </div>
           </form>
-          <div className="text-center text-sm text-gold-light/60">
+          <div className="text-center text-sm text-[#3a3b45] mt-4">
             <p>
               Don&apos;t have an account?{' '}
-              <button className="font-semibold text-gold-light/80 hover:text-gold-light transition-colors">
+              <button 
+                onClick={onSwitchToRegister}
+                className="font-semibold text-[#1a1b25] hover:underline"
+              >
                 Register
               </button>
             </p>

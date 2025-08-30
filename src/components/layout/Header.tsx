@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import SignInModal from '../auth/SignInModal';
+import RegisterModal from '../auth/RegisterModal';
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { useCart } from '@/contexts/CartContext';
 import { useWishlist } from '@/contexts/WishlistContext';
@@ -20,6 +21,7 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
@@ -47,6 +49,23 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
     setUserEmail(email);
     setShowSignInModal(false);
     router.push(`/profile?email=${email}`);
+  };
+
+  const handleRegister = (name: string, email: string, password: string) => {
+    setIsLoggedIn(true);
+    setUserEmail(email);
+    setShowRegisterModal(false);
+    router.push(`/profile?email=${email}`);
+  };
+
+  const switchToRegister = () => {
+    setShowSignInModal(false);
+    setShowRegisterModal(true);
+  };
+
+  const switchToSignIn = () => {
+    setShowRegisterModal(false);
+    setShowSignInModal(true);
   };
 
   return (
@@ -303,7 +322,15 @@ export default function Header({ isScrolled: initialScrolled }: HeaderProps) {
       {showSignInModal && (
         <SignInModal 
           onClose={() => setShowSignInModal(false)} 
-          onSignIn={handleSignIn} 
+          onSignIn={handleSignIn}
+          onSwitchToRegister={switchToRegister}
+        />
+      )}
+      {showRegisterModal && (
+        <RegisterModal 
+          onClose={() => setShowRegisterModal(false)} 
+          onRegister={handleRegister}
+          onSwitchToSignIn={switchToSignIn}
         />
       )}
     </>
