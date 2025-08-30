@@ -311,12 +311,12 @@ export default function Home() {
 
         <PromoSection cards={promoCards} />
 
-        <FeaturedProducts 
+{/*         <FeaturedProducts 
           title="Product Set"
           products={secondaryProducts}
           columns={4}
           viewAllLink="/products"
-        />
+        /> */}
 
         <BrandStory 
           title="MF Fragrance & Perfume"
