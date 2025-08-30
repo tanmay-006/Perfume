@@ -39,13 +39,19 @@ interface UserProfile {
 function ProfilePageContent() {
   const [activeTab, setActiveTab] = useState('profile');
   const [isEditing, setIsEditing] = useState(false);
-  const searchParams = useSearchParams();
   
-  const userEmail = searchParams?.get('email') || 'user@example.com';
+  // Safe handling of search params
+  let userEmail = 'user@example.com';
+  try {
+    const searchParams = useSearchParams();
+    userEmail = searchParams?.get('email') || 'user@example.com';
+  } catch (error) {
+    console.warn('Error reading search params:', error);
+  }
   
   const [userProfile, setUserProfile] = useState<UserProfile>({
     personalInfo: {
-      name: 'Priya Sharma',
+      name: 'Ritisha Bale',
       email: userEmail,
       phone: '+91 98765 43210',
       joinDate: 'June 2024'
@@ -120,7 +126,7 @@ function ProfilePageContent() {
             </svg>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
-            Welcome Back, <span className="text-[var(--gold-light)]">{userProfile.personalInfo.name.split(' ')[0]}</span>
+            Welcome Back, <span className="text-[var(--gold-light)]">{userProfile.personalInfo.name?.split(' ')?.[0] || 'User'}</span>
           </h1>
           <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
             Manage your fragrance journey and discover your scent preferences
@@ -208,7 +214,13 @@ function ProfilePageContent() {
                   <h2 className="text-2xl font-bold text-space-cadet dark:text-isabelline">Personal Information</h2>
                 </div>
                 <button
-                  onClick={() => setIsEditing(!isEditing)}
+                  onClick={() => {
+                    try {
+                      setIsEditing(!isEditing);
+                    } catch (error) {
+                      console.error('Error toggling edit mode:', error);
+                    }
+                  }}
                   className={`px-6 py-3 rounded-lg font-medium text-sm transition-all duration-300 ${
                     isEditing
                       ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30'
@@ -229,10 +241,16 @@ function ProfilePageContent() {
                       <input
                         type="text"
                         value={userProfile.personalInfo.name}
-                        onChange={(e) => setUserProfile({
-                          ...userProfile,
-                          personalInfo: { ...userProfile.personalInfo, name: e.target.value }
-                        })}
+                        onChange={(e) => {
+                          try {
+                            setUserProfile({
+                              ...userProfile,
+                              personalInfo: { ...userProfile.personalInfo, name: e.target.value }
+                            });
+                          } catch (error) {
+                            console.error('Error updating name:', error);
+                          }
+                        }}
                         className="w-full px-4 py-3 border border-rose-quartz/30 dark:border-gold-light/30 rounded-xl bg-white dark:bg-navy-darkest text-space-cadet dark:text-isabelline focus:outline-none focus:ring-2 focus:ring-ultra-violet dark:focus:ring-gold-medium focus:border-transparent transition-all"
                       />
                     ) : (
@@ -250,10 +268,16 @@ function ProfilePageContent() {
                       <input
                         type="tel"
                         value={userProfile.personalInfo.phone}
-                        onChange={(e) => setUserProfile({
-                          ...userProfile,
-                          personalInfo: { ...userProfile.personalInfo, phone: e.target.value }
-                        })}
+                        onChange={(e) => {
+                          try {
+                            setUserProfile({
+                              ...userProfile,
+                              personalInfo: { ...userProfile.personalInfo, phone: e.target.value }
+                            });
+                          } catch (error) {
+                            console.error('Error updating phone:', error);
+                          }
+                        }}
                         className="w-full px-4 py-3 border border-rose-quartz/30 dark:border-gold-light/30 rounded-xl bg-white dark:bg-navy-darkest text-space-cadet dark:text-isabelline focus:outline-none focus:ring-2 focus:ring-ultra-violet dark:focus:ring-gold-medium focus:border-transparent transition-all"
                       />
                     ) : (
@@ -294,7 +318,13 @@ function ProfilePageContent() {
               {isEditing && (
                 <div className="mt-8 pt-6 border-t border-rose-quartz/20 dark:border-gold-light/20 flex gap-4">
                   <button
-                    onClick={() => setIsEditing(false)}
+                    onClick={() => {
+                      try {
+                        setIsEditing(false);
+                      } catch (error) {
+                        console.error('Error saving changes:', error);
+                      }
+                    }}
                     className="px-8 py-3 bg-ultra-violet dark:bg-gold-medium text-white dark:text-navy-darkest rounded-xl font-semibold hover:bg-space-cadet dark:hover:bg-gold-dark transition-all duration-300 shadow-lg hover:shadow-xl"
                   >
                     Save Changes
