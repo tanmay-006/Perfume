@@ -147,7 +147,7 @@ function ProfilePageContent() {
       </section>
 
       {/* Navigation Tabs */}
-      <div className="bg-white/50 dark:bg-navy-dark/50 backdrop-blur-sm border-b border-rose-quartz/20 dark:border-gold-light/20 sticky top-[72px] z-40">
+      <div className="bg-white/50 dark:bg-navy-dark/50 backdrop-blur-sm border-b border-rose-quartz/20 dark:border-gold-light/20   z-40">
         <div className="max-w-6xl mx-auto px-4">
           <nav className="flex space-x-1">
             {tabs.map((tab) => (
