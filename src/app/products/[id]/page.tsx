@@ -345,7 +345,16 @@ function ProductDetailPageContent() {
                                     </svg>
                                     {wishlistItems.some(item => item?.id === product?.id) ? "Remove from Wishlist" : "Add to Wishlist"}
                                 </button>
-                                <button className="border border-gray-300 dark:border-gray-600 py-3 rounded-xl font-semibold hover:border-gray-400 dark:hover:border-gray-500 transition-colors text-gray-900 dark:text-isabelline">
+                                <button 
+                                    onClick={() => {
+                                        if (product && product.inStock) {
+                                            addToCart(product, selectedSize, quantity);
+                                            window.location.href = '/checkout';
+                                        }
+                                    }}
+                                    disabled={!product?.inStock}
+                                    className="border border-gray-300 dark:border-gray-600 py-3 rounded-xl font-semibold hover:border-gray-400 dark:hover:border-gray-500 transition-colors text-gray-900 dark:text-isabelline disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
                                     Quick Buy
                                 </button>
                             </div>

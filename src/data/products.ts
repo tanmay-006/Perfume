@@ -40,8 +40,7 @@ export const products: Product[] = [
     longDescription: "Crafted with meticulous attention to detail, Royal Essence Premium represents the pinnacle of perfumery artistry. Each bottle contains a harmonious blend of carefully selected ingredients sourced from the world's most prestigious fragrance houses.",
     sizes: [
       { size: '30ml', price: 8350, originalPrice: 9450 },
-      { size: '50ml', price: 12850, originalPrice: 14400 },
-      { size: '100ml', price: 20250, originalPrice: 23400 }
+      { size: '50ml', price: 12850, originalPrice: 14400 }
     ],
     inStock: true,
     stockCount: 12,
@@ -81,9 +80,8 @@ export const products: Product[] = [
     ],
     description: "Exotic orchid with hints of vanilla and cedar",
     sizes: [
-      { size: '30ml', price: 7425, originalPrice: 8550 },
-      { size: '50ml', price: 11025, originalPrice: 12600 },
-      { size: '100ml', price: 17325, originalPrice: 19800 }
+      { size: '30ml', price: 3825, originalPrice: 4500 },
+      { size: '50ml', price: 5625, originalPrice: 6750 }
     ],
     inStock: true,
     stockCount: 8,
@@ -114,8 +112,7 @@ export const products: Product[] = [
     description: "Warm amber with spicy undertones",
     sizes: [
       { size: '30ml', price: 6075, originalPrice: 6975 },
-      { size: '50ml', price: 8775, originalPrice: 10350 },
-      { size: '100ml', price: 13275, originalPrice: 15300 }
+      { size: '50ml', price: 8775, originalPrice: 10350 }
     ],
     inStock: true,
     stockCount: 15,
@@ -146,8 +143,7 @@ export const products: Product[] = [
     description: "Bold and masculine with woody base notes",
     sizes: [
       { size: '30ml', price: 6975, originalPrice: 8100 },
-      { size: '50ml', price: 10125, originalPrice: 11700 },
-      { size: '100ml', price: 15525, originalPrice: 17775 }
+      { size: '50ml', price: 10125, originalPrice: 11700 }
     ],
     inStock: true,
     stockCount: 6,
@@ -178,8 +174,7 @@ export const products: Product[] = [
     description: "Refreshing marine scent with citrus top notes",
     sizes: [
       { size: '30ml', price: 5175, originalPrice: 6075 },
-      { size: '50ml', price: 7425, originalPrice: 8775 },
-      { size: '100ml', price: 11025, originalPrice: 12825 }
+      { size: '50ml', price: 7425, originalPrice: 8775 }
     ],
     inStock: true,
     stockCount: 20,
@@ -204,8 +199,7 @@ export const products: Product[] = [
     description: "Pure rose essence with delicate floral harmony",
     sizes: [
       { size: '30ml', price: 4275, originalPrice: 5175 },
-      { size: '50ml', price: 6075, originalPrice: 7200 },
-      { size: '100ml', price: 9225, originalPrice: 10800 }
+      { size: '50ml', price: 6075, originalPrice: 7200 }
     ],
     inStock: false,
     stockCount: 0,
@@ -255,8 +249,7 @@ export const products: Product[] = [
     description: "Light and airy with aquatic florals",
     sizes: [
       { size: '30ml', price: 4725, originalPrice: 5625 },
-      { size: '50ml', price: 6525, originalPrice: 7650 },
-      { size: '100ml', price: 9675, originalPrice: 11250 }
+      { size: '50ml', price: 6525, originalPrice: 7650 }
     ],
     inStock: true,
     stockCount: 11,
