@@ -86,13 +86,16 @@ function CheckoutPageContent() {
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
-      <Header />
-      
-      <main className="max-w-7xl mx-auto px-4 py-8 pt-24">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[var(--foreground)] mb-2">Checkout</h1>
-          <p className="text-[var(--navy-medium)]">Complete your order</p>
+      <div className="bg-[var(--navy-darkest)] bg-opacity-95 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--background)]"></div>
+        <Header />
+        <div className="relative max-w-7xl mx-auto px-4 py-16 pt-28 text-center">
+          <h1 className="text-4xl font-bold text-white mb-2">Checkout</h1>
+          <p className="text-[var(--gold-light)]">Complete your order</p>
         </div>
+      </div>
+      
+      <main className="max-w-7xl mx-auto px-4 py-8 -mt-8 relative z-10">
 
         <form onSubmit={handleSubmit} className="grid lg:grid-cols-2 gap-8">
           {/* Left Column - Forms */}
