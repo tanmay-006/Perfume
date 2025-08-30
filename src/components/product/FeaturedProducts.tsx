@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Product } from "@/types/product";
 import Link from "next/link";
+import { useCartWithToast } from "@/hooks/useToastActions";
 
 interface FeaturedProductsProps {
   title: string;
@@ -19,6 +20,8 @@ export default function FeaturedProducts({
   columns = 5,
   viewAllLink
 }: FeaturedProductsProps) {
+  const { addToCart } = useCartWithToast();
+  
   // Define the grid column classes based on the columns prop
   const gridColsClass = {
     2: "grid-cols-1 sm:grid-cols-2",
@@ -86,8 +89,20 @@ export default function FeaturedProducts({
                   </div>
                   <span className="product-rating-text text-xs">{product.reviews} reviews</span>
                 </div>
-                <button className="add-to-cart-button w-full py-2 rounded-lg font-semibold text-sm">
-                  Add to Cart
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (product.inStock && product.sizes.length > 0) {
+                      const defaultSize = product.sizes.find(size => size.size === '50ml') || product.sizes[0];
+                      addToCart(product, defaultSize.size, 1);
+                    }
+                  }}
+                  disabled={!product.inStock}
+                  className={`add-to-cart-button w-full py-2 rounded-lg font-semibold text-sm ${
+                    !product.inStock ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+                >
+                  {product.inStock ? 'Add to Cart' : 'Out of Stock'}
                 </button>
               </div>
             </div>

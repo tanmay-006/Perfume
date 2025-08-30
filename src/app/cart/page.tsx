@@ -259,10 +259,11 @@ function CartPageContent() {
               )}
 
               {/* Checkout Button */}
-              <Link href="/checkout">
-                <button className="w-full bg-ultra-violet dark:bg-navy-dark text-isabelline dark:text-gold-light py-4 rounded-xl font-semibold text-lg hover:bg-space-cadet dark:hover:bg-navy-darkest transition-colors mb-4">
-                  Proceed to Checkout
-                </button>
+              <Link 
+                href="/checkout"
+                className="block w-full text-center border border-ultra-violet dark:border-navy-dark text-ultra-violet dark:text-navy-dark py-3 rounded-xl font-semibold hover:bg-ultra-violet dark:hover:bg-navy-dark hover:text-isabelline dark:hover:text-gold-light transition-colors mb-4"
+              >
+                Proceed to Checkout
               </Link>
 
               {/* Continue Shopping */}

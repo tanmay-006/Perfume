@@ -78,7 +78,7 @@ export default function Footer({ sections = defaultSections }: FooterProps) {
             <div className="flex space-x-4">
               <a 
                 href="#" 
-                className="w-10 h-10 bg-gray-800 dark:bg-navy-dark rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110 hover:bg-gray-700 dark:hover:bg-navy-medium text-white dark:text-gold-light" 
+                className="w-10 h-10 bg-navy-medium hover:bg-navy-light rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110 text-gold-light hover:text-gold-lightest" 
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -87,7 +87,7 @@ export default function Footer({ sections = defaultSections }: FooterProps) {
               </a>
               <a 
                 href="#" 
-                className="w-10 h-10 bg-gray-800 dark:bg-navy-dark rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110 hover:bg-gray-700 dark:hover:bg-navy-medium text-white dark:text-gold-light" 
+                className="w-10 h-10 bg-navy-medium hover:bg-navy-light rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110 text-gold-light hover:text-gold-lightest" 
                 aria-label="Twitter"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -96,11 +96,11 @@ export default function Footer({ sections = defaultSections }: FooterProps) {
               </a>
               <a 
                 href="#" 
-                className="w-10 h-10 bg-gray-800 dark:bg-navy-dark rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110 hover:bg-gray-700 dark:hover:bg-navy-medium text-white dark:text-gold-light" 
+                className="w-10 h-10 bg-navy-medium hover:bg-navy-light rounded-full flex items-center justify-center transition-all duration-300 hover:transform hover:scale-110 text-gold-light hover:text-gold-lightest" 
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.621 5.367 11.988 11.988 11.988s11.987-5.367 11.987-11.988C24.004 5.367 18.638 0 12.017 0zM8.542 4.271c1.325-.022 1.739-.029 5.058-.029 3.319 0 3.733.007 5.058.029 1.325.023 2.487.109 3.396.232.789.106 1.365.249 1.849.39.639.184 1.229.428 1.767.967.539.538.783 1.128.966 1.767.142.484.285 1.061.391 1.85.123.908.209 2.07.232 3.395.022 1.325.029 1.739.029 5.058 0 3.319-.007 3.733-.029 5.058-.023 1.325-.109 2.487-.232 3.396-.106.789-.249 1.365-.39 1.849-.184.639-.428 1.229-.967 1.767-.538.539-1.128.783-1.767.966-.484.142-1.061.285-1.85.391-.908.123-2.07.209-3.395.232-1.325.022-1.739.029-5.058.029-3.319 0-3.733-.007-5.058-.029-1.325-.023-2.487-.109-3.396-.232-.789-.106-1.365-.249-1.849-.39-.639-.184-1.229-.428-1.767-.967-.539-.538-.783-1.128-.966-1.767-.142-.484-.285-1.061-.391-1.85-.123-.908-.209-2.07-.232-3.395-.022-1.325-.029-1.739-.029-5.058 0-3.319.007-3.733.029-5.058.023-1.325.109-2.487.232-3.396.106-.789.249-1.365.39-1.849.184-.639.428-1.229.967-1.767.538-.539 1.128-.783 1.767-.966.484-.142 1.061-.285 1.85-.391.908-.123 2.07-.209 3.395-.232z"/>
+                  <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.5.508-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z"/>
                 </svg>
               </a>
             </div>
